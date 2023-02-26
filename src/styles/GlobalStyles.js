@@ -1,9 +1,8 @@
-import { css, useTheme } from '@emotion/react';
+import { css } from '@emotion/react';
+import { colors } from './utils/variables';
 
-export const GlobalStyles = () => {
-  const theme = useTheme();
-
-  return css`
+export const globalStyles = () =>
+  css`
     html {
       box-sizing: border-box;
       scroll-behavior: smooth;
@@ -26,8 +25,8 @@ export const GlobalStyles = () => {
       'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale; */
-      color: ${theme.colors.main};
-      background-color: ${theme.colors.white};
+      color: ${colors.mainText};
+      background-color: ${colors.mainBg};
     }
 
     h1,
@@ -70,4 +69,3 @@ export const GlobalStyles = () => {
       color: inherit;
     }
   `;
-};
