@@ -1,16 +1,14 @@
-import { Global, ThemeProvider } from '@emotion/react';
+import { Global } from '@emotion/react';
 import 'modern-normalize';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { GlobalStyles, theme } from 'styles';
-import { App } from 'components/App';
+import { globalStyles } from 'styles/globalStyles';
+import { App } from 'App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <Global styles={GlobalStyles} />
-      <App />
-    </ThemeProvider>
+    <Global styles={globalStyles} />
+    <App />
   </React.StrictMode>
 );
