@@ -1,4 +1,4 @@
-import { Header } from 'Layouts/Header';
+import { Header } from 'layouts/Header';
 
 export function App() {
   return (
