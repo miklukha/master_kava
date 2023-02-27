@@ -11,6 +11,7 @@ export const colors = {
   //icon
   iconDark: '#212121',
   iconLight: '#ffffff',
+  iconGray: '#979998',
   //auxiliary
   auxiliary: '#E1DEE3',
 };
