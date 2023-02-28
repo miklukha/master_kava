@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { colors } from './utils/variables';
+import { colors, fontSizes } from './utils/variables';
 
 export const globalStyles = css`
   html {
@@ -17,6 +17,7 @@ export const globalStyles = css`
 
   body {
     font-family: 'Roboto', sans-serif;
+    font-size: ${fontSizes.s};
     /* min-height: 100vh;
     margin: 0; */
     /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
@@ -26,6 +27,7 @@ export const globalStyles = css`
     -moz-osx-font-smoothing: grayscale; */
     color: ${colors.mainText};
     background-color: ${colors.mainBg};
+
   }
 
   h1,

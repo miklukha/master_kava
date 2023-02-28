@@ -6,30 +6,31 @@ import {
   BurgerIcon,
   CartIcon,
   ProfileIcon,
-  WrapperOfExtraNav,
-  CartBtn,
+  ExtraNavWrapper,
   BurgerBtn,
-  ProfileBtn,
-  MobileMenu,
+  MobileNavbar,
   CloseBtn,
   CloseIcon,
   MobileNavItem,
   MobileContactsItem,
-  Backdrop,
   MobileContacts,
-  ListOfExtraNav,
+  ExtraNavList,
   ExtraNavItem,
 } from './Header.styled';
+import { Backdrop, DropDown, CartDropDown } from 'components';
 import { Container, Logo } from 'components';
 import logo from 'assets/images/logo.png';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // const [click, setClick] = useState(false);
+  const [dropdown, setDropdown] = useState(false);
+  const [cartDropDown, setCartDropDown] = useState(false);
 
-  function handleMenuClick() {
-    setIsMenuOpen(!isMenuOpen);
-    console.log(isMenuOpen);
-  }
+  // const changeMenuClick = () => setClick(!click);
+  // const closeMobileMenu = () => setClick(false);
+
+  const onMenuClick = () => setIsMenuOpen(!isMenuOpen);
 
   return (
     <>
@@ -40,31 +41,37 @@ export function Header() {
               <a href="/">
                 <Logo src={logo} alt="logo" />
               </a>
-              <WrapperOfExtraNav>
-                <ListOfExtraNav>
-                  <ExtraNavItem>
-                    <ProfileBtn type="button">
-                      <ProfileIcon />
-                    </ProfileBtn>
+              <ExtraNavWrapper>
+                <ExtraNavList>
+                  <ExtraNavItem
+                    onMouseEnter={() => setDropdown(true)}
+                    onMouseLeave={() => setDropdown(false)}
+                  >
+                    <ProfileIcon />
+                    {dropdown && <DropDown />}
                   </ExtraNavItem>
-                  <ExtraNavItem>
-                    <CartBtn type="button">
-                      <CartIcon />
-                    </CartBtn>
+                  <ExtraNavItem
+                    onMouseEnter={() => setCartDropDown(true)}
+                    onMouseLeave={() => setCartDropDown(false)}
+                  >
+                    {/* <CartBtn type="button"> */}
+                    <CartIcon />
+                    {cartDropDown && <CartDropDown />}
+                    {/* </CartBtn> */}
                   </ExtraNavItem>
-                </ListOfExtraNav>
+                </ExtraNavList>
                 <BurgerBtn
                   type="button"
                   aria-label="open mobile menu"
-                  onClick={handleMenuClick}
+                  onClick={onMenuClick}
                 >
                   <BurgerIcon />
                 </BurgerBtn>
-              </WrapperOfExtraNav>
+              </ExtraNavWrapper>
               {isMenuOpen && (
                 <Backdrop>
-                  <MobileMenu>
-                    <CloseBtn type="button" onClick={handleMenuClick}>
+                  <MobileNavbar>
+                    <CloseBtn type="button" onClick={onMenuClick}>
                       <CloseIcon></CloseIcon>
                     </CloseBtn>
                     <ul>
@@ -94,7 +101,7 @@ export function Header() {
                         </a>
                       </MobileContactsItem>
                     </MobileContacts>
-                  </MobileMenu>
+                  </MobileNavbar>
                 </Backdrop>
               )}
             </Wrapper>

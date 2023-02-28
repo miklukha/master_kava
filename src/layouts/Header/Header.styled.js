@@ -36,8 +36,12 @@ export const Wrapper = styled.div`
 `;
 
 export const ProfileIcon = styled(VscAccount)`
-  /* margin-right: 10px; */
   /* color: ${colors.iconLight}; */
+
+  /* &:hover,
+  &:focus {
+    color: ${colors.accent};
+  } */
 `;
 
 export const CartIcon = styled(CgShoppingCart)`
@@ -50,8 +54,9 @@ export const BurgerIcon = styled(GiHamburgerMenu)`
 `;
 
 export const BurgerBtn = styled.button`
-  width: 20px;
-  height: 20px;
+  padding: 5px;
+  /* width: 30px;
+  height: 30px; */
 
   color: ${colors.iconLight};
 
@@ -61,48 +66,55 @@ export const BurgerBtn = styled.button`
   }
 `;
 
-export const CartBtn = styled.button`
-  width: 20px;
-  height: 20px;
+// export const CartBtn = styled.button`
+//   width: 20px;
+//   height: 20px;
 
-  color: ${colors.iconLight};
+//   color: ${colors.iconLight};
 
-  &:hover,
-  &:focus {
-    color: ${colors.accent};
-  }
-`;
+//   &:hover,
+//   &:focus {
+//     color: ${colors.accent};
+//   }
+// `;
 
-export const ProfileBtn = styled.button`
-  height: 20px;
-  width: 20px;
+// export const ProfileBtn = styled.button`
+//   height: 20px;
+//   width: 20px;
 
-  color: ${colors.iconLight};
+//   color: ${colors.iconLight};
 
-  &:hover,
-  &:focus {
-    color: ${colors.accent};
-  }
-`;
+//   &:hover,
+//   &:focus {
+//     color: ${colors.accent};
+//   }
+// `;
 
-export const WrapperOfExtraNav = styled.div`
+export const ExtraNavWrapper = styled.div`
+  position: relative;
+
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 
   font-size: 20px;
 `;
 
-export const ListOfExtraNav = styled.ul`
+export const ExtraNavList = styled.ul`
   position: relative;
   display: flex;
 
-  gap: 20px;
+  /* gap: 10px; */
 `;
 
 export const ExtraNavItem = styled.li`
-  height: 20px;
-  width: 20px;
+  padding: 10px;
+  /* height: 30px;
+  width: 30px; */
+  color: ${colors.iconLight};
+
+  position: relative;
+  cursor: pointer;
 
   & + &::before {
     content: '';
@@ -112,12 +124,17 @@ export const ExtraNavItem = styled.li`
     height: 20px;
 
     position: absolute;
-    top: 0;
-    left: 30px;
+    top: inherit;
+    left: -1px;
+  }
+
+  &:hover,
+  &:focus {
+    color: ${colors.accent};
   }
 `;
 
-export const MobileMenu = styled.nav`
+export const MobileNavbar = styled.nav`
   position: fixed;
   top: 0;
   right: 0;
@@ -167,14 +184,15 @@ export const MobileNavItem = styled.li`
 
   &::after {
     content: '';
-    display: block;
-    background-color: ${colors.auxiliary};
-    width: 100%;
-    height: 1px;
-
     position: absolute;
     bottom: 0;
     left: 0;
+
+    display: block;
+
+    width: 100%;
+    height: 1px;
+    background-color: ${colors.auxiliary};
   }
 
   &:hover,
