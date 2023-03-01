@@ -23,12 +23,8 @@ import logo from 'assets/images/logo.png';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const [click, setClick] = useState(false);
   const [dropdown, setDropdown] = useState(false);
   const [cartDropDown, setCartDropDown] = useState(false);
-
-  // const changeMenuClick = () => setClick(!click);
-  // const closeMobileMenu = () => setClick(false);
 
   const onMenuClick = () => setIsMenuOpen(!isMenuOpen);
 
@@ -54,10 +50,8 @@ export function Header() {
                     onMouseEnter={() => setCartDropDown(true)}
                     onMouseLeave={() => setCartDropDown(false)}
                   >
-                    {/* <CartBtn type="button"> */}
                     <CartIcon />
                     {cartDropDown && <CartDropDown />}
-                    {/* </CartBtn> */}
                   </ExtraNavItem>
                 </ExtraNavList>
                 <BurgerBtn
@@ -71,7 +65,11 @@ export function Header() {
               {isMenuOpen && (
                 <Backdrop>
                   <MobileNavbar>
-                    <CloseBtn type="button" onClick={onMenuClick}>
+                    <CloseBtn
+                      type="button"
+                      aria-label="close mobile menu"
+                      onClick={onMenuClick}
+                    >
                       <CloseIcon></CloseIcon>
                     </CloseBtn>
                     <ul>

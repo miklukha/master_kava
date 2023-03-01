@@ -4,3 +4,4 @@ export * from './Logo.styled';
 export * from './Backdrop.styled';
 export * from './DropDown';
 export * from './CartDropDown';
+export * from './Counter';
