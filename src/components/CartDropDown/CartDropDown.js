@@ -5,22 +5,16 @@ import {
   ProductWrapper,
   Title,
   TitleWrapper,
-  CartDeleteBtn,
+  // CartDeleteBtn,
   ProductDesc,
   ProductPrice,
   ProductDetails,
   OrderDesc,
   OrderData,
   OrderDynamicData,
-  Button,
-  // CounterWrapper,
-  // CounterBtn,
-  // CounterNumber,
-  // BtnsWrapper,
 } from './CartDropDown.styled';
 import product from 'assets/images/product.jpg';
-import { CloseIcon } from 'layouts/Header/Header.styled';
-import { Counter } from 'components';
+import { Counter, CloseDeleteIcon, Button } from 'components';
 
 export function CartDropDown() {
   const onDeleteClick = () => {
@@ -33,13 +27,14 @@ export function CartDropDown() {
         <Title>Кошик</Title>
       </TitleWrapper>
       <ProductWrapper>
-        <CartDeleteBtn
+        <CloseDeleteIcon delete handleClick={onDeleteClick} />
+        {/* <CartDeleteBtn
           type="button"
           aria-label="close cart"
           onClick={onDeleteClick}
-        >
-          <CloseIcon />
-        </CartDeleteBtn>
+        > */}
+        {/* <CloseIcon /> */}
+        {/* </CartDeleteBtn> */}
         <ProductImg src={product} alt="product" />
         <ProductDesc>
           <ProductTitle>Кава Brasil, 250г</ProductTitle>
@@ -57,7 +52,9 @@ export function CartDropDown() {
           Остаточна ціна: <OrderDynamicData>655 грн</OrderDynamicData>
         </OrderData>
       </OrderDesc>
-      <Button>Замовити</Button>
+      <Button type="button" aria-label="order">
+        Замовити
+      </Button>
     </CartDropWrapper>
   );
 }

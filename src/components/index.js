@@ -5,3 +5,5 @@ export * from './Backdrop.styled';
 export * from './DropDown';
 export * from './CartDropDown';
 export * from './Counter';
+export * from './Nav';
+export * from './CloseDeleteIcon';

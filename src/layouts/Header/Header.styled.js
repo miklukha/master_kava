@@ -3,36 +3,61 @@ import { colors, mq } from 'styles/utils/variables';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { VscAccount } from 'react-icons/vsc';
 import { CgShoppingCart } from 'react-icons/cg';
-import { IoMdClose } from 'react-icons/io';
 
 export const HeaderStyled = styled.header`
-  /* height: 60px; */
+  height: 60px;
   width: 100vw;
-
   border-bottom: 1px solid ${colors.auxiliary};
 
-  /* ${mq.tablet} {
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 60px;
+    background-color: ${colors.headerBg};
+
+    ${mq.tablet} {
+      height: 80px;
+    }
+  }
+
+  ${mq.tablet} {
     height: 140px;
-  } */
+  }
 `;
 
 export const HeaderMain = styled.div`
-  height: 60px;
-  width: 100%;
-
-  background-color: ${colors.headerBg};
-
-  /* ${mq.tablet} {
-    height: 80px;
-  } */
-`;
-
-export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   height: 60px;
+  width: 100%;
+
+  ${mq.tablet} {
+    height: 80px;
+  }
+`;
+
+// export const Wrapper = styled.div`
+//   /* display: flex;
+//   align-items: center;
+//   justify-content: space-between; */
+
+//   height: 60px;
+
+//   ${mq.tablet} {
+//     height: 80px;
+//   }
+// `;
+
+export const HeaderNav = styled.div`
+  height: 60px;
+  /* background-color: ${colors.mainBg}; */
+  /* width: 100wv; */
 `;
 
 export const ProfileIcon = styled(VscAccount)`
@@ -46,6 +71,9 @@ export const ProfileIcon = styled(VscAccount)`
 
 export const CartIcon = styled(CgShoppingCart)`
   /* color: ${colors.iconLight}; */
+  /* ${mq.tablet} {
+    display: none;
+  } */
 `;
 
 export const BurgerIcon = styled(GiHamburgerMenu)`
@@ -64,6 +92,10 @@ export const BurgerBtn = styled.button`
   &:focus {
     color: ${colors.accent};
   }
+
+  /* ${mq.tablet} {
+    display: none;
+  } */
 `;
 
 // export const CartBtn = styled.button`
@@ -95,9 +127,14 @@ export const ExtraNavWrapper = styled.div`
 
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 5px;
 
   font-size: 20px;
+
+  ${mq.tablet} {
+    font-size: 30px;
+    gap: 15px;
+  }
 `;
 
 export const ExtraNavList = styled.ul`
@@ -126,6 +163,10 @@ export const ExtraNavItem = styled.li`
     position: absolute;
     top: inherit;
     left: -1px;
+
+    ${mq.tablet} {
+      height: 30px;
+    }
   }
 
   &:hover,
@@ -145,7 +186,7 @@ export const MobileNavbar = styled.nav`
   flex-direction: column;
   justify-content: space-between;
 
-  font-weight: 600;
+  /* font-weight: 600; */
   font-size: 14px;
   line-height: calc(16 / 14);
 
@@ -155,65 +196,4 @@ export const MobileNavbar = styled.nav`
   padding: 30px 20px;
 
   background-color: ${colors.mainBg};
-`;
-
-export const CloseIcon = styled(IoMdClose)`
-  font-size: 20px;
-`;
-
-export const CloseBtn = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-
-  width: 20px;
-  height: 20px;
-
-  color: ${colors.iconGray};
-
-  &:hover,
-  &:focus {
-    color: ${colors.accent};
-  }
-`;
-
-export const MobileNavItem = styled.li`
-  padding-top: 10px;
-  padding-bottom: 10px;
-  position: relative;
-
-  border-bottom: 1px solid ${colors.auxiliary};
-
-  &:hover,
-  &:focus {
-    color: ${colors.accent};
-  }
-`;
-
-export const MobileContactsItem = styled.li`
-  & + & {
-    margin-top: 10px;
-  }
-
-  &:hover,
-  &:focus {
-    color: ${colors.accent};
-  }
-`;
-
-export const Backdrop = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9;
-
-  width: 100vw;
-  height: 100vh;
-
-  background-color: rgba(47, 48, 58, 0.4);
-`;
-
-export const MobileContacts = styled.ul`
-  /* padding: 20px 15px;
-  background-color: ${colors.accent}; */
 `;
