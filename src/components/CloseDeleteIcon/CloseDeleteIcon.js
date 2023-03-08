@@ -1,8 +1,8 @@
-import { Btn, Icon } from './CloseDeleteIcon.styled';
 import { css } from '@emotion/css';
+import { Btn, Icon } from './CloseDeleteIcon.styled';
 
-export function CloseDeleteIcon(props) {
-  const myStyle = props.delete
+export function CloseDeleteIcon({ remove, handleClick }) {
+  const myStyle = remove
     ? css`
         top: -1px;
         right: 0;
@@ -17,7 +17,7 @@ export function CloseDeleteIcon(props) {
       className={myStyle}
       type="button"
       aria-label="close"
-      onClick={props.handleClick}
+      onClick={handleClick}
     >
       <Icon />
     </Btn>

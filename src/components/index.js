@@ -7,3 +7,6 @@ export * from './CartDropDown';
 export * from './Counter';
 export * from './Nav';
 export * from './CloseDeleteIcon';
+export * from './ModalTitle';
+export * from './ProductOrder';
+export * from './CartDesc';
