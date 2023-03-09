@@ -1,7 +1,7 @@
 import { css } from '@emotion/css';
-import { Btn, Icon } from './CloseDeleteIcon.styled';
+import { Btn, Icon } from './CloseDeleteBtn.styled';
 
-export function CloseDeleteIcon({ remove, handleClick }) {
+export function CloseDeleteBtn({ remove, handleClick }) {
   const myStyle = remove
     ? css`
         top: -1px;

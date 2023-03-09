@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { colors, mq } from 'styles/utils/variables';
+import { colors, mq, utils } from 'styles/utils/variables';
 
 export const NavList = styled.ul`
   font-weight: 600;
@@ -20,6 +20,8 @@ export const NavItem = styled.li`
   position: relative;
 
   border-bottom: 1px solid ${colors.auxiliary};
+
+  transition: color ${utils.transitDur} ${utils.transitFunc};
 
   &:hover,
   &:focus {

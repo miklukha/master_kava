@@ -34,6 +34,8 @@ export const DropDownItem = styled.li`
     height: 1px;
   }
 
+  transition: color ${utils.transitDur} ${utils.transitFunc};
+
   &:hover,
   &:after {
     color: ${colors.accent};

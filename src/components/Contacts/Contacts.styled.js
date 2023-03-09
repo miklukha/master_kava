@@ -24,7 +24,6 @@ export const ContactsWrapper = styled.ul`
     justify-content: center;
 
     font-size: 14px;
-    /* font-weight: 700; */
 
     height: 80px;
     padding-left: 10px;

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { colors, mq, utils } from 'styles/utils/variables';
+import { colors, fontSizes, mq, utils } from 'styles/utils/variables';
 
 // export const CounterWrapper = styled.div`
 //   display: flex;
@@ -16,7 +16,7 @@ import { colors, mq, utils } from 'styles/utils/variables';
 // `;
 
 export const Input = styled.input`
-  font-size: 10px;
+  font-size: ${fontSizes.xs};
   text-align: center;
 
   padding: 5px;

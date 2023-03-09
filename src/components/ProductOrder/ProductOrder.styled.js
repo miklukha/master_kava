@@ -5,9 +5,9 @@ export const Wrapper = styled.div`
   position: relative;
   display: flex;
   gap: 20px;
+
   padding-bottom: 20px;
   margin-bottom: 20px;
-
   border-bottom: 1px solid ${colors.auxiliary};
 `;
 
@@ -17,7 +17,6 @@ export const Img = styled.img`
 
 export const Title = styled.h3`
   font-weight: 600;
-
   margin-bottom: 15px;
 `;
 
