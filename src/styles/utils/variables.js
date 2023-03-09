@@ -51,5 +51,6 @@ export const mq = {
   mobile: `@media (min-width: ${breakpoints.mobile})`,
   onlyMobile: `@media (max-width: ${breakpoints.preTablet})`,
   tablet: `@media (min-width: ${breakpoints.tablet})`,
+  onlyTablet: `@media (min-width: ${breakpoints.tablet}) and (max-width: ${breakpoints.preDesktop}) `,
   desktop: `@media (min-width: ${breakpoints.desktop})`,
 };

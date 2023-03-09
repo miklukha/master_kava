@@ -16,7 +16,7 @@ export const Img = styled.img`
 `;
 
 export const Title = styled.h3`
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 15px;
 `;
 

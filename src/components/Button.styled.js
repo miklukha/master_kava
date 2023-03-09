@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { colors, utils } from 'styles/utils/variables';
 
 export const Button = styled.button`
-  font-weight: 600;
+  font-weight: 500;
   text-align: center;
 
   width: 100%;

@@ -16,7 +16,7 @@ export const ContactsItem = styled.li`
 `;
 
 export const ContactsWrapper = styled.ul`
-  font-weight: 600;
+  font-weight: 500;
 
   ${mq.tablet} {
     display: flex;

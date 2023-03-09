@@ -13,3 +13,4 @@ export * from './CartDesc';
 export * from './Contacts';
 export * from './ExtraNav';
 export * from './MobileMenu';
+export * from './Section.styled';
