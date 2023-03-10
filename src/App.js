@@ -1,4 +1,4 @@
-import { Header, Hero, Features } from 'layouts';
+import { Header, Hero, Features, Popular } from 'layouts';
 
 export function App() {
   return (
@@ -6,6 +6,7 @@ export function App() {
       <Header />
       <Hero />
       <Features />
+      <Popular />
     </>
   );
 }

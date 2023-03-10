@@ -27,7 +27,6 @@ export const globalStyles = css`
     -moz-osx-font-smoothing: grayscale; */
     color: ${colors.mainText};
     background-color: ${colors.mainBg};
-
   }
 
   h1,
@@ -38,6 +37,8 @@ export const globalStyles = css`
   h6,
   p {
     margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
   }
 
   img {

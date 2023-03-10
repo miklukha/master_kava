@@ -1,11 +1,13 @@
 import { deliveryBox, deliveryReturn, deliveryTruck } from 'assets/images';
 import { Container, Section } from 'components';
 import { BgIcon, Desc, Img, Item, List, Title } from './Features.styled';
+import { visuallyHidden } from 'styles/utils/visuallyHidden';
 
 export function Features() {
   return (
     <Section>
       <Container>
+        <h2 className={visuallyHidden}>Наші переваги</h2>
         <List>
           <Item>
             <BgIcon>

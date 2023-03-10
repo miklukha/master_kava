@@ -3,7 +3,6 @@ import { fontSizes, mq } from 'styles/utils/variables';
 
 export const Title = styled.h1`
   font-size: ${fontSizes.mobileTitle};
-  font-weight: 500;
   margin-bottom: 20px;
 
   ${mq.tablet} {
