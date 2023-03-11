@@ -2,6 +2,7 @@ import { Section, Container, Title, ProductCard, WatchMore } from 'components';
 import { List } from './Popular.styled';
 
 export function Popular() {
+  // in tablet version only 3 cards
   return (
     <Section>
       <Container>
