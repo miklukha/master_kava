@@ -13,10 +13,10 @@ export const Button = styled.button`
   background-color: ${colors.accent};
   color: ${colors.whiteText};
 
-  transition: box-shadow ${utils.transitDur} ${utils.transitFunc};
+  transition: background-color ${utils.transitDur} ${utils.transitFunc};
 
   &:hover,
   &:focus {
-    box-shadow: ${utils.shadowHover};
+    background-color: ${colors.accentHover};
   }
 `;

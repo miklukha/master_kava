@@ -1,8 +1,9 @@
 import {
   List,
   Item,
-  Circle,
-  CircleItem,
+  // Circle,
+  // CircleItem,
+  Estimate,
 } from './ProductCharacteristics.styled';
 
 export function ProductCharacteristics() {
@@ -10,7 +11,8 @@ export function ProductCharacteristics() {
     <List>
       <Item>
         <span>Кислинка:</span>
-        <ul>
+        <Estimate>4/5</Estimate>
+        {/* <ul>
           <CircleItem>
             <Circle />
             <Circle />
@@ -18,35 +20,38 @@ export function ProductCharacteristics() {
             <Circle />
             <Circle />
           </CircleItem>
-        </ul>
-      </Item>
-      <Item>
-        <span>Гірчинка:</span>
-        <ul>
-          <CircleItem>
-            <Circle />
-            <Circle />
-            <Circle />
-            <Circle gray />
-            <Circle gray />
-          </CircleItem>
-        </ul>
+        </ul> */}
       </Item>
       <Item>
         <span>Міцність:</span>
-        <ul>
+        <Estimate>3/5</Estimate>
+        {/* <ul>
           <CircleItem>
             <Circle />
             <Circle />
             <Circle />
-            <Circle />
+            <Circle gray />
             <Circle gray />
           </CircleItem>
-        </ul>
+        </ul> */}
       </Item>
       <Item>
-        <span>Насиченість:</span>
-        <ul>
+        <span>Гірчинка:</span>
+        <Estimate>4/5</Estimate>
+        {/* <ul>
+          <CircleItem>
+            <Circle />
+            <Circle />
+            <Circle />
+            <Circle />
+            <Circle gray />
+          </CircleItem>
+        </ul> */}
+      </Item>
+      <Item>
+        <span>Аромат:</span>
+        <Estimate>2/5</Estimate>
+        {/* <ul>
           <CircleItem>
             <Circle />
             <Circle />
@@ -54,7 +59,7 @@ export function ProductCharacteristics() {
             <Circle gray />
             <Circle gray />
           </CircleItem>
-        </ul>
+        </ul> */}
       </Item>
     </List>
   );

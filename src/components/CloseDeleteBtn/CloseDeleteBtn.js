@@ -1,5 +1,6 @@
 import { css } from '@emotion/css';
-import { Btn, Icon } from './CloseDeleteBtn.styled';
+import { Btn } from './CloseDeleteBtn.styled';
+import { UilTimes } from '@iconscout/react-unicons';
 
 export function CloseDeleteBtn({ remove, handleClick }) {
   const myStyle = remove
@@ -19,7 +20,7 @@ export function CloseDeleteBtn({ remove, handleClick }) {
       aria-label="close"
       onClick={handleClick}
     >
-      <Icon />
+      <UilTimes />
     </Btn>
   );
 }

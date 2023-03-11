@@ -8,7 +8,7 @@ export function MobileMenu({ handleClick, isOpen }) {
       <Backdrop open={isOpen}>
         <Navbar>
           <CloseDeleteBtn handleClick={handleClick} />
-          <Nav />
+          <Nav layout="header" />
           <Contacts />
         </Navbar>
       </Backdrop>

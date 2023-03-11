@@ -1,13 +1,9 @@
-import { Header, Hero, Features, Popular, ReviewsMain } from 'layouts';
+import { Home } from 'pages';
 
 export function App() {
   return (
     <>
-      <Header />
-      <Hero />
-      <Features />
-      <Popular />
-      <ReviewsMain />
+      <Home />
     </>
   );
 }

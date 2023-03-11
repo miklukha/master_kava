@@ -3,6 +3,7 @@ import { colors, mq, utils } from 'styles/utils/variables';
 
 export const NavList = styled.ul`
   font-weight: 600;
+  text-transform: uppercase;
 
   ${mq.tablet} {
     display: flex;
@@ -11,6 +12,25 @@ export const NavList = styled.ul`
 
   ${mq.desktop} {
     gap: 40px;
+  }
+`;
+
+export const NavListFooter = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+
+  text-transform: uppercase;
+
+  width: 280px;
+  margin-bottom: 20px;
+
+  ${mq.tablet} {
+    gap: 20px;
+  }
+
+  ${mq.onlyTablet} {
+    width: 176px;
   }
 `;
 
@@ -32,5 +52,14 @@ export const NavItem = styled.li`
     border: none;
     padding-top: 22px;
     padding-bottom: 22px;
+  }
+`;
+
+export const NavItemFooter = styled.li`
+  transition: color ${utils.transitDur} ${utils.transitFunc};
+
+  &:hover,
+  &:focus {
+    color: ${colors.accent};
   }
 `;

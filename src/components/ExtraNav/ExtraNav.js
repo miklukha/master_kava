@@ -3,9 +3,7 @@ import MediaQuery from 'react-responsive';
 import { CartDropDown, Contacts, DropDown } from 'components';
 import { breakpoints } from 'styles/utils/variables';
 import { BurgerBtn, Item, List, Wrapper } from './ExtraNav.styled';
-import { CgShoppingCart as CartIcon } from 'react-icons/cg';
-import { GiHamburgerMenu as BurgerIcon } from 'react-icons/gi';
-import { VscAccount as ProfileIcon } from 'react-icons/vsc';
+import { UilBars, UilUser, UilShoppingBag } from '@iconscout/react-unicons';
 
 export function ExtraNav({ handleClick }) {
   const [dropdown, setDropdown] = useState(false);
@@ -21,14 +19,14 @@ export function ExtraNav({ handleClick }) {
           onMouseEnter={() => setDropdown(true)}
           onMouseLeave={() => setDropdown(false)}
         >
-          <ProfileIcon />
+          <UilUser />
           {dropdown && <DropDown />}
         </Item>
         <Item
           onMouseEnter={() => setCartDropDown(true)}
           onMouseLeave={() => setCartDropDown(false)}
         >
-          <CartIcon />
+          <UilShoppingBag />
           {cartDropDown && <CartDropDown />}
         </Item>
       </List>
@@ -38,7 +36,7 @@ export function ExtraNav({ handleClick }) {
           aria-label="open mobile menu"
           onClick={handleClick}
         >
-          <BurgerIcon />
+          <UilBars />
         </BurgerBtn>
       </MediaQuery>
     </Wrapper>

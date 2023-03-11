@@ -20,3 +20,5 @@ export * from './CookingIcons';
 export * from './ProductCharacteristics';
 export * from './WatchMore.styled';
 export * from './Review.styled';
+export * from './SocialMedias';
+export * from './Feedback.styled';

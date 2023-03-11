@@ -8,10 +8,17 @@ export const Wrapper = styled.div`
   align-items: center;
   gap: 5px;
 
-  font-size: 20px;
+  & svg {
+    width: 20px;
+    height: 20px;
+
+    ${mq.tablet} {
+      width: 30px;
+      height: 30px;
+    }
+  }
 
   ${mq.tablet} {
-    font-size: 30px;
     gap: 15px;
   }
 `;
@@ -25,8 +32,6 @@ export const List = styled.ul`
 
 export const Item = styled.li`
   padding: 10px;
-  /* height: 30px;
-  width: 30px; */
   color: ${colors.iconLight};
 
   position: relative;
@@ -57,7 +62,10 @@ export const Item = styled.li`
 `;
 
 export const BurgerBtn = styled.button`
-  padding: 5px;
+  line-height: 0;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
 
   color: ${colors.iconLight};
 

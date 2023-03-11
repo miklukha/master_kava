@@ -5,6 +5,7 @@ export const colors = {
   whiteText: '#ffffff',
   //accent
   accent: '#CE4B43',
+  accentHover: '#b12922',
   //background
   headerBg: '#A9ACA9',
   mainBg: '#ffffff',

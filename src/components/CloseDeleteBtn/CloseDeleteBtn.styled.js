@@ -1,16 +1,18 @@
 import styled from '@emotion/styled';
-import { IoMdClose } from 'react-icons/io';
-import { colors, fontSizes, utils } from 'styles/utils/variables';
+import { colors, utils } from 'styles/utils/variables';
 
 export const Btn = styled.button`
   position: absolute;
-
-  width: 20px;
-  height: 20px;
+  line-height: 0;
 
   color: ${colors.iconGray};
 
   transition: color ${utils.transitDur} ${utils.transitFunc};
+
+  & svg {
+    width: 24px;
+    height: 24px;
+  }
 
   &:hover,
   &:focus {
@@ -18,6 +20,8 @@ export const Btn = styled.button`
   }
 `;
 
-export const Icon = styled(IoMdClose)`
-  font-size: ${fontSizes.mobileTitle};
-`;
+// export const Icon = styled(UilTimes)`
+//   /* width: 20px;
+//   height: 20px; */
+//   /* font-size: ${fontSizes.mobileTitle}; */
+// `;
