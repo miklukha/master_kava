@@ -1,8 +1,18 @@
 import styled from '@emotion/styled';
-import { utils, colors } from 'styles/utils/variables';
+import { mq, utils, colors } from 'styles/utils/variables';
 
 export const Item = styled.li`
   width: 175px;
+
+  ${mq.tablet} {
+    width: 239px;
+    font-size: 16px;
+  }
+
+  ${mq.desktop} {
+    width: 277px;
+    /* font-size: 16px; */
+  }
 `;
 
 export const Link = styled.a`
@@ -28,14 +38,24 @@ export const Link = styled.a`
 
 export const Img = styled.img`
   width: 115px;
-  /* margin: 0 auto; */
+
+  ${mq.tablet} {
+    width: 218px;
+  }
+
+  ${mq.desktop} {
+    width: 240px;
+  }
 `;
 
 export const Name = styled.h3`
   flex: 1;
   font-size: 16px;
   font-weight: 700;
-  /* margin-top: 10px; */
+
+  ${mq.tablet} {
+    font-size: 18px;
+  }
 `;
 
 export const Ingredients = styled.span`
