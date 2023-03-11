@@ -19,3 +19,4 @@ export * from './ProductCard';
 export * from './CookingIcons';
 export * from './ProductCharacteristics';
 export * from './WatchMore.styled';
+export * from './Review.styled';
