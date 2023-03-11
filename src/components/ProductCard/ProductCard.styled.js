@@ -37,14 +37,11 @@ export const Link = styled.a`
 `;
 
 export const Img = styled.img`
-  width: 115px;
+  width: 120px;
 
   ${mq.tablet} {
-    width: 218px;
-  }
-
-  ${mq.desktop} {
-    width: 240px;
+    width: 200px;
+    height: 250px;
   }
 `;
 
