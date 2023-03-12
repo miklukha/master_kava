@@ -1,18 +1,20 @@
 import {
   List,
   Item,
-  // Circle,
-  // CircleItem,
-  Estimate,
+  Circle,
+  CircleItem,
+  CircleList,
+  Characteristic,
+  // Estimate,
 } from './ProductCharacteristics.styled';
 
 export function ProductCharacteristics() {
   return (
     <List>
       <Item>
-        <span>Кислинка:</span>
-        <Estimate>4/5</Estimate>
-        {/* <ul>
+        <Characteristic>Кислинка:</Characteristic>
+        {/* <Estimate>4/5</Estimate> */}
+        <CircleList>
           <CircleItem>
             <Circle />
             <Circle />
@@ -20,12 +22,12 @@ export function ProductCharacteristics() {
             <Circle />
             <Circle />
           </CircleItem>
-        </ul> */}
+        </CircleList>
       </Item>
       <Item>
-        <span>Міцність:</span>
-        <Estimate>3/5</Estimate>
-        {/* <ul>
+        <Characteristic>Міцність:</Characteristic>
+        {/* <Estimate>3/5</Estimate> */}
+        <CircleList>
           <CircleItem>
             <Circle />
             <Circle />
@@ -33,12 +35,12 @@ export function ProductCharacteristics() {
             <Circle gray />
             <Circle gray />
           </CircleItem>
-        </ul> */}
+        </CircleList>
       </Item>
       <Item>
-        <span>Гірчинка:</span>
-        <Estimate>4/5</Estimate>
-        {/* <ul>
+        <Characteristic>Гірчинка:</Characteristic>
+        {/* <Estimate>4/5</Estimate> */}
+        <CircleList>
           <CircleItem>
             <Circle />
             <Circle />
@@ -46,12 +48,12 @@ export function ProductCharacteristics() {
             <Circle />
             <Circle gray />
           </CircleItem>
-        </ul> */}
+        </CircleList>
       </Item>
       <Item>
-        <span>Аромат:</span>
-        <Estimate>2/5</Estimate>
-        {/* <ul>
+        <Characteristic>Насиченість:</Characteristic>
+        {/* <Estimate>2/5</Estimate> */}
+        <CircleList>
           <CircleItem>
             <Circle />
             <Circle />
@@ -59,7 +61,7 @@ export function ProductCharacteristics() {
             <Circle gray />
             <Circle gray />
           </CircleItem>
-        </ul> */}
+        </CircleList>
       </Item>
     </List>
   );
