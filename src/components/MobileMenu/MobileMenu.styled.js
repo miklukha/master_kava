@@ -15,10 +15,12 @@ export const Navbar = styled.nav`
   font-size: 14px;
   line-height: calc(16 / 14);
 
-  width: 260px;
+  width: 300px; //260px
   height: 100vh;
 
-  padding: 30px 20px;
+  padding: 50px 20px;
+  padding-bottom: 100px;
+
   background-color: ${colors.mainBg};
 `;
 

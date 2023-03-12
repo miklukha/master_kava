@@ -9,8 +9,8 @@ export const Wrapper = styled.div`
   gap: 5px;
 
   & svg {
-    width: 20px;
-    height: 20px;
+    width: 26px; //20px
+    height: 26px; //20px
 
     ${mq.tablet} {
       width: 30px;
@@ -42,7 +42,7 @@ export const Item = styled.li`
     display: block;
     background-color: ${colors.iconLight};
     width: 1px;
-    height: 20px;
+    height: 26px; //20px
 
     position: absolute;
     top: inherit;

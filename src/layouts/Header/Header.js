@@ -20,9 +20,11 @@ export function Header() {
             </a>
             <ExtraNav handleClick={onMenuClick} />
           </HeaderMain>
-          <MediaQuery maxWidth={parseInt(breakpoints.preTablet)}>
-            <MobileMenu handleClick={onMenuClick} isOpen={isMenuOpen} />
-          </MediaQuery>
+          {isMenuOpen && (
+            <MediaQuery maxWidth={parseInt(breakpoints.preTablet)}>
+              <MobileMenu handleClick={onMenuClick} isOpen={isMenuOpen} />
+            </MediaQuery>
+          )}
           <MediaQuery minWidth={parseInt(breakpoints.tablet)}>
             <HeaderNav>
               <Nav layout="header" />
