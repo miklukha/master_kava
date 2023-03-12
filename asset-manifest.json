@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/master_kava/static/css/main.17654e45.css",
-    "main.js": "/master_kava/static/js/main.e472c13f.js",
+    "main.js": "/master_kava/static/js/main.7224761c.js",
     "static/media/hero.jpg": "/master_kava/static/media/hero.fcee4969365ebaba8cfd.jpg",
     "static/media/logo.png": "/master_kava/static/media/logo.f87f2393f9223fed5e6c.png",
     "static/media/productCard.png": "/master_kava/static/media/productCard.acc33e04f70843e96198.png",
     "index.html": "/master_kava/index.html",
     "main.17654e45.css.map": "/master_kava/static/css/main.17654e45.css.map",
-    "main.e472c13f.js.map": "/master_kava/static/js/main.e472c13f.js.map"
+    "main.7224761c.js.map": "/master_kava/static/js/main.7224761c.js.map"
   },
   "entrypoints": [
     "static/css/main.17654e45.css",
-    "static/js/main.e472c13f.js"
+    "static/js/main.7224761c.js"
   ]
 }
