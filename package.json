@@ -2,6 +2,7 @@
   "name": "master_kava",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://miklukha/master_kava/",
   "dependencies": {
     "@emotion/css": "^11.10.6",
     "@emotion/react": "^11.10.6",
