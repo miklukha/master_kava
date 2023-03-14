@@ -22,3 +22,6 @@ export * from './WatchMore.styled';
 export * from './Review.styled';
 export * from './SocialMedias';
 export * from './Feedback.styled';
+export * from './FilterDropdown';
+export * from './ShopFilter';
+export * from './Input.styled';

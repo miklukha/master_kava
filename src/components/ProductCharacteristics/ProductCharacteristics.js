@@ -25,7 +25,11 @@ import bean from 'assets/images/bean.png';
 
 export function ProductCharacteristics() {
   return (
-    <List>
+    <List
+      onClick={e => {
+        e.preventDefault();
+      }}
+    >
       <Item>
         <Tip>
           <TipText>

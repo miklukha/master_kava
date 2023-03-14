@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { Navbar } from './MobileMenu.styled';
-import { Backdrop } from 'components/Backdrop.styled';
-import { CloseDeleteBtn, Nav, Contacts } from 'components';
+import { CloseDeleteBtn, Nav, Contacts, Backdrop } from 'components';
 
 export function MobileMenu({ handleClick, isOpen }) {
   useEffect(() => {

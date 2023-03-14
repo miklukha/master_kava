@@ -4,6 +4,7 @@ import { colors, mq } from 'styles/utils/variables';
 export const FooterStyled = styled.footer`
   position: relative;
   border-top: 1px solid ${colors.auxiliary};
+  background-color: ${colors.mainBg};
 `;
 
 export const FooterMain = styled.div`
@@ -43,7 +44,7 @@ export const FooterCopyright = styled.div`
     position: absolute;
     bottom: 0;
     left: 0;
-    z-index: -1;
+    z-index: 0;
     width: 100%;
     height: 46px;
     background-color: ${colors.headerBg};
@@ -51,6 +52,8 @@ export const FooterCopyright = styled.div`
 `;
 
 export const Copyright = styled.p`
+  position: relative;
+  z-index: 1;
   font-weight: 500;
   padding-top: 15px;
   padding-bottom: 15px;

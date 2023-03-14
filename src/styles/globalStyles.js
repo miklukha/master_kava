@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { colors, fontSizes } from './utils/variables';
+import background from 'assets/images/background.jpg';
 
 export const globalStyles = css`
   html {
@@ -27,6 +28,8 @@ export const globalStyles = css`
     -moz-osx-font-smoothing: grayscale; */
     color: ${colors.mainText};
     background-color: ${colors.mainBg};
+
+    background-image: url(${background});
   }
 
   h1,

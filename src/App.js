@@ -1,9 +1,9 @@
-import { Home } from 'pages';
+import { Shop } from 'pages';
 
 export function App() {
   return (
     <>
-      <Home />
+      <Shop />
     </>
   );
 }

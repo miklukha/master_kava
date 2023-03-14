@@ -28,6 +28,8 @@ export const Link = styled.a`
   border: 1px solid ${colors.auxiliary};
   border-radius: ${utils.borderRadius};
 
+  background-color: ${colors.mainBg};
+
   transition: box-shadow ${utils.transitDur} ${utils.transitFunc};
 
   &:hover,
@@ -41,7 +43,7 @@ export const Img = styled.img`
 
   ${mq.tablet} {
     width: 200px;
-    height: 250px;
+    height: 240px;
   }
 `;
 

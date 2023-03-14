@@ -27,14 +27,14 @@ export const Input = styled.input`
 
   color: ${colors.mainText};
 
-  transition: border-color ${utils.transitDur} ${utils.transitFunc};
+  /* transition: border-color ${utils.transitDur} ${utils.transitFunc};
 
   &:hover,
   &:focus {
     border-color: ${colors.accent};
-  }
+  } */
 
-  ${mq.desktop} {
+  ${mq.tablet} {
     width: 40px; //48
   }
 `;

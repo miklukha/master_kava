@@ -5,13 +5,14 @@ export const HeaderStyled = styled.header`
   height: 80px; //60px
   width: 100vw;
   border-bottom: 1px solid ${colors.auxiliary};
+  background-color: ${colors.mainBg};
 
   &:before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -1;
+    z-index: 0;
     width: 100%;
     height: 80px; //60px
     background-color: ${colors.headerBg};
@@ -41,4 +42,5 @@ export const HeaderMain = styled.div`
 
 export const HeaderNav = styled.nav`
   height: 60px;
+  /* background-color: ${colors.mainBg}; */
 `;

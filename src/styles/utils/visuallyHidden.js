@@ -8,7 +8,7 @@ export const visuallyHidden = css`
   overflow: hidden;
   border: 0;
   padding: 0;
-  /* clip: rect(0 0 0 0); */
-  /* clip-path: inset(50%); */
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
   margin: -1px;
 `;
