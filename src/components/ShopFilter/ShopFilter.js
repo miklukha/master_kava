@@ -94,7 +94,7 @@ export function ShopFilter({ handleClick }) {
       </OptionList>
       <Button
         type="submit"
-        aria-label="set filter"
+        aria-label="застосувати фільтр"
         onClick={e => {
           onSubmitClick(e);
         }}

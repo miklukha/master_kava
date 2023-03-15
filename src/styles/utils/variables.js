@@ -15,6 +15,9 @@ export const colors = {
   iconGray: '#979998',
   //auxiliary
   auxiliary: '#E1DEE3',
+  //notification
+  success: '#009C10',
+  error: '#F73333',
 };
 
 export const fontSizes = {

@@ -11,6 +11,10 @@ export const FiltersWrapper = styled.div`
   ${mq.desktop} {
     margin-bottom: 40px;
   }
+
+  & div {
+    margin-left: auto;
+  }
 `;
 
 export const FilterBtn = styled.button`

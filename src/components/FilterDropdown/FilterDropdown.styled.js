@@ -1,11 +1,10 @@
 import styled from '@emotion/styled';
-import { colors, utils } from 'styles/utils/variables';
+import { colors, mq, utils } from 'styles/utils/variables';
 import { UilAngleRightB } from '@iconscout/react-unicons';
 
 export const DropdownWrapper = styled.div`
   position: relative;
-  width: 214px;
-  margin-left: auto;
+  /* width: 214px; */
 
   cursor: pointer;
 `;
@@ -15,12 +14,16 @@ export const Header = styled.div`
   justify-content: space-between;
   align-items: flex-end;
 
-  padding: 8px 15px;
+  padding: 8px 10px;
   border: 1px solid ${colors.auxiliary};
   border-radius: ${utils.borderRadius};
-  box-shadow: ${utils.shadow};
+  /* box-shadow: ${utils.shadow}; */
 
   background-color: ${colors.mainBg};
+
+  ${mq.tablet} {
+    padding: 8px 15px;
+  }
 `;
 
 export const Icon = styled(UilAngleRightB)`
@@ -34,7 +37,7 @@ export const List = styled.ul`
   top: 34px;
   left: auto;
   right: 0;
-  width: 214px;
+  /* width: 214px; */
   border-radius: ${utils.borderRadius};
   box-shadow: ${utils.shadowOfSelect};
 `;

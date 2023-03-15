@@ -1,9 +1,10 @@
-import { Shop } from 'pages';
+import { Product } from 'pages';
 
 export function App() {
   return (
     <>
-      <Shop />
+      <Product />
+      {/* <Shop /> */}
     </>
   );
 }

@@ -33,7 +33,7 @@ export function ExtraNav({ handleClick }) {
       <MediaQuery maxWidth={parseInt(breakpoints.preTablet)}>
         <BurgerBtn
           type="button"
-          aria-label="open mobile menu"
+          aria-label="відкрити мобільне меню"
           onClick={handleClick}
         >
           <UilBars />

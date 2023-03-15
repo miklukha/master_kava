@@ -18,6 +18,7 @@ import {
   ProductList,
   ContentWrapper,
 } from './Shop.styled';
+import { filterOptions } from 'helpers';
 
 export function Shop() {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -36,7 +37,7 @@ export function Shop() {
             <MediaQuery maxWidth={parseInt(breakpoints.preTablet)}>
               <FilterBtn
                 type="button"
-                aria-label="open filter"
+                aria-label="відкрити фільтр"
                 onClick={onFilterClick}
               >
                 <UilFilter width="20px" height="22px" />
@@ -48,6 +49,7 @@ export function Shop() {
               )}
             </MediaQuery>
             <FilterDropdown
+              filterOptions={filterOptions}
               selectedOption={selectedOption}
               onSetOption={option => setSelectedOption(option)}
             />

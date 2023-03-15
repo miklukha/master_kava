@@ -17,7 +17,7 @@ export function CloseDeleteBtn({ remove, handleClick }) {
     <Btn
       className={myStyle}
       type="button"
-      aria-label="close"
+      aria-label="закрити"
       onClick={handleClick}
     >
       <UilTimes />

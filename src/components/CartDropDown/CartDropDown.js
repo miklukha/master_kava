@@ -11,7 +11,7 @@ export function CartDropDown() {
         <>
           <ProductOrder />
           <CartDesc />
-          <Button type="button" aria-label="order">
+          <Button type="button" aria-label="замовити">
             Замовити
           </Button>{' '}
         </>

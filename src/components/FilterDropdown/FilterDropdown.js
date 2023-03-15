@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { filterOptions } from 'helpers';
+import { css } from '@emotion/css';
 import {
   DropdownWrapper,
   Header,
@@ -8,7 +8,12 @@ import {
   Item,
 } from './FilterDropdown.styled';
 
-export function FilterDropdown({ selectedOption, onSetOption }) {
+export function FilterDropdown({
+  desc,
+  filterOptions,
+  selectedOption,
+  onSetOption,
+}) {
   const [dropdown, setDropdown] = useState(false);
   const isDropdownOpen = () => setDropdown(!dropdown);
 
@@ -17,14 +22,22 @@ export function FilterDropdown({ selectedOption, onSetOption }) {
     onSetOption(option);
   };
 
+  const myStyle = desc
+    ? css`
+        width: 190px;
+      `
+    : css`
+        width: 214px;
+      `;
+
   return (
-    <DropdownWrapper>
+    <DropdownWrapper className={myStyle}>
       <Header onClick={isDropdownOpen}>
-        {selectedOption?.name || 'За популярністю'}
+        {selectedOption?.name || filterOptions[0].name}
         <Icon />
       </Header>
       {dropdown && (
-        <List>
+        <List className={myStyle}>
           {filterOptions.map(option => (
             <Item onClick={() => onOptionClick(option)} key={option.key}>
               {option.name}

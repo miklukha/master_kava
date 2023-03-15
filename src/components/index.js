@@ -25,3 +25,4 @@ export * from './Feedback.styled';
 export * from './FilterDropdown';
 export * from './ShopFilter';
 export * from './Input.styled';
+export * from './ProductCharactDesc';
