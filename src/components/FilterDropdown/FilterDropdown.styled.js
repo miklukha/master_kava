@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { colors, mq, utils } from 'styles/utils/variables';
+import { colors, fontSizes, mq, utils } from 'styles/utils/variables';
 import { UilAngleRightB } from '@iconscout/react-unicons';
 
 export const DropdownWrapper = styled.div`
@@ -13,6 +13,8 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+
+  font-size: ${fontSizes.s};
 
   padding: 8px 10px;
   border: 1px solid ${colors.auxiliary};

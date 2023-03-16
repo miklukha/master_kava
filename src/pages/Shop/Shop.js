@@ -8,7 +8,7 @@ import {
   Backdrop,
   ProductCard,
 } from 'components';
-import { Header } from 'layouts';
+import { Header, Footer } from 'layouts';
 import { UilFilter } from '@iconscout/react-unicons';
 import { breakpoints } from 'styles/utils/variables';
 import MediaQuery from 'react-responsive';
@@ -72,8 +72,7 @@ export function Shop() {
           </ContentWrapper>
         </Container>
       </Section>
-
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

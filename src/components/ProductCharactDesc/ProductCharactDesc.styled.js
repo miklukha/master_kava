@@ -11,8 +11,12 @@ export const Item = styled.li`
 
   margin-bottom: 5px;
 
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
   ${mq.desktop} {
-    width: 176px;
+    width: 192px;
   }
 `;
 

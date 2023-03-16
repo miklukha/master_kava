@@ -60,7 +60,6 @@ export const Name = styled.h3`
 export const Ingredients = styled.span`
   flex: 1;
   text-align: center;
-  line-height: calc(16 / 14);
 `;
 
 export const Price = styled.span`

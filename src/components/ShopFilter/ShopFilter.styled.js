@@ -44,6 +44,10 @@ export const OptionList = styled.ul`
 
 export const OptionItem = styled.li`
   margin-bottom: 10px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 `;
 
 export const CheckboxLabel = styled.label`
