@@ -1,17 +1,21 @@
 {
   "files": {
     "main.css": "/master_kava/static/css/main.17654e45.css",
-    "main.js": "/master_kava/static/js/main.4abaa166.js",
+    "main.js": "/master_kava/static/js/main.f443f3f1.js",
     "static/media/hero.jpg": "/master_kava/static/media/hero.fcee4969365ebaba8cfd.jpg",
     "static/media/background.jpg": "/master_kava/static/media/background.c44efea42843c5848a24.jpg",
+    "static/media/coffeeFilter.webp": "/master_kava/static/media/coffeeFilter.7d80d425da77535fe46d.webp",
     "static/media/logo.png": "/master_kava/static/media/logo.f87f2393f9223fed5e6c.png",
     "static/media/productCard.png": "/master_kava/static/media/productCard.acc33e04f70843e96198.png",
+    "static/media/machine.webp": "/master_kava/static/media/machine.bec211fa346033e5a3b1.webp",
+    "static/media/turka.webp": "/master_kava/static/media/turka.be187035444e0d78bd5e.webp",
+    "static/media/geyser.webp": "/master_kava/static/media/geyser.4a9ed1329d7691bcc78c.webp",
     "index.html": "/master_kava/index.html",
     "main.17654e45.css.map": "/master_kava/static/css/main.17654e45.css.map",
-    "main.4abaa166.js.map": "/master_kava/static/js/main.4abaa166.js.map"
+    "main.f443f3f1.js.map": "/master_kava/static/js/main.f443f3f1.js.map"
   },
   "entrypoints": [
     "static/css/main.17654e45.css",
-    "static/js/main.4abaa166.js"
+    "static/js/main.f443f3f1.js"
   ]
 }
