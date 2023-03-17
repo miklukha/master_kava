@@ -1,10 +1,12 @@
-import { Product } from 'pages';
+// import { Product } from 'pages';
+import { Container, CartModal } from 'components';
 
 export function App() {
   return (
     <>
-      <Product />
-      {/* <Shop /> */}
+      <Container>
+        <CartModal />
+      </Container>
     </>
   );
 }

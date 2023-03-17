@@ -6,14 +6,14 @@ export function CartDropDown() {
 
   return (
     <CartDropWrapper>
-      <ModalTitle title="Кошик" />
+      <ModalTitle>Кошик</ModalTitle>
       {show ? (
         <>
           <ProductOrder />
           <CartDesc />
           <Button type="button" aria-label="замовити">
             Замовити
-          </Button>{' '}
+          </Button>
         </>
       ) : (
         <Notification>Немає товарів у кошику</Notification>
