@@ -9,7 +9,9 @@ export function CartDropDown() {
       <ModalTitle>Кошик</ModalTitle>
       {show ? (
         <>
-          <ProductOrder />
+          <ul>
+            <ProductOrder />
+          </ul>
           <CartDesc />
           <Button type="button" aria-label="замовити">
             Замовити

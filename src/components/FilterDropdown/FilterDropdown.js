@@ -10,7 +10,7 @@ import {
 
 export function FilterDropdown({
   desc,
-  filterOptions,
+  filterOptions = [],
   selectedOption,
   onSetOption,
 }) {

@@ -10,7 +10,9 @@ export function CartModal() {
         }}
       />
       <ModalTitle>Кошик</ModalTitle>
-      <ProductOrder />
+      <ul>
+        <ProductOrder />
+      </ul>
       <CartDesc />
       <BtnsWrapper>
         <OrderBtn type="button" aria-label="замовити">

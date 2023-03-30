@@ -6,8 +6,8 @@ export const Button = styled.button`
   text-align: center;
 
   width: 100%;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   border-radius: ${utils.borderRadiusOfBtn};
 
   background-color: ${colors.accent};

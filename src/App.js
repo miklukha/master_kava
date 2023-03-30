@@ -1,12 +1,9 @@
-// import { Product } from 'pages';
-import { Container, CartModal } from 'components';
+import { PlacingOrder } from 'pages';
 
 export function App() {
   return (
     <>
-      <Container>
-        <CartModal />
-      </Container>
+      <PlacingOrder />
     </>
   );
 }

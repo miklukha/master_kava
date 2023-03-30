@@ -9,6 +9,7 @@ export const colors = {
   //background
   headerBg: '#A9ACA9',
   mainBg: '#ffffff',
+  placingOrderBg: '#f5f5f5',
   //icon
   iconDark: '#212121',
   iconLight: '#ffffff',

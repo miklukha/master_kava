@@ -1,14 +1,15 @@
 import styled from '@emotion/styled';
 import { colors } from 'styles/utils/variables';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.li`
   position: relative;
   display: flex;
   gap: 20px;
 
   padding-bottom: 20px;
   margin-bottom: 20px;
-  border-bottom: 1px solid ${colors.auxiliary};
+  border-bottom: ${({ placing }) =>
+    placing ? `1px solid ${colors.iconDark}` : `1px solid ${colors.auxiliary}`};
 `;
 
 export const Img = styled.img`

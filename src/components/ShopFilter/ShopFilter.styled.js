@@ -53,7 +53,7 @@ export const OptionItem = styled.li`
 export const CheckboxLabel = styled.label`
   display: flex;
   align-items: normal;
-  gap: 10px;
+  gap: 7px;
 
   font-weight: 400;
 
