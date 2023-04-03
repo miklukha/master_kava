@@ -6,3 +6,4 @@ export * from './Contacts';
 export * from './PaymentDelivery';
 export * from './AboutUs';
 export * from './Reviews';
+export * from './Profile';

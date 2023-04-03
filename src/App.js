@@ -1,9 +1,9 @@
-import { Reviews } from 'pages';
+import { Profile } from 'pages';
 
 export function App() {
   return (
     <>
-      <Reviews />
+      <Profile />
     </>
   );
 }
