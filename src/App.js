@@ -1,9 +1,9 @@
-import { PlacingOrder } from 'pages';
+import { Reviews } from 'pages';
 
 export function App() {
   return (
     <>
-      <PlacingOrder />
+      <Reviews />
     </>
   );
 }

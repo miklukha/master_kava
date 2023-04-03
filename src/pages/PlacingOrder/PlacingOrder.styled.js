@@ -71,6 +71,8 @@ export const OrderDetailsCondition = styled.button`
   margin-left: 5px;
   margin-bottom: 0;
 
+  transition: color ${utils.transitDur} ${utils.transitFunc};
+
   &:hover,
   &:focus {
     color: ${colors.accent};

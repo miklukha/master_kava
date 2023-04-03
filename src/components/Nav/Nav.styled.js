@@ -40,6 +40,7 @@ export const NavItem = styled.li`
   position: relative;
 
   border-bottom: 1px solid ${colors.auxiliary};
+  cursor: pointer;
 
   transition: color ${utils.transitDur} ${utils.transitFunc};
 
