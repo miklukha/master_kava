@@ -3,6 +3,19 @@ import { Button, Input } from 'components';
 import { colors, fontSizes, mq, utils } from 'styles/utils/variables';
 import { Controller } from 'react-hook-form';
 
+export const Wrapper = styled.div`
+  ${mq.tablet} {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 30px;
+  }
+
+  ${mq.desktop} {
+    gap: 40px;
+    justify-content: center;
+  }
+`;
+
 export const OrderDetailsWrapper = styled.div`
   width: 100%;
   padding: 20px;
@@ -15,11 +28,10 @@ export const OrderDetailsWrapper = styled.div`
   }
 
   ${mq.tablet} {
+    flex-grow: 0;
     width: 380px;
-  }
-
-  ${mq.desktop} {
-    width: 466px;
+    height: 240px;
+    margin-bottom: 0;
   }
 `;
 
@@ -30,7 +42,7 @@ export const OrderDetailsTogether = styled.p`
 `;
 
 export const OrderDetailsList = styled.ul`
-  /* margin-bottom: 20px; */
+  margin-bottom: 20px;
 `;
 
 export const OrderDetailsItem = styled.li`
@@ -76,6 +88,10 @@ export const OrderDetailsValue = styled.span`
 
 export const OrderDetailsBtn = styled(Button)`
   margin-bottom: 20px;
+
+  ${mq.tablet} {
+    margin-bottom: 0;
+  }
 `;
 
 export const OrderDetailsTip = styled.p`
@@ -125,7 +141,16 @@ export const DeliveryItem = styled.li`
   border: 1px solid ${colors.auxiliary};
   border-radius: 4px;
 
+  background-color: ${colors.mainBg};
+
+  cursor: pointer;
+
   &:last-child {
     margin-bottom: 0;
+  }
+
+  & label {
+    margin-right: 0;
+    /* padding: 10px; */
   }
 `;
