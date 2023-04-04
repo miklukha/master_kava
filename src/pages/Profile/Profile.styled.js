@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { colors, fontSizes, mq, utils } from 'styles/utils/variables';
+import { TextField, InputLabel } from '@mui/material';
 
 export const Wrapper = styled.div`
   ${mq.tablet} {
@@ -25,7 +26,7 @@ export const ProfileMenu = styled.div`
 
   ${mq.tablet} {
     width: 240px;
-    /* height: 196px; */
+    height: 196px;
   }
 
   ${mq.desktop} {
@@ -121,4 +122,37 @@ export const ProductSummary = styled.span`
 
 export const SectionWrapper = styled.div`
   width: 100%;
+
+  & button {
+    display: block;
+
+    ${mq.tablet} {
+      width: 400px;
+    }
+  }
+`;
+
+export const Input = styled(TextField)`
+  margin-bottom: 10px;
+  width: 100%;
+  background-color: ${colors.mainBg};
+
+  & input {
+    font-size: ${fontSizes.s};
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  &:last-of-type {
+    margin-bottom: 20px;
+  }
+
+  ${mq.tablet} {
+    width: 400px;
+  }
+`;
+
+export const Label = styled(InputLabel)`
+  font-size: ${fontSizes.xs};
+  color: ${colors.auxiliaryText};
 `;

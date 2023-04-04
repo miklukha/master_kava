@@ -1,7 +1,10 @@
 import { useState } from 'react';
-import { Container, ProductOrder, Section, Title } from 'components';
+import { useForm } from 'react-hook-form';
+import { createTheme, ThemeProvider } from '@mui/material';
+import { Container, ProductOrder, Section, Title, Button } from 'components';
 import { Footer, Header } from 'layouts';
 import {
+  Input,
   OrderDate,
   OrderItem,
   OrderList,
@@ -19,18 +22,45 @@ import {
   SectionTitle,
   SectionWrapper,
   Wrapper,
+  Label,
 } from './Profile.styled';
 import { UilUser } from '@iconscout/react-unicons';
+import { colors } from 'styles/utils/variables';
+
+const theme = createTheme({
+  palette: {
+    myColor: {
+      main: colors.auxiliaryText,
+    },
+  },
+});
 
 export function Profile() {
   const [selectedItem, setSelectedItem] = useState('contacts');
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = data => {
+    console.log(data);
+  };
+
+  const phoneValidation = {
+    pattern: {
+      value: /^(\+38)?(0\d{9})$/,
+      message: 'Невірний формат номера (+380961234567)',
+    },
+  };
 
   const handleClick = e => {
     setSelectedItem(e.target.value);
   };
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Header />
       <Section>
         <Container>
@@ -81,9 +111,39 @@ export function Profile() {
               </ProfileList>
             </ProfileMenu>
             {selectedItem === 'contacts' && (
-              <>
-                <div>Contacts</div>
-              </>
+              <SectionWrapper>
+                <SectionTitle>Контактна інформація</SectionTitle>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <Label htmlFor="lastName">Прізвище</Label>
+                  <Input
+                    {...register('lastName')}
+                    id="lastName"
+                    error={!!errors.lastName}
+                    helperText={errors.lastName?.message}
+                    color="myColor"
+                  />
+                  <Label htmlFor="firstName">Ім'я</Label>
+                  <Input
+                    {...register('firstName')}
+                    id="firstName"
+                    error={!!errors.firstName}
+                    helperText={errors.firstName?.message}
+                    color="myColor"
+                  />
+                  <Label htmlFor="phoneNumber">Телефон</Label>
+                  <Input
+                    {...register('phoneNumber', phoneValidation)}
+                    id="firstName"
+                    error={!!errors.phoneNumber}
+                    helperText={errors.phoneNumber?.message}
+                    color="myColor"
+                    defaultValue="+380"
+                  />
+                  <Button type="submit" variant="contained" color="primary">
+                    Відправити
+                  </Button>
+                </form>
+              </SectionWrapper>
             )}
             {selectedItem === 'history' && (
               <SectionWrapper>
@@ -115,14 +175,45 @@ export function Profile() {
               </SectionWrapper>
             )}
             {selectedItem === 'password' && (
-              <>
-                <div>password</div>
-              </>
+              <SectionWrapper>
+                <SectionTitle>Зміна паролю</SectionTitle>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <Label htmlFor="oldPassword">Старий пароль</Label>
+                  <Input
+                    {...register('oldPassword')}
+                    id="oldPassword"
+                    error={!!errors.oldPassword}
+                    helperText={errors.oldPassword?.message}
+                    color="myColor"
+                  />
+                  <Label htmlFor="newPassword">Новий пароль</Label>
+                  <Input
+                    {...register('newPassword')}
+                    id="newPassword"
+                    error={!!errors.newPassword}
+                    helperText={errors.newPassword?.message}
+                    color="myColor"
+                  />
+                  <Label htmlFor="passwordConfirmation">
+                    Підтвердження нового паролю
+                  </Label>
+                  <Input
+                    {...register('passwordConfirmation')}
+                    id="passwordConfirmation"
+                    error={!!errors.passwordConfirmation}
+                    helperText={errors.passwordConfirmation?.message}
+                    color="myColor"
+                  />
+                  <Button type="submit" variant="contained" color="primary">
+                    Відправити
+                  </Button>
+                </form>
+              </SectionWrapper>
             )}
           </Wrapper>
         </Container>
       </Section>
       <Footer />
-    </>
+    </ThemeProvider>
   );
 }
