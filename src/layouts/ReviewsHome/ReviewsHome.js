@@ -1,4 +1,4 @@
-import { WatchMore, Section, Container, Title, Review } from 'components';
+import { WatchMore, Section, Container, TitleHome, Review } from 'components';
 import { List } from './ReviewsHome.styled';
 
 export function ReviewsHome() {
@@ -6,7 +6,7 @@ export function ReviewsHome() {
   return (
     <Section>
       <Container>
-        <Title>Відгуки</Title>
+        <TitleHome>Відгуки</TitleHome>
         <List>
           <Review></Review>
           <Review></Review>

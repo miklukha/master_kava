@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { mq, fontSizes } from 'styles/utils/variables';
 
-export const Title = styled.h1`
+export const TitleHome = styled.h2`
   font-weight: 700;
   font-size: ${fontSizes.mobileTitle};
   text-align: center;

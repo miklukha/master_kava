@@ -5,7 +5,7 @@ import { UilTimes } from '@iconscout/react-unicons';
 export function CloseDeleteBtn({ remove, handleClick }) {
   const myStyle = remove
     ? css`
-        top: -1px;
+        top: 8px;
         right: 0;
       `
     : css`

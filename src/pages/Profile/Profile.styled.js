@@ -1,5 +1,16 @@
 import styled from '@emotion/styled';
-import { colors, mq, utils } from 'styles/utils/variables';
+import { colors, fontSizes, mq, utils } from 'styles/utils/variables';
+
+export const Wrapper = styled.div`
+  ${mq.tablet} {
+    display: flex;
+    gap: 20px;
+  }
+
+  ${mq.desktop} {
+    gap: 30px;
+  }
+`;
 
 export const ProfileMenu = styled.div`
   width: 100%;
@@ -7,6 +18,11 @@ export const ProfileMenu = styled.div`
   border-radius: ${utils.borderRadius};
 
   background-color: ${colors.auxiliaryBg};
+
+  ${mq.onlyMobile} {
+    margin-bottom: 30px;
+  }
+
   ${mq.tablet} {
     width: 240px;
     /* height: 196px; */
@@ -55,4 +71,54 @@ export const ProfileBtn = styled.button`
   &:focus {
     color: ${colors.accent};
   }
+`;
+
+export const SectionTitle = styled.h2`
+  font-size: ${fontSizes.l};
+  font-weight: 500;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid ${colors.auxiliary};
+`;
+
+export const OrderList = styled.ul``;
+
+export const OrderItem = styled.li`
+  /* padding: 10px 0; */
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid ${colors.auxiliary};
+
+  &:last-of-type {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+`;
+
+export const OrderWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+`;
+
+export const OrderTitle = styled.span`
+  font-weight: 500;
+`;
+
+export const OrderDate = styled.span``;
+
+export const ProductOrderList = styled.ul`
+  margin-bottom: 10px;
+`;
+
+export const ProductSummary = styled.span`
+  font-weight: 500;
+  display: block;
+  text-align: right;
+`;
+
+export const SectionWrapper = styled.div`
+  width: 100%;
 `;

@@ -9,5 +9,5 @@ export const ModalTitle = styled.h2`
   border-bottom: 1px solid ${colors.auxiliary};
   width: 100%;
   padding: 10px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 `;

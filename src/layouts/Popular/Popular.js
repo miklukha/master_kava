@@ -1,4 +1,10 @@
-import { Section, Container, Title, ProductCard, WatchMore } from 'components';
+import {
+  Section,
+  Container,
+  TitleHome,
+  ProductCard,
+  WatchMore,
+} from 'components';
 import { List } from './Popular.styled';
 
 export function Popular() {
@@ -6,7 +12,7 @@ export function Popular() {
   return (
     <Section>
       <Container>
-        <Title>Популярні товари</Title>
+        <TitleHome>Популярні товари</TitleHome>
         <List>
           <ProductCard ingredients="Арабіка 100%" />
           <ProductCard ingredients="Арабіка 80%/Робуста 20% " />

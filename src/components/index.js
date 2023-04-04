@@ -27,3 +27,4 @@ export * from './ShopFilter';
 export * from './Input.styled';
 export * from './ProductCharactDesc';
 export * from './CartModal';
+export * from './TitleHome.styled';

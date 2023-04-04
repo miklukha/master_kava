@@ -27,3 +27,8 @@ export const CartDropWrapper = styled.div`
 export const Notification = styled.p`
   text-align: center;
 `;
+
+export const ProductList = styled.ul`
+  margin-bottom: 20px;
+  /* padding-bottom: 20px; */
+`;

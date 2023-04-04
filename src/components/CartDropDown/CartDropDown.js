@@ -1,5 +1,9 @@
 import { Button, CartDesc, ModalTitle, ProductOrder } from 'components';
-import { CartDropWrapper, Notification } from './CartDropDown.styled';
+import {
+  CartDropWrapper,
+  Notification,
+  ProductList,
+} from './CartDropDown.styled';
 
 export function CartDropDown() {
   const show = true;
@@ -9,9 +13,11 @@ export function CartDropDown() {
       <ModalTitle>Кошик</ModalTitle>
       {show ? (
         <>
-          <ul>
+          <ProductList>
             <ProductOrder />
-          </ul>
+            <ProductOrder />
+            <ProductOrder />
+          </ProductList>
           <CartDesc />
           <Button type="button" aria-label="замовити">
             Замовити
