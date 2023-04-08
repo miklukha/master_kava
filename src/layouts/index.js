@@ -4,3 +4,4 @@ export * from './Features';
 export * from './Popular';
 export * from './ReviewsHome';
 export * from './Footer';
+export * from './SharedLayout';

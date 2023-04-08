@@ -1,9 +1,8 @@
 import styled from '@emotion/styled';
 import { colors, utils } from 'styles/utils/variables';
+import { NavLink } from 'react-router-dom';
 
-// in future - Link
-
-export const WatchMore = styled.a`
+export const WatchMore = styled(NavLink)`
   display: block;
 
   font-weight: 700;

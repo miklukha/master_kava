@@ -1,4 +1,5 @@
 import logo from 'assets/images/logo.png';
+import { Link } from 'react-router-dom';
 import { Container, Logo, Nav, ExtraNav, MobileMenu } from 'components';
 import { useState } from 'react';
 import MediaQuery from 'react-responsive';
@@ -15,9 +16,9 @@ export function Header() {
       <HeaderStyled>
         <Container>
           <HeaderMain>
-            <a href="/">
+            <Link to="/">
               <Logo src={logo} alt="logo" />
-            </a>
+            </Link>
             <ExtraNav handleClick={onMenuClick} />
           </HeaderMain>
           {isMenuOpen && (

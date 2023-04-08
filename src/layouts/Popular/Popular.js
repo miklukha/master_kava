@@ -19,7 +19,7 @@ export function Popular() {
           <ProductCard ingredients="Арабіка 100%" />
           <ProductCard ingredients="Арабіка 80%/Робуста 20% " />
         </List>
-        <WatchMore href="/">Подивитися всі товари</WatchMore>
+        <WatchMore to="/shop">Подивитися всі товари</WatchMore>
       </Container>
     </Section>
   );

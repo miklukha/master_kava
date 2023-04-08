@@ -1,4 +1,10 @@
-import { NavItem, NavList, NavListFooter, NavItemFooter } from './Nav.styled';
+import {
+  Link,
+  NavItem,
+  NavItemFooter,
+  NavList,
+  NavListFooter,
+} from './Nav.styled';
 
 export function Nav({ layout }) {
   return (
@@ -6,37 +12,43 @@ export function Nav({ layout }) {
       {layout === 'header' ? (
         <NavList layout={layout}>
           <NavItem>
-            <a href="/">ГОЛОВНА</a>
+            <Link to="/">ГОЛОВНА</Link>
           </NavItem>
           <NavItem>
-            <a href="/">МАГАЗИН</a>
+            <Link to="/shop">МАГАЗИН</Link>
           </NavItem>
           <NavItem>
-            <a href="/">ПРО НАС</a>
+            <Link to="/about-us">ПРО НАС</Link>
           </NavItem>
           <NavItem>
-            <a href="/">КОНТАКТИ</a>
+            <Link to="/contacts">КОНТАКТИ</Link>
           </NavItem>
           <NavItem>
-            <a href="/">ОПЛАТА ТА ДОСТАВКА</a>
+            <Link to="/reviews">ВІДГУКИ</Link>
+          </NavItem>
+          <NavItem>
+            <Link to="/payment-delivery">ОПЛАТА ТА ДОСТАВКА</Link>
           </NavItem>
         </NavList>
       ) : (
         <NavListFooter>
           <NavItemFooter>
-            <a href="/">ГОЛОВНА</a>
+            <Link to="/">ГОЛОВНА</Link>
           </NavItemFooter>
           <NavItemFooter>
-            <a href="/">МАГАЗИН</a>
+            <Link to="/shop">МАГАЗИН</Link>
           </NavItemFooter>
           <NavItemFooter>
-            <a href="/">ПРО НАС</a>
+            <Link to="/about-us">ПРО НАС</Link>
           </NavItemFooter>
           <NavItemFooter>
-            <a href="/">КОНТАКТИ</a>
+            <Link to="/contacts">КОНТАКТИ</Link>
           </NavItemFooter>
           <NavItemFooter>
-            <a href="/">ОПЛАТА ТА ДОСТАВКА</a>
+            <Link to="/reviews">ВІДГУКИ</Link>
+          </NavItemFooter>
+          <NavItemFooter>
+            <Link to="/payment-delivery">ОПЛАТА ТА ДОСТАВКА</Link>
           </NavItemFooter>
         </NavListFooter>
       )}

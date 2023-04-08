@@ -1,4 +1,5 @@
 import { Global } from '@emotion/react';
+import { BrowserRouter } from 'react-router-dom';
 import 'modern-normalize';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -8,7 +9,9 @@ import { App } from 'App';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Global styles={globalStyles} />
-    <App />
+    <BrowserRouter>
+      <Global styles={globalStyles} />
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );

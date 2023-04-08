@@ -15,7 +15,7 @@ export function ReviewsHome() {
           <Review></Review>
           <Review></Review>
         </List>
-        <WatchMore href="/">Подивитися всі відгуки</WatchMore>
+        <WatchMore to="/reviews">Подивитися всі відгуки</WatchMore>
       </Container>
     </Section>
   );

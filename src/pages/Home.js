@@ -1,14 +1,12 @@
-import { Header, Hero, Features, Popular, ReviewsHome, Footer } from 'layouts';
+import { Hero, Features, Popular, ReviewsHome } from 'layouts';
 
 export function Home() {
   return (
     <>
-      <Header />
       <Hero />
       <Features />
       <Popular />
       <ReviewsHome />
-      <Footer />
     </>
   );
 }

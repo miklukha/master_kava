@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { createTheme, ThemeProvider } from '@mui/material';
-import { Container, ProductOrder, Section, Title, Button } from 'components';
-import { Footer, Header } from 'layouts';
+import { ProductOrder, Title, Button } from 'components';
 import {
   Input,
   OrderDate,
@@ -61,159 +60,153 @@ export function Profile() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Header />
-      <Section>
-        <Container>
-          <Title>ПРОФІЛЬ</Title>
-          <Wrapper>
-            <ProfileMenu>
-              <ProfileInformation>
-                <UilUser width="30px" height="30px" />
-                <div>
-                  <ProfileName>Тарас</ProfileName>
-                  <ProfileEmail>taras@gmail.com</ProfileEmail>
-                </div>
-              </ProfileInformation>
-              <ProfileList>
-                <ProfileItem>
-                  <ProfileBtn
-                    selected={selectedItem === 'contacts'}
-                    type="button"
-                    value="contacts"
-                    aria-label="перейти на сторінку контактна інформація"
-                    onClick={e => handleClick(e)}
-                  >
-                    Контактна інформація
-                  </ProfileBtn>
-                </ProfileItem>
-                <ProfileItem>
-                  <ProfileBtn
-                    selected={selectedItem === 'password'}
-                    type="button"
-                    value="password"
-                    aria-label="перейти на сторінку зміни паролю"
-                    onClick={e => handleClick(e)}
-                  >
-                    Зміна паролю
-                  </ProfileBtn>
-                </ProfileItem>
-                <ProfileItem>
-                  <ProfileBtn
-                    selected={selectedItem === 'history'}
-                    type="button"
-                    value="history"
-                    aria-label="перейти на сторінку історія замовлень"
-                    onClick={e => handleClick(e)}
-                  >
-                    Історія замовлень
-                  </ProfileBtn>
-                </ProfileItem>
-              </ProfileList>
-            </ProfileMenu>
-            {selectedItem === 'contacts' && (
-              <SectionWrapper>
-                <SectionTitle>Контактна інформація</SectionTitle>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <Label htmlFor="lastName">Прізвище</Label>
-                  <Input
-                    {...register('lastName')}
-                    id="lastName"
-                    error={!!errors.lastName}
-                    helperText={errors.lastName?.message}
-                    color="myColor"
-                  />
-                  <Label htmlFor="firstName">Ім'я</Label>
-                  <Input
-                    {...register('firstName')}
-                    id="firstName"
-                    error={!!errors.firstName}
-                    helperText={errors.firstName?.message}
-                    color="myColor"
-                  />
-                  <Label htmlFor="phoneNumber">Телефон</Label>
-                  <Input
-                    {...register('phoneNumber', phoneValidation)}
-                    id="firstName"
-                    error={!!errors.phoneNumber}
-                    helperText={errors.phoneNumber?.message}
-                    color="myColor"
-                    defaultValue="+380"
-                  />
-                  <Button type="submit" variant="contained" color="primary">
-                    Відправити
-                  </Button>
-                </form>
-              </SectionWrapper>
-            )}
-            {selectedItem === 'history' && (
-              <SectionWrapper>
-                <SectionTitle>Ваші замовлення</SectionTitle>
-                <OrderList>
-                  <OrderItem>
-                    <OrderWrapper>
-                      <OrderTitle>Замовлення № 342452-21</OrderTitle>
-                      <OrderDate>06.05.2023</OrderDate>
-                    </OrderWrapper>
-                    <ProductOrderList>
-                      <ProductOrder placing />
-                      <ProductOrder placing />
-                    </ProductOrderList>
-                    <ProductSummary>Разом: 1310</ProductSummary>
-                  </OrderItem>
-                  <OrderItem>
-                    <OrderWrapper>
-                      <OrderTitle>Замовлення № 342452-21</OrderTitle>
-                      <OrderDate>06.05.2023</OrderDate>
-                    </OrderWrapper>
-                    <ProductOrderList>
-                      <ProductOrder placing />
-                      <ProductOrder placing />
-                    </ProductOrderList>
-                    <ProductSummary>Разом: 1310</ProductSummary>
-                  </OrderItem>
-                </OrderList>
-              </SectionWrapper>
-            )}
-            {selectedItem === 'password' && (
-              <SectionWrapper>
-                <SectionTitle>Зміна паролю</SectionTitle>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <Label htmlFor="oldPassword">Старий пароль</Label>
-                  <Input
-                    {...register('oldPassword')}
-                    id="oldPassword"
-                    error={!!errors.oldPassword}
-                    helperText={errors.oldPassword?.message}
-                    color="myColor"
-                  />
-                  <Label htmlFor="newPassword">Новий пароль</Label>
-                  <Input
-                    {...register('newPassword')}
-                    id="newPassword"
-                    error={!!errors.newPassword}
-                    helperText={errors.newPassword?.message}
-                    color="myColor"
-                  />
-                  <Label htmlFor="passwordConfirmation">
-                    Підтвердження нового паролю
-                  </Label>
-                  <Input
-                    {...register('passwordConfirmation')}
-                    id="passwordConfirmation"
-                    error={!!errors.passwordConfirmation}
-                    helperText={errors.passwordConfirmation?.message}
-                    color="myColor"
-                  />
-                  <Button type="submit" variant="contained" color="primary">
-                    Відправити
-                  </Button>
-                </form>
-              </SectionWrapper>
-            )}
-          </Wrapper>
-        </Container>
-      </Section>
-      <Footer />
+      <Title>ПРОФІЛЬ</Title>
+      <Wrapper>
+        <ProfileMenu>
+          <ProfileInformation>
+            <UilUser width="30px" height="30px" />
+            <div>
+              <ProfileName>Тарас</ProfileName>
+              <ProfileEmail>taras@gmail.com</ProfileEmail>
+            </div>
+          </ProfileInformation>
+          <ProfileList>
+            <ProfileItem>
+              <ProfileBtn
+                selected={selectedItem === 'contacts'}
+                type="button"
+                value="contacts"
+                aria-label="перейти на сторінку контактна інформація"
+                onClick={e => handleClick(e)}
+              >
+                Контактна інформація
+              </ProfileBtn>
+            </ProfileItem>
+            <ProfileItem>
+              <ProfileBtn
+                selected={selectedItem === 'password'}
+                type="button"
+                value="password"
+                aria-label="перейти на сторінку зміни паролю"
+                onClick={e => handleClick(e)}
+              >
+                Зміна паролю
+              </ProfileBtn>
+            </ProfileItem>
+            <ProfileItem>
+              <ProfileBtn
+                selected={selectedItem === 'history'}
+                type="button"
+                value="history"
+                aria-label="перейти на сторінку історія замовлень"
+                onClick={e => handleClick(e)}
+              >
+                Історія замовлень
+              </ProfileBtn>
+            </ProfileItem>
+          </ProfileList>
+        </ProfileMenu>
+        {selectedItem === 'contacts' && (
+          <SectionWrapper>
+            <SectionTitle>Контактна інформація</SectionTitle>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Label htmlFor="lastName">Прізвище</Label>
+              <Input
+                {...register('lastName')}
+                id="lastName"
+                error={!!errors.lastName}
+                helperText={errors.lastName?.message}
+                color="myColor"
+              />
+              <Label htmlFor="firstName">Ім'я</Label>
+              <Input
+                {...register('firstName')}
+                id="firstName"
+                error={!!errors.firstName}
+                helperText={errors.firstName?.message}
+                color="myColor"
+              />
+              <Label htmlFor="phoneNumber">Телефон</Label>
+              <Input
+                {...register('phoneNumber', phoneValidation)}
+                id="firstName"
+                error={!!errors.phoneNumber}
+                helperText={errors.phoneNumber?.message}
+                color="myColor"
+                defaultValue="+380"
+              />
+              <Button type="submit" variant="contained" color="primary">
+                Відправити
+              </Button>
+            </form>
+          </SectionWrapper>
+        )}
+        {selectedItem === 'history' && (
+          <SectionWrapper>
+            <SectionTitle>Ваші замовлення</SectionTitle>
+            <OrderList>
+              <OrderItem>
+                <OrderWrapper>
+                  <OrderTitle>Замовлення № 342452-21</OrderTitle>
+                  <OrderDate>06.05.2023</OrderDate>
+                </OrderWrapper>
+                <ProductOrderList>
+                  <ProductOrder placing />
+                  <ProductOrder placing />
+                </ProductOrderList>
+                <ProductSummary>Разом: 1310</ProductSummary>
+              </OrderItem>
+              <OrderItem>
+                <OrderWrapper>
+                  <OrderTitle>Замовлення № 342452-21</OrderTitle>
+                  <OrderDate>06.05.2023</OrderDate>
+                </OrderWrapper>
+                <ProductOrderList>
+                  <ProductOrder placing />
+                  <ProductOrder placing />
+                </ProductOrderList>
+                <ProductSummary>Разом: 1310</ProductSummary>
+              </OrderItem>
+            </OrderList>
+          </SectionWrapper>
+        )}
+        {selectedItem === 'password' && (
+          <SectionWrapper>
+            <SectionTitle>Зміна паролю</SectionTitle>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Label htmlFor="oldPassword">Старий пароль</Label>
+              <Input
+                {...register('oldPassword')}
+                id="oldPassword"
+                error={!!errors.oldPassword}
+                helperText={errors.oldPassword?.message}
+                color="myColor"
+              />
+              <Label htmlFor="newPassword">Новий пароль</Label>
+              <Input
+                {...register('newPassword')}
+                id="newPassword"
+                error={!!errors.newPassword}
+                helperText={errors.newPassword?.message}
+                color="myColor"
+              />
+              <Label htmlFor="passwordConfirmation">
+                Підтвердження нового паролю
+              </Label>
+              <Input
+                {...register('passwordConfirmation')}
+                id="passwordConfirmation"
+                error={!!errors.passwordConfirmation}
+                helperText={errors.passwordConfirmation?.message}
+                color="myColor"
+              />
+              <Button type="submit" variant="contained" color="primary">
+                Відправити
+              </Button>
+            </form>
+          </SectionWrapper>
+        )}
+      </Wrapper>
     </ThemeProvider>
   );
 }

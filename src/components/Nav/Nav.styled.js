@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { colors, mq, utils } from 'styles/utils/variables';
 
@@ -42,13 +43,6 @@ export const NavItem = styled.li`
   border-bottom: 1px solid ${colors.auxiliary};
   cursor: pointer;
 
-  transition: color ${utils.transitDur} ${utils.transitFunc};
-
-  &:hover,
-  &:focus {
-    color: ${colors.accent};
-  }
-
   ${mq.tablet} {
     border: none;
     padding-top: 22px;
@@ -56,9 +50,12 @@ export const NavItem = styled.li`
   }
 `;
 
-export const NavItemFooter = styled.li`
+export const NavItemFooter = styled.li``;
+
+export const Link = styled(NavLink)`
   transition: color ${utils.transitDur} ${utils.transitFunc};
 
+  &.active,
   &:hover,
   &:focus {
     color: ${colors.accent};
