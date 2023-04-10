@@ -1,23 +1,23 @@
-import {
-  Shop,
-  Home,
-  PaymentDelivery,
-  AboutUs,
-  Reviews,
-  Profile,
-  Product,
-  PlacingOrder,
-  Contacts,
-} from 'pages';
 import { Routes, Route } from 'react-router-dom';
 import { SharedLayout } from 'layouts';
+import { createAsyncComponent } from 'helpers';
+
+const Home = createAsyncComponent('Home');
+const Shop = createAsyncComponent('Shop');
+const AboutUs = createAsyncComponent('AboutUs');
+const Contacts = createAsyncComponent('Contacts');
+const Reviews = createAsyncComponent('Reviews');
+const PaymentDelivery = createAsyncComponent('PaymentDelivery');
+const PlacingOrder = createAsyncComponent('PlacingOrder');
+const Profile = createAsyncComponent('Profile');
+const Product = createAsyncComponent('Product');
 
 export function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
-          <Route path="/" element={<Home />} />
+          <Route index element={<Home />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contacts" element={<Contacts />} />
@@ -30,6 +30,13 @@ export function App() {
 
           <Route path="*" element={<Home />} />
         </Route>
+
+        {/* For admin system (maybe) */}
+        {/* <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="sales" element={<Sales />} />
+          <Route path="customers" element={<Customers />} />
+        </Route> */}
       </Routes>
     </>
   );

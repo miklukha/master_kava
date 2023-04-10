@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { NavLink } from 'react-router-dom';
 import { mq, utils, colors } from 'styles/utils/variables';
 
 export const Item = styled.li`
@@ -15,7 +16,7 @@ export const Item = styled.li`
   }
 `;
 
-export const Link = styled.a`
+export const Link = styled(NavLink)`
   display: flex;
   flex-direction: column;
   align-items: center;

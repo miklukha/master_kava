@@ -175,15 +175,10 @@ export const Icon = styled.div`
   background-image: linear-gradient(
     to top,
     ${colors.auxiliary} 0%,
-    ${colors.auxiliary} 80%,
-    transparent 80%,
+    ${colors.auxiliary} ${({ estimate }) => estimate * 20}%,
+    transparent ${({ estimate }) => estimate * 20}%,
     transparent 100%
   );
-
-  /* ${mq.tablet} {
-    width: 32px;
-    height: 32px;
-  } */
 
   ${mq.tablet} {
     width: 36px;
@@ -192,86 +187,5 @@ export const Icon = styled.div`
 `;
 
 export const Img = styled.img`
-  /* width: 30px; */
   border-radius: 50%;
-  /* margin: 0 auto; */
-`;
-
-export const Icon1 = styled.div`
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 1px solid ${colors.auxiliaryText};
-
-  background-image: linear-gradient(
-    to top,
-    ${colors.auxiliary} 0%,
-    ${colors.auxiliary} 60%,
-    transparent 60%,
-    transparent 100%
-  );
-
-  /* ${mq.tablet} {
-    width: 32px;
-    height: 32px;
-  } */
-
-  ${mq.tablet} {
-    width: 36px;
-    height: 36px;
-  }
-`;
-
-export const Icon2 = styled.div`
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-
-  border: 1px solid ${colors.auxiliaryText};
-
-  background-image: linear-gradient(
-    to top,
-    ${colors.auxiliary} 0%,
-    ${colors.auxiliary} 100%,
-    transparent 100%,
-    transparent 100%
-  );
-  /* 
-  ${mq.tablet} {
-    width: 32px;
-    height: 32px;
-  } */
-
-  ${mq.tablet} {
-    width: 36px;
-    height: 36px;
-  }
-`;
-
-export const Icon3 = styled.div`
-  /* width: 30px; */
-  /* border-radius: 50%; */
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  /* background-color: ${colors.auxiliary}; */
-  border: 1px solid ${colors.auxiliaryText};
-
-  background-image: linear-gradient(
-    to top,
-    ${colors.auxiliary} 0%,
-    ${colors.auxiliary} 20%,
-    transparent 20%,
-    transparent 100%
-  );
-
-  /* ${mq.tablet} {
-    width: 32px;
-    height: 32px;
-  } */
-
-  ${mq.tablet} {
-    width: 36px;
-    height: 36px;
-  }
 `;

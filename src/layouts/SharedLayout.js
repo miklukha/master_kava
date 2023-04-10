@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { Header, Footer } from 'layouts';
-import { Section, Container } from 'components';
+import { Section, Container, Loader } from 'components';
+import { Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export function SharedLayout() {
@@ -12,12 +13,16 @@ export function SharedLayout() {
       <Header />
       {isHome ? (
         <Container>
-          <Outlet />
+          <Suspense fallback={<Loader />}>
+            <Outlet />
+          </Suspense>
         </Container>
       ) : (
         <Section>
           <Container>
-            <Outlet />
+            <Suspense fallback={<Loader />}>
+              <Outlet />
+            </Suspense>
           </Container>
         </Section>
       )}

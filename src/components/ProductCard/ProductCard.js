@@ -7,17 +7,18 @@ import {
   Ingredients,
   Price,
 } from './ProductCard.styled';
-import productCard from 'assets/images/productCard.png';
 
-export function ProductCard({ ingredients }) {
+export function ProductCard({ product }) {
+  const { _id, image, category, price, characteristics, name } = product;
+
   return (
     <Item>
-      <Link href="">
-        <Img src={productCard} alt="coffee Brasil" />
-        <Name>Кава Brasil</Name>
-        <Ingredients>{ingredients}</Ingredients>
-        <ProductCharacteristics />
-        <Price>655 грн</Price>
+      <Link to={`/shop/${_id}`}>
+        <Img src={image} alt={name} />
+        <Name>{name}</Name>
+        <Ingredients>{category}</Ingredients>
+        <ProductCharacteristics characteristics={characteristics} />
+        <Price>{price} грн</Price>
         <Button type="button" onClick={() => console.log('add to the cart')}>
           До кошика
         </Button>

@@ -37,10 +37,14 @@ export const Circle = styled.div`
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: ${({ gray }) => (gray ? colors.auxiliary : colors.accent)};
+  background-color: ${colors.accent};
 
   ${mq.desktop} {
     width: 12px;
     height: 12px;
   }
+`;
+
+export const CircleGray = styled(Circle)`
+  background-color: ${colors.auxiliary};
 `;

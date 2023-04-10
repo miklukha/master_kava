@@ -7,7 +7,7 @@ import {
   Title,
 } from 'components';
 import { filterOptions } from 'helpers';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MediaQuery from 'react-responsive';
 import { breakpoints } from 'styles/utils/variables';
 import {
@@ -16,13 +16,31 @@ import {
   FiltersWrapper,
   ProductList,
 } from './Shop.styled';
+// import { getProducts } from 'services/fakeApi';
+import * as API from 'services/api';
 
 export function Shop() {
   const [selectedOption, setSelectedOption] = useState(null);
+  const [products, setProducts] = useState([]);
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const onFilterClick = () => setIsFilterOpen(!isFilterOpen);
+
+  useEffect(() => {
+    (async function getProducts() {
+      try {
+        const products = await API.getProducts();
+        setProducts(products);
+      } catch (error) {
+        // toast.error('Film is not found');
+        // navigate('/', { replace: true });
+        // console.log(error);
+      }
+    })();
+    // const products = getProducts();
+    // setProducts(products);
+  }, []);
 
   return (
     <>
@@ -53,15 +71,9 @@ export function Shop() {
           <ShopFilter />
         </MediaQuery>
         <ProductList>
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          {products.map(product => (
+            <ProductCard key={product._id} product={product} />
+          ))}
         </ProductList>
       </ContentWrapper>
     </>
