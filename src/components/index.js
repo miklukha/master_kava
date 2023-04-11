@@ -29,3 +29,4 @@ export * from './ProductCharactDesc';
 export * from './CartModal';
 export * from './TitleHome.styled';
 export * from './Loader';
+export * from './NavigationStyles.styled';

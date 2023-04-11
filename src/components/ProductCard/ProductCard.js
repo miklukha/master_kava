@@ -8,11 +8,11 @@ import {
   Price,
 } from './ProductCard.styled';
 
-export function ProductCard({ product }) {
+export function ProductCard({ product, home }) {
   const { _id, image, category, price, characteristics, name } = product;
 
   return (
-    <Item>
+    <Item as={home && 'div'}>
       <Link to={`/shop/${_id}`}>
         <Img src={image} alt={name} />
         <Name>{name}</Name>
