@@ -1,3 +1,4 @@
 export * from './filterOptions';
-export * from './typesOptions';
+export * from './productOptions';
 export * from './createAsyncComponent';
+export * from './adminCategories';

@@ -30,3 +30,7 @@ export * from './CartModal';
 export * from './TitleHome.styled';
 export * from './Loader';
 export * from './NavigationStyles.styled';
+export * from './ProductDescription';
+export * from './DescCharacteristics';
+export * from './CookingMethods';
+export * from './AdminProducts';

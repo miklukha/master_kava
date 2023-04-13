@@ -16,7 +16,7 @@ export function ProductCard({ product, home }) {
       <Link to={`/shop/${_id}`}>
         <Img src={image} alt={name} />
         <Name>{name}</Name>
-        <Ingredients>{category}</Ingredients>
+        <Ingredients>{category.name}</Ingredients>
         <ProductCharacteristics characteristics={characteristics} />
         <Price>{price} грн</Price>
         <Button type="button" onClick={() => console.log('add to the cart')}>

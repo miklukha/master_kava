@@ -11,6 +11,7 @@ const PaymentDelivery = createAsyncComponent('PaymentDelivery');
 const PlacingOrder = createAsyncComponent('PlacingOrder');
 const Profile = createAsyncComponent('Profile');
 const Product = createAsyncComponent('Product');
+const Admin = createAsyncComponent('Admin');
 
 export function App() {
   return (
@@ -27,6 +28,8 @@ export function App() {
           <Route path="/placing-order" element={<PlacingOrder />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/shop/:productId" element={<Product />} />
+
+          <Route path="/admin" element={<Admin />} />
 
           <Route path="*" element={<Home />} />
         </Route>

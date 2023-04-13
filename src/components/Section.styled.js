@@ -4,7 +4,7 @@ import { mq } from 'styles/utils/variables';
 export const Section = styled.section`
   padding-top: 30px;
   padding-bottom: 30px;
-  width: fit-content;
+  /* width: fit-content; */
 
   ${mq.desktop} {
     padding-top: 40px;

@@ -18,13 +18,13 @@ export function SharedLayout() {
           </Suspense>
         </Container>
       ) : (
-        <Section>
-          <Container>
+        <Container>
+          <Section>
             <Suspense fallback={<Loader />}>
               <Outlet />
             </Suspense>
-          </Container>
-        </Section>
+          </Section>
+        </Container>
       )}
       <Footer />
     </>

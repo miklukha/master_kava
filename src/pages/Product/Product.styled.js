@@ -176,110 +176,110 @@ export const AmountBtnWrapper = styled.div`
   }
 `;
 
-export const DescBtnsWrapper = styled.div`
-  display: flex;
-  border-bottom: 1px solid ${colors.auxiliary};
-  margin-bottom: 20px;
+// export const DescBtnsWrapper = styled.div`
+//   display: flex;
+//   border-bottom: 1px solid ${colors.auxiliary};
+//   margin-bottom: 20px;
 
-  ${mq.tablet} {
-    gap: 20px;
-  }
+//   ${mq.tablet} {
+//     gap: 20px;
+//   }
 
-  ${mq.desktop} {
-    gap: 30px;
-    /* margin-bottom: 20px; */
-  }
-`;
+//   ${mq.desktop} {
+//     gap: 30px;
+//     /* margin-bottom: 20px; */
+//   }
+// `;
 
-export const DescBtn = styled.button`
-  font-weight: 500;
-  text-transform: uppercase;
-  text-align: left;
-  padding: 5px 0;
+// export const DescBtn = styled.button`
+//   font-weight: 500;
+//   text-transform: uppercase;
+//   text-align: left;
+//   padding: 5px 0;
 
-  color: ${({ selected }) => (selected ? colors.accent : colors.mainText)};
+//   color: ${({ selected }) => (selected ? colors.accent : colors.mainText)};
 
-  transition: color ${utils.transitDur} ${utils.transitFunc};
+//   transition: color ${utils.transitDur} ${utils.transitFunc};
 
-  &:hover,
-  &:focus {
-    color: ${colors.accent};
-  }
-`;
+//   &:hover,
+//   &:focus {
+//     color: ${colors.accent};
+//   }
+// `;
 
-export const DescText = styled.p`
-  margin-bottom: 20px;
+// export const DescText = styled.p`
+//   margin-bottom: 20px;
 
-  /* ${mq.desktop} {
-    margin-bottom: 20px;
-  } */
-`;
+//   /* ${mq.desktop} {
+//     margin-bottom: 20px;
+//   } */
+// `;
 
-export const CharactList = styled.ul``;
+// export const CharactList = styled.ul``;
 
-export const CharactItem = styled.li`
-  display: flex;
-  align-items: center;
+// export const CharactItem = styled.li`
+//   display: flex;
+//   align-items: center;
 
-  margin-bottom: 5px;
+//   margin-bottom: 5px;
 
-  &:last-of-type {
-    margin-bottom: 0;
-  }
+//   &:last-of-type {
+//     margin-bottom: 0;
+//   }
 
-  ${mq.desktop} {
-    margin-bottom: 10px;
-  }
-`;
+//   ${mq.desktop} {
+//     margin-bottom: 10px;
+//   }
+// `;
 
-export const CharactText = styled.span`
-  flex: 1;
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+// export const CharactText = styled.span`
+//   flex: 1;
+//   display: flex;
+//   align-items: baseline;
+//   justify-content: space-between;
 
-  &:first-of-type::after {
-    content: '';
-    flex: 1;
-    border-bottom: 1px dotted ${colors.auxiliary};
-    margin: 0 3px;
-  }
+//   &:first-of-type::after {
+//     content: '';
+//     flex: 1;
+//     border-bottom: 1px dotted ${colors.auxiliary};
+//     margin: 0 3px;
+//   }
 
-  ${mq.tablet} {
-    &:last-of-type {
-      flex-basis: 50%;
-    }
-  }
+//   ${mq.tablet} {
+//     &:last-of-type {
+//       flex-basis: 50%;
+//     }
+//   }
 
-  ${mq.desktop} {
-    &:last-of-type {
-      flex-basis: 60%;
-    }
-  }
-`;
+//   ${mq.desktop} {
+//     &:last-of-type {
+//       flex-basis: 60%;
+//     }
+//   }
+// `;
 
-export const CookingMethodsTitle = styled.p`
-  margin-bottom: 10px;
-`;
+// export const CookingMethodsTitle = styled.p`
+//   margin-bottom: 10px;
+// `;
 
-export const CookingMethodsList = styled.ul``;
+// export const CookingMethodsList = styled.ul``;
 
-export const CookingMethodsItem = styled.li`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 39px;
-  /* padding-top: 5px; */
+// export const CookingMethodsItem = styled.li`
+//   display: flex;
+//   align-items: center;
+//   gap: 10px;
+//   min-height: 39px;
+//   /* padding-top: 5px; */
 
-  margin-bottom: 10px;
+//   margin-bottom: 10px;
 
-  &:last-of-type {
-    margin-bottom: 0;
-  }
-`;
+//   &:last-of-type {
+//     margin-bottom: 0;
+//   }
+// `;
 
-export const CookingMethod = styled.span``;
+// export const CookingMethod = styled.span``;
 
-export const CookingMethodImg = styled.img`
-  width: 30px;
-`;
+// export const CookingMethodImg = styled.img`
+//   width: 30px;
+// `;

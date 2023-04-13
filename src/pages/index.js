@@ -7,3 +7,4 @@ export * from './PaymentDelivery';
 export * from './AboutUs';
 export * from './Reviews';
 export * from './Profile';
+export * from './Admin';

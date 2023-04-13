@@ -1,25 +1,18 @@
-// import product from 'assets/images/product.jpg';
 import {
-  ProductCharactDesc,
-  FilterDropdown,
-  Counter,
   Button,
+  Counter,
+  FilterDropdown,
+  ProductCharactDesc,
+  ProductDescription,
 } from 'components';
+import { typesOptions, weights } from 'helpers';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import {
   AmountBtnWrapper,
   BtnsItem,
   BtnsList,
-  CharactItem,
-  CharactList,
-  CharactText,
-  CookingMethod,
-  CookingMethodImg,
-  CookingMethodsItem,
-  CookingMethodsList,
-  CookingMethodsTitle,
-  DescBtn,
-  DescBtnsWrapper,
-  DescText,
+  DescWrapper,
   FiltersWrapper,
   Img,
   ImgWrapper,
@@ -33,41 +26,17 @@ import {
   WeightBtn,
   Wholesale,
   Wrapper,
-  DescWrapper,
 } from './Product.styled';
-import { useState, useEffect } from 'react';
-import { typesOptions } from 'helpers';
-import { coffeeFilter, turka, geyser, machine } from 'assets/images';
-import { useParams } from 'react-router-dom';
-// import { getProductById } from 'services/fakeApi';
-
 import * as API from 'services/api';
-
-// const weights = [250, 500, 1000];
-const weights = [
-  { id: 1, value: 250 },
-  { id: 2, value: 500 },
-  { id: 3, value: 1000 },
-];
-
-const descs = [
-  { id: 1, value: 'опис та характеристика' },
-  { id: 2, value: 'способи приготування' },
-];
 
 export function Product() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedWeight, setSelectedWeight] = useState(weights[0].value);
-  const [selectedDesc, setSelectedDesc] = useState(descs[0].value);
   const [product, setProduct] = useState(null);
   const { productId } = useParams();
 
   const onBtnClick = i => {
     setSelectedWeight(weights[i].value);
-  };
-
-  const onDescBtnClick = i => {
-    setSelectedDesc(descs[i].value);
   };
 
   useEffect(() => {
@@ -166,66 +135,7 @@ export function Product() {
               </AmountBtnWrapper>
             </DescWrapper>
           </Wrapper>
-          <DescBtnsWrapper>
-            {descs.map(({ id, value }, i) => {
-              return (
-                <DescBtn
-                  key={id}
-                  selected={selectedDesc === value ? true : false}
-                  type="button"
-                  aria-label={`подивитися ${value}`}
-                  onClick={() => onDescBtnClick(i)}
-                >
-                  {value}
-                </DescBtn>
-              );
-            })}
-          </DescBtnsWrapper>
-          {selectedDesc === descs[0].value && (
-            <>
-              <DescText>{product.description}</DescText>
-              <CharactList>
-                <CharactItem>
-                  <CharactText>Склад</CharactText>
-                  <CharactText>{product.category}</CharactText>
-                </CharactItem>
-                <CharactItem>
-                  <CharactText>Ступінь обсмаження</CharactText>
-                  <CharactText>{product.roastLevel}</CharactText>
-                </CharactItem>
-                <CharactItem>
-                  <CharactText>Країна походження</CharactText>
-                  <CharactText>{product.countries.join(', ')}</CharactText>
-                </CharactItem>
-              </CharactList>
-            </>
-          )}
-          {selectedDesc === descs[1].value && (
-            <>
-              <CookingMethodsTitle>
-                Рекомендовані способи приготування:
-              </CookingMethodsTitle>
-              <CookingMethodsList>
-                <CookingMethodsItem>
-                  <CookingMethodImg src={turka} />
-                  <CookingMethod>Турка</CookingMethod>
-                </CookingMethodsItem>
-                <CookingMethodsItem>
-                  <CookingMethodImg src={machine} />
-                  <CookingMethod>Кавомашина (еспресо)</CookingMethod>
-                </CookingMethodsItem>
-                <CookingMethodsItem>
-                  <CookingMethodImg src={geyser} />
-                  <CookingMethod>Гейзер</CookingMethod>
-                </CookingMethodsItem>
-
-                <CookingMethodsItem>
-                  <CookingMethodImg src={coffeeFilter} />
-                  <CookingMethod>Фільтр кавоварка</CookingMethod>
-                </CookingMethodsItem>
-              </CookingMethodsList>
-            </>
-          )}
+          <ProductDescription product={product} />
         </>
       )}
     </>

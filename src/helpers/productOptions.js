@@ -1,3 +1,14 @@
+export const weights = [
+  { id: 1, value: 250 },
+  { id: 2, value: 500 },
+  { id: 3, value: 1000 },
+];
+
+export const descriptions = [
+  { id: 1, value: 'опис та характеристика' },
+  { id: 2, value: 'способи приготування' },
+];
+
 export const typesOptions = [
   {
     key: 1,
