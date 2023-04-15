@@ -20,6 +20,30 @@ export async function getCategories() {
   return response.data;
 }
 
+export async function deleteProduct(id) {
+  const response = await axios.put(`/delete/${id}`);
+  return response.data;
+}
+
+export async function uploadImage(data) {
+  const response = await axios.post('/upload-image', { data });
+  return response.data;
+}
+
+export async function upload(data) {
+  const response = await axios.post('/prod', { data });
+  return response.data;
+}
+
+/*
+ * try {
+    const response = await axios.post('/prod', { data });
+    return response.data;
+  } catch (error) {
+    // handle the error
+  }
+ */
+
 // /products?sort=country&name=brasil,nicaragua
 // /products?sort=price&min=260&max=500
 // /products?sort=category&label=arabica50

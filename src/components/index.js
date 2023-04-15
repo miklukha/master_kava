@@ -34,3 +34,5 @@ export * from './ProductDescription';
 export * from './DescCharacteristics';
 export * from './CookingMethods';
 export * from './AdminProducts';
+export * from './AdminProductEdit';
+export * from './AdminProductCreate';

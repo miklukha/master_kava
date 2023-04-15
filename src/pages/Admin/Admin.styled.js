@@ -12,8 +12,8 @@ export const CategoryList = styled.ul`
   ${mq.onlyMobile} {
     display: flex;
     /* gap: 10px; */
-    margin-bottom: 20px;
-    border-bottom: 1px solid ${colors.auxiliary};
+    margin-bottom: 10px;
+    /* border-bottom: 1px solid ${colors.auxiliary}; */
     width: 100%;
   }
 `;
@@ -21,7 +21,7 @@ export const CategoryList = styled.ul`
 export const CategoryItem = styled.li`
   font-weight: 500;
   border-right: 1px solid ${colors.auxiliary};
-  padding: 20px 11px;
+  padding: 14px 11px;
 
   &:last-of-type {
     border-right: none;
