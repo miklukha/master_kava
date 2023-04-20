@@ -1,9 +1,13 @@
 import { Input } from './Counter.styled';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export function Counter() {
+export function Counter({ handleQuantityChange }) {
   const [quantity, setQuantity] = useState('1'); //! stored as a STRING
   //! it is necessary to do check if it number or not
+
+  useEffect(() => {
+    handleQuantityChange(quantity);
+  }, [quantity, handleQuantityChange]);
 
   return (
     <label>

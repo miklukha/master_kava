@@ -28,12 +28,20 @@ import {
   Wrapper,
 } from './Product.styled';
 import * as API from 'services/api';
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 export function Product() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedWeight, setSelectedWeight] = useState(weights[0].value);
   const [product, setProduct] = useState(null);
+  const [quantity, setQuantity] = useState(1);
   const { productId } = useParams();
+  const navigate = useNavigate();
+
+  const onQuantityChange = newQuantity => {
+    setQuantity(parseInt(newQuantity));
+  };
 
   const onBtnClick = i => {
     setSelectedWeight(weights[i].value);
@@ -45,12 +53,12 @@ export function Product() {
         const product = await API.getProductById(productId);
         setProduct(product[0]);
       } catch (error) {
-        // toast.error('Film is not found');
-        // navigate('/', { replace: true });
-        // console.log(error);
+        toast.error('Продукт не знайдений, спробуйте, будь ласка, пізніше');
+        navigate('/shop', { replace: true });
+        console.log(error);
       }
     })();
-  }, [productId]);
+  }, [navigate, productId]);
 
   // const product = getProductById(productId);
   // setProduct(product);
@@ -120,9 +128,12 @@ export function Product() {
                 Придбання цього товару <b>оптом</b> можливе лише за попередньою
                 розмовою по <Phone href="tel:+380671429022">телефону</Phone>
               </Wholesale>
-              <Price>Ціна: {product.price} грн</Price>
+              <Price>
+                Ціна: {(product.price * (selectedWeight / 100) + 10) * quantity}
+                грн
+              </Price>
               <AmountBtnWrapper>
-                <Counter />
+                <Counter handleQuantityChange={onQuantityChange} />
                 <Button
                   onClick={() => {
                     console.log('add to cart');

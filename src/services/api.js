@@ -25,13 +25,41 @@ export async function deleteProduct(id) {
   return response.data;
 }
 
-export async function uploadImage(data) {
-  const response = await axios.post('/upload-image', { data });
+// export async function uploadImage(data) {
+//   const response = await axios.post('/upload-image', { data });
+//   return response.data;
+// }
+
+export async function updateProduct(id, data) {
+  const response = await axios.put(
+    `/update/${id}`,
+    { data },
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }
+  );
   return response.data;
 }
 
-export async function upload(data) {
-  const response = await axios.post('/prod', { data });
+export async function upload(formData, file) {
+  const response = await axios.post('/upload', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      'file-name': file.name,
+      'file-size': file.size,
+    },
+  });
+  return response.data;
+}
+
+export async function createProduct(data) {
+  const response = await axios.post(`/create`, data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
   return response.data;
 }
 

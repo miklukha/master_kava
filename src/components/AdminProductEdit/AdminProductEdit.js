@@ -9,74 +9,9 @@ import {
 } from './AdminProductEdit.styled';
 import { useEffect, useState } from 'react';
 import * as API from 'services/api';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 
-axios.defaults.baseURL = 'http://127.0.0.1:1880';
-
 export function AdminProductEdit({ product = {}, onCancel, action }) {
-  const [categories, setCategories] = useState([]);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    // setValue,
-  } = useForm();
-
-  const onSubmit = async data => {
-    if (action === 'edit') {
-    }
-
-    if (action === 'create') {
-    }
-    // setValue('image', data.image[0]);
-    // console.log(data);
-
-    //! availability, characteristics save like STRING
-    // setValue('availability', Boolean(data.availability));
-
-    // fetch('http://127.0.0.1:1880/upload-image', {
-    //   method: 'POST',
-    //   body: data,
-    // })
-    //   .then(response => {
-    //     console.log(response);
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
-
-    const formData = new FormData();
-    formData.append('image', data.image[0]);
-
-    // const res = await fetch('http://localhost:5000/upload-file', {
-    //   method: 'POST',
-    //   body: formData,
-    // }).then(res => res.json());
-    // alert(JSON.stringify(`${res.message}, status: ${res.status}`));
-
-    axios.post('/upload-image', data, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-  };
-
-  useEffect(() => {
-    (async function getCategories() {
-      try {
-        const categories = await API.getCategories();
-        setCategories(categories);
-      } catch (error) {
-        toast.error('Категорії не знайденію спробуйте пізніше');
-        // navigate('/', { replace: true });
-        console.log(error);
-      }
-    })();
-  }, []);
-
-  // console.log(product);
-
   const {
     name,
     code,
@@ -86,7 +21,45 @@ export function AdminProductEdit({ product = {}, onCancel, action }) {
     description,
     price,
     roastLevel,
+    category,
   } = product;
+
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(category?.label);
+  const [selectedAvailability, setSelectedAvailability] =
+    useState(availability);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    // setValue,
+  } = useForm();
+
+  const onSubmit = data => {
+    // if (action === 'edit') {
+    // }
+    // if (action === 'create') {
+    // }
+    // setValue('category', selectedCategory);
+
+    console.log(data);
+    //! availability, characteristics save like STRING
+  };
+
+  useEffect(() => {
+    (async function getCategories() {
+      try {
+        const categories = await API.getCategories();
+        setCategories(categories);
+      } catch (error) {
+        toast.error('Категорії не знайдені, спробуйте пізніше');
+        // navigate('/', { replace: true });
+        console.log(error);
+      }
+    })();
+  }, []);
+
   return (
     <Form onSubmit={handleSubmit(onSubmit)} action={action}>
       <ItemWrapper>
@@ -113,20 +86,31 @@ export function AdminProductEdit({ product = {}, onCancel, action }) {
       </ItemWrapper>
       <ItemWrapper>
         <label htmlFor="availability">В наявності</label>
-        <select {...register('availability')} value={availability}>
+        <select
+          {...register('availability')}
+          value={selectedAvailability}
+          onChange={e => setSelectedAvailability(e.target.value)}
+        >
           <option value={true}>Так</option>
           <option value={false}>Ні</option>
         </select>
       </ItemWrapper>
       <ItemWrapper>
         <label htmlFor="category">Категорія</label>
-        <select {...register('category')}>
-          {categories.map(({ label, name, _id }) => (
-            <option key={_id} value={label}>
-              {name}
-            </option>
-          ))}
+        <select
+          {...register('category', { required: true })}
+          value={selectedCategory}
+          onChange={e => setSelectedCategory(e.target.value)}
+        >
+          {categories.map(({ label, name, _id }) => {
+            return (
+              <option key={_id} value={label}>
+                {name}
+              </option>
+            );
+          })}
         </select>
+        {errors.category && <Tip>Це поле обов'язкове</Tip>}
       </ItemWrapper>
       <ItemWrapper>
         <label htmlFor="sourness">Кислинка</label>
@@ -211,7 +195,7 @@ export function AdminProductEdit({ product = {}, onCancel, action }) {
         />
         {errors.roastLevel && <Tip>Це поле обов'язкове </Tip>}
       </ItemWrapper>
-      <ItemWrapper>
+      {/* <ItemWrapper>
         <label htmlFor="image">Зоображення</label>
         <input
           type="file"
@@ -220,7 +204,7 @@ export function AdminProductEdit({ product = {}, onCancel, action }) {
           {...register('image', { required: true })}
         />
         {errors.image && <Tip>Це поле обов'язкове </Tip>}
-      </ItemWrapper>
+      </ItemWrapper> */}
       <BtnsWrapper>
         <Btn type="submit">Підтвердити</Btn>
         {action === 'edit' && (
