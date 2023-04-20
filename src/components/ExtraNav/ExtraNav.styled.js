@@ -53,10 +53,24 @@ export const Item = styled.li`
     }
   }
 
+  & + &::after {
+    content: '';
+    display: block;
+    background-color: ${colors.accent};
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+
+    position: absolute;
+    top: 15px;
+    right: 11px;
+  }
+
   transition: color ${utils.transitDur} ${utils.transitFunc};
 
   &:hover,
-  &:focus {
+  &:focus,
+  &:active {
     color: ${colors.accent};
   }
 `;

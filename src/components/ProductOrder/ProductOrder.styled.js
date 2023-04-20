@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { colors } from 'styles/utils/variables';
+import { colors, fontSizes } from 'styles/utils/variables';
 
 export const Wrapper = styled.li`
   position: relative;
@@ -29,13 +29,22 @@ export const Img = styled.img`
 
 export const Title = styled.h3`
   font-weight: 500;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 `;
 
-export const Details = styled.div`
+export const Details = styled.ul`
   display: flex;
-  gap: 10px;
-  align-items: flex-end;
+  /* justify-content: space-between; */
+  gap: 8px;
+  /* align-items: flex-end; */
+`;
+
+export const DetailsPrice = styled.span`
+  font-weight: 500;
+`;
+
+export const DetailsItem = styled.li`
+  /* font-size: ${fontSizes.xs}; */
 `;
 
 export const DescWrapper = styled.div`
@@ -44,4 +53,9 @@ export const DescWrapper = styled.div`
   align-items: ${({ placing }) => placing && 'flex-start'};
 
   width: ${({ placing }) => placing && '100%'};
+`;
+
+export const DetailsWrapper = styled.div`
+  display: flex;
+  gap: 20px;
 `;

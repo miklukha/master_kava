@@ -5,7 +5,7 @@ import {
   ProductCharactDesc,
   ProductDescription,
 } from 'components';
-import { typesOptions, weights } from 'helpers';
+import { grinds, weights } from 'helpers';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
@@ -32,19 +32,49 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 export function Product() {
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [selectedWeight, setSelectedWeight] = useState(weights[0].value);
+  // const LS_KEY = 'products';
   const [product, setProduct] = useState(null);
+
+  const [grind, setGrind] = useState(grinds[0]);
+  const [weight, setWeight] = useState(weights[0].value);
   const [quantity, setQuantity] = useState(1);
+
   const { productId } = useParams();
   const navigate = useNavigate();
 
   const onQuantityChange = newQuantity => {
-    setQuantity(parseInt(newQuantity));
+    if (newQuantity) {
+      setQuantity(parseInt(newQuantity));
+    }
+
+    if (!newQuantity) {
+      setQuantity(0);
+    }
   };
 
   const onBtnClick = i => {
-    setSelectedWeight(weights[i].value);
+    setWeight(weights[i].value);
+  };
+
+  const onSubmit = e => {
+    e.preventDefault();
+
+    const cartProduct = {
+      id: product._id,
+      name: product.name,
+      image: product.image,
+      price: (product.price * (weight / 100) + 10) * quantity,
+      grind,
+      weight,
+      quantity,
+    };
+
+    const cartData = JSON.parse(localStorage.getItem('cartData')) || [];
+    cartData.push(cartProduct);
+
+    localStorage.setItem('cartData', JSON.stringify(cartData));
+
+    toast.success('Товар успішно доданий до кошика');
   };
 
   useEffect(() => {
@@ -81,7 +111,7 @@ export function Product() {
   return (
     <>
       {product && (
-        <>
+        <form onSubmit={e => onSubmit(e)}>
           <Wrapper>
             <ImgWrapper>
               <Img src={product.image} alt={product.name} />
@@ -103,16 +133,16 @@ export function Product() {
               <FiltersWrapper>
                 <FilterDropdown
                   desc={true}
-                  filterOptions={typesOptions}
-                  selectedOption={selectedOption}
-                  onSetOption={option => setSelectedOption(option)}
+                  filterOptions={grinds}
+                  selectedOption={grind}
+                  onSetOption={option => setGrind(option)}
                 />
                 <BtnsList>
                   {weights.map(({ id, value }, i) => {
                     return (
                       <BtnsItem key={id}>
                         <WeightBtn
-                          selected={selectedWeight === value ? true : false}
+                          selected={weight === value ? true : false}
                           type="button"
                           aria-label={`${value} грам кави`}
                           onClick={() => onBtnClick(i)}
@@ -129,25 +159,19 @@ export function Product() {
                 розмовою по <Phone href="tel:+380671429022">телефону</Phone>
               </Wholesale>
               <Price>
-                Ціна: {(product.price * (selectedWeight / 100) + 10) * quantity}
+                Ціна: {(product.price * (weight / 100) + 10) * quantity}
                 грн
               </Price>
               <AmountBtnWrapper>
                 <Counter handleQuantityChange={onQuantityChange} />
-                <Button
-                  onClick={() => {
-                    console.log('add to cart');
-                  }}
-                  type="button"
-                  aria-label="додати до кошика"
-                >
+                <Button type="submit" aria-label="додати до кошика">
                   До кошика
                 </Button>
               </AmountBtnWrapper>
             </DescWrapper>
           </Wrapper>
           <ProductDescription product={product} />
-        </>
+        </form>
       )}
     </>
   );

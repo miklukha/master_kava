@@ -9,7 +9,7 @@ export const descriptions = [
   { id: 2, value: 'способи приготування' },
 ];
 
-export const typesOptions = [
+export const grinds = [
   {
     key: 1,
     value: 'beans',
@@ -22,7 +22,7 @@ export const typesOptions = [
   },
   {
     key: 3,
-    value: 'turk',
+    value: 'turka',
     name: 'Для турки',
   },
   {

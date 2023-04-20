@@ -24,7 +24,7 @@ export function FilterDropdown({
 
   const myStyle = desc
     ? css`
-        width: 190px;
+        width: 200px;
       `
     : css`
         width: 214px;

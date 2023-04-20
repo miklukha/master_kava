@@ -25,6 +25,7 @@ export const CartDropWrapper = styled.div`
 `;
 
 export const Notification = styled.p`
+  margin-top: 20px;
   text-align: center;
 `;
 

@@ -1,13 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MediaQuery from 'react-responsive';
 import { CartDropDown, Contacts, DropDown } from 'components';
 import { breakpoints } from 'styles/utils/variables';
 import { BurgerBtn, Item, List, Wrapper } from './ExtraNav.styled';
 import { UilBars, UilUser, UilShoppingBag } from '@iconscout/react-unicons';
 
-export function ExtraNav({ handleClick }) {
+export function ExtraNav({ handleClick, onCartDown = false }) {
   const [dropdown, setDropdown] = useState(false);
   const [cartDropDown, setCartDropDown] = useState(false);
+
+  useEffect(() => {
+    setCartDropDown(onCartDown);
+  }, [onCartDown]);
 
   return (
     <Wrapper>

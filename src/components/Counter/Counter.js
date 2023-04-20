@@ -1,8 +1,8 @@
 import { Input } from './Counter.styled';
 import { useState, useEffect } from 'react';
 
-export function Counter({ handleQuantityChange }) {
-  const [quantity, setQuantity] = useState('1'); //! stored as a STRING
+export function Counter({ handleQuantityChange, cartQuantity = '1' }) {
+  const [quantity, setQuantity] = useState(cartQuantity); //! stored as a STRING
   //! it is necessary to do check if it number or not
 
   useEffect(() => {
@@ -14,6 +14,7 @@ export function Counter({ handleQuantityChange }) {
       <Input
         type="number"
         name="quantity"
+        min="1"
         value={quantity}
         onChange={e => setQuantity(e.target.value)}
       />
