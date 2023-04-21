@@ -27,7 +27,7 @@ export const Link = styled(NavLink)`
 
   box-shadow: none;
   border: 1px solid ${colors.auxiliary};
-  border-radius: ${utils.borderRadius};
+  border-radius: ${utils.borderRadiusOfBtn};
 
   background-color: ${colors.mainBg};
 

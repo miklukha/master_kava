@@ -45,6 +45,7 @@ export const DetailsPrice = styled.span`
 
 export const DetailsItem = styled.li`
   /* font-size: ${fontSizes.xs}; */
+  /* color: ${colors.auxiliaryText}; */
 `;
 
 export const DescWrapper = styled.div`

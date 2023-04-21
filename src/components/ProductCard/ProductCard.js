@@ -1,27 +1,27 @@
-import { ProductCharacteristics, Button } from 'components';
+import { ProductCharacteristics } from 'components';
+import slugify from 'slugify';
 import {
-  Link,
-  Item,
   Img,
-  Name,
   Ingredients,
+  Item,
+  Link,
+  Name,
   Price,
 } from './ProductCard.styled';
 
 export function ProductCard({ product, home }) {
   const { _id, image, category, price, characteristics, name } = product;
 
+  const makeSlug = string => slugify(string, { lower: true });
+
   return (
     <Item as={home && 'div'}>
-      <Link to={`/shop/${_id}`}>
+      <Link to={`/shop/${makeSlug(`${name} ${_id}`)}`}>
         <Img src={image} alt={name} />
         <Name>{name}</Name>
         <Ingredients>{category.name}</Ingredients>
         <ProductCharacteristics characteristics={characteristics} />
-        <Price>{price} грн</Price>
-        <Button type="button" onClick={() => console.log('add to the cart')}>
-          До кошика
-        </Button>
+        <Price>{price} грн (за 100г)</Price>
       </Link>
     </Item>
   );

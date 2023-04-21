@@ -39,7 +39,9 @@ export function Product() {
   const [weight, setWeight] = useState(weights[0].value);
   const [quantity, setQuantity] = useState(1);
 
-  const { productId } = useParams();
+  const { slug } = useParams();
+  const productId = slug.match(/[a-z0-9]+$/)[0];
+  // const { productId } = useParams();
   const navigate = useNavigate();
 
   const onQuantityChange = newQuantity => {
@@ -59,22 +61,33 @@ export function Product() {
   const onSubmit = e => {
     e.preventDefault();
 
-    const cartProduct = {
-      id: product._id,
-      name: product.name,
-      image: product.image,
-      price: (product.price * (weight / 100) + 10) * quantity,
-      grind,
-      weight,
-      quantity,
-    };
-
     const cartData = JSON.parse(localStorage.getItem('cartData')) || [];
-    cartData.push(cartProduct);
+
+    const isExistProduct = cartData.find(p => p.id === product._id);
+
+    if (isExistProduct) {
+      toast('Товар вже є у кошику', {
+        icon: '⚠️',
+      });
+    }
+
+    if (!isExistProduct) {
+      const cartProduct = {
+        id: product._id,
+        name: product.name,
+        image: product.image,
+        price: (product.price * (weight / 100) + 10) * quantity,
+        grind,
+        weight,
+        quantity,
+      };
+
+      cartData.push(cartProduct);
+      toast.success('Товар успішно доданий до кошика');
+    }
 
     localStorage.setItem('cartData', JSON.stringify(cartData));
-
-    toast.success('Товар успішно доданий до кошика');
+    window.dispatchEvent(new Event('storage'));
   };
 
   useEffect(() => {

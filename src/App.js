@@ -24,13 +24,12 @@ export function App() {
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/payment-delivery" element={<PaymentDelivery />} />
-
           <Route path="/placing-order" element={<PlacingOrder />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/shop/:productId" element={<Product />} />
+          {/* <Route path="/shop/:productId" element={<Product />} /> */}
+          <Route path="/shop/:slug" element={<Product />} />
 
           <Route path="/admin" element={<Admin />} />
-
           <Route path="*" element={<Home />} />
         </Route>
 
