@@ -37,3 +37,4 @@ export * from './AdminProducts';
 export * from './AdminProductEdit';
 export * from './AdminProductCreate';
 export * from './LoadFotos';
+export * from './OrderAside';
