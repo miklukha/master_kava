@@ -1,15 +1,22 @@
-import { Button, CartDesc, ModalTitle, ProductOrder } from 'components';
+import { ModalTitle, ProductOrder } from 'components';
 import {
   CartDropWrapper,
   Notification,
+  OrderData,
+  OrderDesc,
+  OrderDynamicData,
+  OrderLink,
   ProductList,
 } from './CartDropDown.styled';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export function CartDropDown() {
   const [cartData, setCartData] = useState(
     JSON.parse(localStorage.getItem('cartData')) || []
   );
+  const [number, setNumber] = useState(1);
+  const [totalPrice, setTotalPrice] = useState(0);
+
   const isCartData = cartData.length !== 0 ? true : false;
 
   const onDelete = id => {
@@ -17,8 +24,18 @@ export function CartDropDown() {
     cartData.splice(productIndex, 1);
 
     localStorage.setItem('cartData', JSON.stringify(cartData));
+    window.dispatchEvent(new Event('storage'));
     setCartData([...cartData]);
   };
+
+  useEffect(() => {
+    setNumber(cartData.length);
+
+    const totalPrice = cartData.reduce((acc, product) => {
+      return acc + product.price;
+    }, 0);
+    setTotalPrice(totalPrice);
+  }, [cartData]);
 
   return (
     <CartDropWrapper>
@@ -34,10 +51,16 @@ export function CartDropDown() {
               />
             ))}
           </ProductList>
-          <CartDesc />
-          <Button type="button" aria-label="замовити">
-            Замовити
-          </Button>
+          <OrderDesc>
+            <OrderData>
+              Кількість товарів: <OrderDynamicData>{number}</OrderDynamicData>
+            </OrderData>
+            <OrderData>
+              Остаточна ціна:{' '}
+              <OrderDynamicData>{totalPrice} грн</OrderDynamicData>
+            </OrderData>
+          </OrderDesc>
+          <OrderLink to={'/placing-order'}>Замовити</OrderLink>
         </>
       ) : (
         <Notification>Немає товарів у кошику</Notification>

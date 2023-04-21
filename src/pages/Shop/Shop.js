@@ -16,15 +16,17 @@ import {
   FiltersWrapper,
   ProductList,
 } from './Shop.styled';
+import { toast } from 'react-hot-toast';
 // import { getProducts } from 'services/fakeApi';
 import * as API from 'services/api';
+import { useNavigate } from 'react-router-dom';
 
 export function Shop() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [products, setProducts] = useState([]);
-
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
+  const navigate = useNavigate();
   const onFilterClick = () => setIsFilterOpen(!isFilterOpen);
 
   useEffect(() => {
@@ -33,14 +35,14 @@ export function Shop() {
         const products = await API.getProducts();
         setProducts(products);
       } catch (error) {
-        // toast.error('Film is not found');
-        // navigate('/', { replace: true });
-        // console.log(error);
+        toast.error('Щось пішло не так :(( Спробуйте, будь ласка, пізніше!');
+        navigate('/', { replace: true });
+        console.log(error);
       }
     })();
     // const products = getProducts();
     // setProducts(products);
-  }, []);
+  }, [navigate]);
 
   return (
     <>

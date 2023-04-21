@@ -1,17 +1,53 @@
-import { useState, useEffect } from 'react';
-import MediaQuery from 'react-responsive';
+import { css } from '@emotion/css';
+import { UilBars, UilShoppingBag, UilUser } from '@iconscout/react-unicons';
 import { CartDropDown, Contacts, DropDown } from 'components';
-import { breakpoints } from 'styles/utils/variables';
+import { useEffect, useState } from 'react';
+import MediaQuery from 'react-responsive';
+import { breakpoints, colors } from 'styles/utils/variables';
 import { BurgerBtn, Item, List, Wrapper } from './ExtraNav.styled';
-import { UilBars, UilUser, UilShoppingBag } from '@iconscout/react-unicons';
 
-export function ExtraNav({ handleClick, onCartDown = false }) {
+export function ExtraNav({ handleClick }) {
   const [dropdown, setDropdown] = useState(false);
   const [cartDropDown, setCartDropDown] = useState(false);
+  const [cartData, setCartData] = useState(
+    JSON.parse(localStorage.getItem('cartData')) || []
+  );
+  const [isCartData, setIsCartData] = useState(
+    cartData.length !== 0 ? true : false
+  );
 
   useEffect(() => {
-    setCartDropDown(onCartDown);
-  }, [onCartDown]);
+    const onStorageChange = () => {
+      const updatedCartData =
+        JSON.parse(localStorage.getItem('cartData')) || [];
+      setCartData(updatedCartData);
+
+      setIsCartData(updatedCartData.length !== 0 ? true : false);
+    };
+
+    window.addEventListener('storage', onStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', onStorageChange);
+    };
+  }, []);
+
+  const myStyle =
+    isCartData &&
+    css`
+      &::after {
+        content: '';
+        display: block;
+        background-color: ${colors.accent};
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+
+        position: absolute;
+        top: 15px;
+        right: 11px;
+      }
+    `;
 
   return (
     <Wrapper>
@@ -29,6 +65,7 @@ export function ExtraNav({ handleClick, onCartDown = false }) {
         <Item
           onMouseEnter={() => setCartDropDown(true)}
           onMouseLeave={() => setCartDropDown(false)}
+          className={myStyle}
         >
           <UilShoppingBag />
           {cartDropDown && <CartDropDown />}

@@ -1,13 +1,13 @@
 import { OrderData, OrderDesc, OrderDynamicData } from './CartDesc.styled';
 
-export function CartDesc() {
+export function CartDesc({ number, totalPrice }) {
   return (
     <OrderDesc>
       <OrderData>
-        У кошику <OrderDynamicData>1</OrderDynamicData> товар
+        У кошику <OrderDynamicData>{number}</OrderDynamicData> товар
       </OrderData>
       <OrderData>
-        Остаточна ціна: <OrderDynamicData>655 грн</OrderDynamicData>
+        Остаточна ціна: <OrderDynamicData>{totalPrice} грн</OrderDynamicData>
       </OrderData>
     </OrderDesc>
   );
