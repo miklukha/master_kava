@@ -23,7 +23,7 @@ export const Link = styled(NavLink)`
   gap: 10px;
 
   min-height: 352px;
-  padding: 15px;
+  padding: 15px 15px 30px 15px;
 
   box-shadow: none;
   border: 1px solid ${colors.auxiliary};

@@ -11,7 +11,7 @@ import {
 import { CloseDeleteBtn } from 'components';
 
 export function ProductOrder({ placing, product = {}, onDelete }) {
-  const { image, name, quantity, price, weight, grind } = product;
+  const { image, name, quantity, price, weight, grind = {} } = product;
 
   return (
     <Wrapper placing={placing && true}>

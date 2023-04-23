@@ -126,18 +126,16 @@ export function Profile() {
                 helperText={errors.firstName?.message}
                 color="myColor"
               />
-              <Label htmlFor="phoneNumber">Телефон</Label>
+              <Label htmlFor="phone">Телефон</Label>
               <Input
-                {...register('phoneNumber', phoneValidation)}
-                id="firstName"
-                error={!!errors.phoneNumber}
-                helperText={errors.phoneNumber?.message}
+                {...register('phone', phoneValidation)}
+                id="phone"
+                error={!!errors.phone}
+                helperText={errors.phone?.message}
                 color="myColor"
                 defaultValue="+380"
               />
-              <Button type="submit" variant="contained" color="primary">
-                Відправити
-              </Button>
+              <Button type="submit">Відправити</Button>
             </form>
           </SectionWrapper>
         )}
@@ -200,9 +198,7 @@ export function Profile() {
                 helperText={errors.passwordConfirmation?.message}
                 color="myColor"
               />
-              <Button type="submit" variant="contained" color="primary">
-                Відправити
-              </Button>
+              <Button type="submit">Відправити</Button>
             </form>
           </SectionWrapper>
         )}

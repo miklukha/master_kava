@@ -1,24 +1,20 @@
-// import { createTheme } from '@material-ui';
-import { useForm, Controller } from 'react-hook-form';
-import { Title } from 'components';
+import { useForm } from 'react-hook-form';
+import { OrderAside, Title } from 'components';
 import {
-  DeliveryDetails,
-  DeliveryDetailsInput,
-  DeliveryDetailsItem,
-  DeliveryDetailsLabel,
-  DeliveryDetailsList,
-  DeliveryDetailsTitle,
+  DetailsInput,
+  DetailsItem,
+  DetailsLabel,
+  DetailsList,
+  DetailsTitle,
   OrderDetailsBtn,
   OrderDetailsCondition,
-  OrderDetailsItem,
-  OrderDetailsLabel,
-  OrderDetailsList,
-  OrderDetailsTogether,
-  OrderDetailsValue,
-  OrderDetailsWrapper,
   DeliveryItem,
-  OrderDetailsTip,
   Wrapper,
+  // Notification,
+  // Tip,
+  // SelectOption,
+  // Option,
+  // AddressInput,
 } from './PlacingOrder.styled';
 // import { CheckboxLabel } from 'components/ShopFilter/ShopFilter.styled';
 // import { visuallyHidden } from 'styles/utils/visuallyHidden';
@@ -30,111 +26,138 @@ import {
   ThemeProvider,
   Box,
   Select,
-  MenuItem,
+  // MenuItem,
   Typography,
-  InputLabel,
+  // InputLabel,
   Checkbox,
-  FormGroup,
+  // FormGroup,
   // TextField,
-  // FormControl,
 } from '@mui/material';
 import { colors } from 'styles/utils/variables';
-import liqpay from 'assets/images/liqpay.png';
+// import liqpay from 'assets/images/liqpay.png';
+import { useState, useEffect } from 'react';
+// import * as API from 'services/deliveryApi';
 // import { FilterDropdown } from 'components';
 // import { typesOptions } from 'helpers';
 
 const theme = createTheme({
   palette: {
-    myColor: {
+    accent: {
       main: colors.accent,
+    },
+    auxillary: {
+      main: colors.auxiliaryText,
     },
   },
 });
 
 export function PlacingOrder() {
+  // const [cartData, setCartData] = useState(
+  //   JSON.parse(localStorage.getItem('cartData')) || []
+  // );
+  const [deliveryType, setDeliveryType] = useState('novaPoshta');
+  const [selectedCity, setSelectedCity] = useState('');
+  const [selectedDepartment, setSelectedDepartment] = useState('');
+  // const [cities, setCities] = useState([]);
+  // const [addresses, setAddresses] = useState([]);
+  // const [options, setOptions] = useState([
+  //   { label: 'Kyiv', value: 'Kyiv' },
+  //   { label: 'Odesa', value: 'Odesa' },
+  //   { label: 'Option 3', value: 'option3' },
+  // ]);
+
+  // const isCartData = cartData.length !== 0 ? true : false;
+
   const {
     register,
     handleSubmit,
-    // formState: { errors },
-    control,
+    formState: { errors },
+    // control,
   } = useForm();
-  const onSubmit = data => console.log(data);
+
+  const onSubmit = data => {
+    console.log(data);
+  };
+
+  const phoneValidation = {
+    pattern: {
+      value: /^(\+38)?(0\d{9})$/,
+      message: 'Невірний формат номера (+380961234567)',
+    },
+  };
+
+  useEffect(() => {
+    (async function getProducts() {
+      try {
+        // const cities = await API.getCities();
+        // setCities(cities.data);
+        // console.log(cities.data);
+        // const address = await API.getAddress(selectedCity);
+        // console.log(selectedCity);
+        // console.log(address);
+        // setAddresses(address);
+      } catch (error) {
+        //  toast.error('Щось пішло не так :(( Спробуйте, будь ласка, пізніше!');
+        //  navigate('/', { replace: true });
+        console.log(error);
+      }
+    })();
+    // const products = getProducts();
+    // setProducts(products);
+  }, []);
+
+  // const city = watch('city');
 
   return (
     <ThemeProvider theme={theme}>
       <Title>ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</Title>
+      {/* {isCartData ? ( */}
       <Wrapper>
-        <OrderDetailsWrapper>
-          {/* <ul>
-                  <ProductOrder placing />
-                </ul> */}
-          <OrderDetailsTogether>Разом</OrderDetailsTogether>
-          <OrderDetailsList>
-            <OrderDetailsItem>
-              <OrderDetailsLabel>
-                Сума за <span>1</span> товар:
-              </OrderDetailsLabel>
-              <OrderDetailsValue>655 грн</OrderDetailsValue>
-            </OrderDetailsItem>
-            <OrderDetailsItem>
-              <OrderDetailsLabel>Вартість доставки:</OrderDetailsLabel>
-              <OrderDetailsValue>
-                за тарифами служби доставки*
-              </OrderDetailsValue>
-            </OrderDetailsItem>
-            <OrderDetailsItem>
-              <OrderDetailsLabel>До сплати:</OrderDetailsLabel>
-              <OrderDetailsValue>655 грн</OrderDetailsValue>
-            </OrderDetailsItem>
-          </OrderDetailsList>
-          <OrderDetailsTip>
-            *вартість доставки окремо оплачується при отриманні посилки у
-            відділенні
-          </OrderDetailsTip>
-        </OrderDetailsWrapper>
-        <FormGroup>
-          <DeliveryDetails onSubmit={handleSubmit(onSubmit)}>
-            <DeliveryDetailsTitle>Контактні дані</DeliveryDetailsTitle>
-            <DeliveryDetailsList>
-              <DeliveryDetailsItem>
-                {/* <FormControl>
-                      <InputLabel htmlFor="lastName">
-                        <Typography style={{ fontSize: '14px' }}>
-                          Новою поштою
-                        </Typography>
-                      </InputLabel>
-                      <TextField id="lastName" />
-                    </FormControl> */}
-                <DeliveryDetailsLabel htmlFor="lastName">
-                  Прізвище*
-                </DeliveryDetailsLabel>
-                <DeliveryDetailsInput
-                  id="lastName"
-                  {...register('lastName', { required: true })}
-                />
-              </DeliveryDetailsItem>
-              <DeliveryDetailsItem>
-                <DeliveryDetailsLabel htmlFor="firstName">
-                  Ім’я*
-                </DeliveryDetailsLabel>
-                <DeliveryDetailsInput
-                  id="firstName"
-                  {...register('firstName', { required: true })}
-                />
-              </DeliveryDetailsItem>
-              <DeliveryDetailsItem>
-                <DeliveryDetailsLabel htmlFor="phone">
-                  Мобільний телефон*
-                </DeliveryDetailsLabel>
-                <DeliveryDetailsInput
-                  id="phone"
-                  type="number"
-                  {...register('phone', { required: true })}
-                />
-              </DeliveryDetailsItem>
-            </DeliveryDetailsList>
-            <DeliveryDetailsTitle>Доставка</DeliveryDetailsTitle>
-            <Controller
+        {/* <OrderAside cartData={cartData} />
+         */}
+        <OrderAside />
+
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <DetailsTitle>Контактні дані</DetailsTitle>
+          <DetailsList>
+            <DetailsItem>
+              <DetailsLabel htmlFor="lastName">Прізвище*</DetailsLabel>
+              <DetailsInput
+                id="lastName"
+                {...register('lastName', { required: "Це поле обов'язкове" })}
+                error={!!errors.lastName}
+                helperText={errors.lastName?.message}
+                color="accent"
+              />
+            </DetailsItem>
+            <DetailsItem>
+              <DetailsLabel htmlFor="firstName">Ім’я*</DetailsLabel>
+              <DetailsInput
+                id="firstName"
+                {...register('firstName', {
+                  required: "Це поле обов'язкове",
+                })}
+                error={!!errors.firstName}
+                helperText={errors.firstName?.message}
+              />
+            </DetailsItem>
+            <DetailsItem>
+              <DetailsLabel htmlFor="phone">Мобільний телефон*</DetailsLabel>
+              <DetailsInput
+                {...register('phone', {
+                  required: "Це поле обов'язкове",
+                  pattern: phoneValidation.pattern,
+                })}
+                id="phone"
+                error={!!errors.phone}
+                helperText={errors.phone?.message}
+                color="accent"
+                defaultValue="+380"
+              />
+            </DetailsItem>
+          </DetailsList>
+          <DetailsTitle>Доставка</DetailsTitle>
+          {/* <Controller
               name="delivery"
               control={control}
               defaultValue=""
@@ -149,15 +172,10 @@ export function PlacingOrder() {
                     <ul>
                       <DeliveryItem>
                         <FormControlLabel
-                          // sx={{
-                          //   border: '1px solid #E1DEE3',
-                          //   margin: 0,
-                          //   borderRadius: '4px',
-                          // }}
                           value="NovaPoshta"
                           control={
                             <Radio
-                              color="myColor"
+                              color="accent"
                               size="small"
                               sx={{
                                 '& .MuiSvgIcon-root': {
@@ -171,7 +189,6 @@ export function PlacingOrder() {
                               Новою поштою
                             </Typography>
                           }
-                          // label="Новою поштою"
                         />
                         {field.value === 'NovaPoshta' && (
                           <>
@@ -272,7 +289,7 @@ export function PlacingOrder() {
                           value="courier"
                           control={
                             <Radio
-                              color="myColor"
+                              color="accent"
                               size="small"
                               sx={{
                                 '& .MuiSvgIcon-root': {
@@ -334,7 +351,7 @@ export function PlacingOrder() {
                           value="selfPickup"
                           control={
                             <Radio
-                              color="myColor"
+                              color="accent"
                               size="small"
                               sx={{
                                 '& .MuiSvgIcon-root': {
@@ -356,8 +373,154 @@ export function PlacingOrder() {
                   </RadioGroup>
                 </Box>
               )}
-            />
-            <DeliveryDetailsTitle>Оплата</DeliveryDetailsTitle>
+            /> */}
+          <Box marginBottom={2.5}>
+            <RadioGroup
+              id="delivery"
+              value={deliveryType}
+              onChange={e => setDeliveryType(e.target.value)}
+              sx={{ rowGap: 1 }}
+            >
+              <ul>
+                <DeliveryItem>
+                  <FormControlLabel
+                    value="novaPoshta"
+                    control={
+                      <Radio
+                        color="accent"
+                        size="small"
+                        sx={{
+                          '& .MuiSvgIcon-root': {
+                            fontSize: 16,
+                          },
+                        }}
+                      />
+                    }
+                    label={
+                      <Typography style={{ fontSize: '14px' }}>
+                        Новою поштою
+                      </Typography>
+                    }
+                  />
+                  {deliveryType === 'novaPoshta' && (
+                    <>
+                      <Box marginBottom={1}>
+                        <DetailsLabel id="city">Місто*</DetailsLabel>
+                        <Select
+                          {...register('city', { required: true })}
+                          value={selectedCity}
+                          onChange={e => setSelectedCity(e.target.value)}
+                          fullWidth
+                          color="auxillary"
+                          sx={{ fontSize: 14 }}
+                          // getOptionLabel={option => option.label}
+                          // renderInput={params => (
+                          //   <TextField
+                          //     {...params}
+                          //     fullWidth
+                          //     color="auxillary"
+                          //   />
+                          // )}
+                        >
+                          {/* {cities.map(city => (
+                            <Option key={city.CityID} value={city.Description}>
+                              {city.Description}
+                            </Option>
+                          ))} */}
+                        </Select>
+                      </Box>
+                      <div>
+                        <DetailsLabel id="department">Відділення*</DetailsLabel>
+                        <Select
+                          labelId="department"
+                          {...register('department', { required: true })}
+                          value={selectedDepartment}
+                          onChange={e => setSelectedDepartment(e.target.value)}
+                          fullWidth
+                          color="auxillary"
+                        >
+                          {/* {addresses.map(address => (
+                              <Option
+                                key={city.CityID}
+                                value={city.Description}
+                              >
+                                {city.Description}
+                              </Option>
+                            ))} */}
+                          {/* <Option value="option1">Option 1</Option>
+                            <Option value="option2">Option 2</Option>
+                            <Option value="option3">Option 3</Option> */}
+                        </Select>
+                      </div>
+                    </>
+                  )}
+                </DeliveryItem>
+                <DeliveryItem>
+                  <FormControlLabel
+                    value="courier"
+                    control={
+                      <Radio
+                        color="accent"
+                        size="small"
+                        sx={{
+                          '& .MuiSvgIcon-root': {
+                            fontSize: 16,
+                          },
+                        }}
+                      />
+                    }
+                    label={
+                      <Typography style={{ fontSize: '14px' }}>
+                        Кур'єром (лише по Києву)
+                      </Typography>
+                    }
+                  />
+                  {deliveryType === 'courier' && (
+                    <div>
+                      <DetailsLabel
+                        sx={{
+                          fontSize: 12,
+                          color: 'text.secondary',
+                        }}
+                        htmlFor="address"
+                      >
+                        Адреса*
+                      </DetailsLabel>
+                      {/* <AddressInput
+                          id="address"
+                          {...register('address', { required: true })}
+                          onChange={e => setAddress(e.target.value)}
+                          fullWidth
+                          color="auxillary"
+                        ></AddressInput> */}
+                    </div>
+                  )}
+                </DeliveryItem>
+                <DeliveryItem>
+                  <FormControlLabel
+                    value="selfPickup"
+                    control={
+                      <Radio
+                        color="accent"
+                        size="small"
+                        sx={{
+                          '& .MuiSvgIcon-root': {
+                            fontSize: 16,
+                          },
+                        }}
+                      />
+                    }
+                    label={
+                      <Typography style={{ fontSize: '14px' }}>
+                        Самовивіз (м. Київ, вул. Сім’ї Сосняних 11)
+                      </Typography>
+                    }
+                  />
+                </DeliveryItem>
+              </ul>
+            </RadioGroup>
+          </Box>
+          {/* <DetailsTitle>Оплата</DetailsTitle>
             <Controller
               name="payment"
               control={control}
@@ -376,7 +539,7 @@ export function PlacingOrder() {
                           value="receiving"
                           control={
                             <Radio
-                              color="myColor"
+                              color="accent"
                               size="small"
                               sx={{
                                 '& .MuiSvgIcon-root': {
@@ -397,7 +560,7 @@ export function PlacingOrder() {
                           value="now"
                           control={
                             <Radio
-                              color="myColor"
+                              color="accent"
                               size="small"
                               sx={{
                                 '& .MuiSvgIcon-root': {
@@ -425,39 +588,39 @@ export function PlacingOrder() {
                   </RadioGroup>
                 </Box>
               )}
-            />
-            <FormControlLabel
-              sx={{ marginBottom: '10px' }}
-              control={
-                <Checkbox
-                  color="myColor"
-                  size="small"
-                  sx={{
-                    '& .MuiSvgIcon-root': {
-                      fontSize: 16,
-                    },
+            /> */}
+          <FormControlLabel
+            sx={{ marginBottom: '10px' }}
+            control={
+              <Checkbox
+                color="accent"
+                size="small"
+                sx={{
+                  '& .MuiSvgIcon-root': {
+                    fontSize: 16,
+                  },
+                }}
+              />
+            }
+            label={
+              <>
+                <Typography variant="span" style={{ fontSize: 14 }}>
+                  Я приймаю умови
+                </Typography>
+                <OrderDetailsCondition
+                  type="button"
+                  aria-label="відкрити публічний договір"
+                  onClick={() => {
+                    console.log('open modal');
                   }}
-                />
-              }
-              label={
-                <>
-                  <Typography variant="span" style={{ fontSize: 14 }}>
-                    Я приймаю умови
-                  </Typography>
-                  <OrderDetailsCondition
-                    type="button"
-                    aria-label="відкрити публічний договір"
-                    onClick={() => {
-                      console.log('open modal');
-                    }}
-                  >
-                    публічного договору
-                  </OrderDetailsCondition>
-                </>
-              }
-            />
+                >
+                  публічного договору
+                </OrderDetailsCondition>
+              </>
+            }
+          />
 
-            {/* <input
+          {/* <input
                 className={visuallyHidden}
                 type="checkbox"
                 id="conditions"
@@ -474,16 +637,21 @@ export function PlacingOrder() {
                   публічного договору
                 </OrderDetailsCondition>
               </CheckboxLabel> */}
-            <OrderDetailsBtn type="submit">
-              Підтвердити замовлення
-            </OrderDetailsBtn>
-          </DeliveryDetails>
-        </FormGroup>
+          <OrderDetailsBtn type="submit">
+            Підтвердити замовлення
+          </OrderDetailsBtn>
+        </form>
       </Wrapper>
+      {/* ) : (
+      <Notification>
+        Для оформлення замовлення додаєте товари в кошик...
+      </Notification>
+      )} */}
     </ThemeProvider>
   );
 }
 
+//! реалізувати модалку публічного договору
 /**
  * <input
                         {...register("sun")}
@@ -498,3 +666,43 @@ export function PlacingOrder() {
               відділенні
             </OrderDetailsTip>
  */
+
+/**
+             * <DetailsList>
+              <DetailsItem>
+                <DetailsLabel htmlFor="lastName">Прізвище*</DetailsLabel>
+                <DetailsInput
+                  id="lastName"
+                  {...register('lastName', { required: "Це поле обов'язкове" })}
+                  error={!!errors.lastName}
+                  helperText={errors.lastName?.message}
+                  color="accent"
+                />
+              </DetailsItem>
+              <DetailsItem>
+                <DetailsLabel htmlFor="firstName">Ім’я*</DetailsLabel>
+                <DetailsInput
+                  id="firstName"
+                  {...register('firstName', {
+                    required: "Це поле обов'язкове",
+                  })}
+                  error={!!errors.firstName}
+                  helperText={errors.firstName?.message}
+                />
+              </DetailsItem>
+              <DetailsItem>
+                <DetailsLabel htmlFor="phone">Мобільний телефон*</DetailsLabel>
+                <DetailsInput
+                  {...register('phone', {
+                    required: "Це поле обов'язкове",
+                    pattern: phoneValidation.pattern,
+                  })}
+                  id="phone"
+                  error={!!errors.phone}
+                  helperText={errors.phone?.message}
+                  color="accent"
+                  defaultValue="+380"
+                />
+              </DetailsItem>
+            </DetailsList>
+             */

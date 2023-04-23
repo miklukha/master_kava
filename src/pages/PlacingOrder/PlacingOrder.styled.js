@@ -1,9 +1,20 @@
 import styled from '@emotion/styled';
-import { Button, Input } from 'components';
+import { Button } from 'components';
 import { colors, fontSizes, mq, utils } from 'styles/utils/variables';
 import { Controller } from 'react-hook-form';
+import {
+  TextField,
+  InputLabel,
+  // Select,
+  MenuItem,
+  // Autocomplete,
+} from '@mui/material';
 
 export const Wrapper = styled.div`
+  & div.Mui-focused {
+    border-color: red;
+  }
+
   ${mq.tablet} {
     display: flex;
     flex-direction: row-reverse;
@@ -13,55 +24,6 @@ export const Wrapper = styled.div`
   ${mq.desktop} {
     gap: 40px;
     justify-content: center;
-  }
-`;
-
-export const OrderDetailsWrapper = styled.div`
-  width: 100%;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: ${utils.borderRadius};
-  background-color: ${colors.placingOrderBg};
-
-  & label {
-    gap: 5px;
-  }
-
-  ${mq.tablet} {
-    flex-grow: 0;
-    width: 380px;
-    height: 240px;
-    margin-bottom: 0;
-  }
-`;
-
-export const OrderDetailsTogether = styled.p`
-  font-size: ${fontSizes.l};
-  font-weight: 500;
-  margin-bottom: 20px;
-`;
-
-export const OrderDetailsList = styled.ul`
-  margin-bottom: 20px;
-`;
-
-export const OrderDetailsItem = styled.li`
-  display: flex;
-  justify-content: space-between;
-
-  margin-bottom: 10px;
-
-  &:last-of-type {
-    /* padding: 20px 0; */
-    padding-top: 20px;
-    border-top: 1px solid ${colors.iconDark};
-    /* border-bottom: 1px solid ${colors.iconDark}; */
-    margin-bottom: 0;
-  }
-
-  &:last-of-type span {
-    font-size: ${fontSizes.l};
-    font-weight: 500;
   }
 `;
 
@@ -79,40 +41,21 @@ export const OrderDetailsCondition = styled.button`
   }
 `;
 
-export const OrderDetailsLabel = styled.span`
-  flex-basis: 50%;
-`;
-
-export const OrderDetailsValue = styled.span`
-  flex-basis: 50%;
-  text-align: end;
-`;
-
 export const OrderDetailsBtn = styled(Button)`
-  margin-bottom: 20px;
-
-  ${mq.tablet} {
-    margin-bottom: 0;
-  }
+  padding: 17px 0;
 `;
 
-export const OrderDetailsTip = styled.p`
-  font-size: ${fontSizes.xs};
-`;
-
-export const DeliveryDetails = styled.form``;
-
-export const DeliveryDetailsTitle = styled.h2`
+export const DetailsTitle = styled.h2`
   font-size: ${fontSizes.m};
   margin-bottom: 10px;
 `;
 
-export const DeliveryDetailsList = styled.ul`
+export const DetailsList = styled.ul`
   font-size: ${fontSizes.s};
   margin-bottom: 20px;
 `;
 
-export const DeliveryDetailsItem = styled.li`
+export const DetailsItem = styled.li`
   margin-bottom: 10px;
 
   &:last-of-type {
@@ -120,16 +63,36 @@ export const DeliveryDetailsItem = styled.li`
   }
 `;
 
-export const DeliveryDetailsLabel = styled.label`
+// export const DetailsLabel = styled.label`
+//   font-size: ${fontSizes.xs};
+//   margin-bottom: 5px;
+
+//   color: ${colors.auxiliaryText};
+// `;
+
+export const DetailsLabel = styled(InputLabel)`
   font-size: ${fontSizes.xs};
   margin-bottom: 5px;
-
   color: ${colors.auxiliaryText};
 `;
 
-export const DeliveryDetailsInput = styled(Input)`
+export const DetailsInput = styled(TextField)`
   width: 100%;
-  padding: 10px;
+  background-color: ${colors.mainBg};
+
+  & input {
+    font-size: ${fontSizes.s};
+    padding-top: 17px;
+    padding-bottom: 17px;
+  }
+
+  ${mq.tablet} {
+    width: 400px;
+  }
+
+  ${mq.desktop} {
+    width: 470px;
+  }
 `;
 
 export const CustomController = styled(Controller)`
@@ -156,3 +119,41 @@ export const DeliveryItem = styled.li`
     /* padding: 10px; */
   }
 `;
+
+export const Notification = styled.p`
+  text-align: center;
+`;
+
+export const Tip = styled.p`
+  align-self: flex-end;
+  margin-top: 10px;
+  color: ${colors.error};
+`;
+
+// export const SelectOption = styled(Autocomplete)`
+//   font-size: 14px;
+
+/* &:hover,
+  &:focus {
+    border-color: ${colors.accent};
+  } */
+// `;
+
+export const AddressInput = styled(TextField)`
+  font-size: 14px;
+`;
+
+export const Option = styled(MenuItem)`
+  font-size: ${fontSizes.s};
+
+  &.Mui-selected:hover,
+  &.Mui-selected:focus {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  &.Mui-selected {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+`;
+
+//------------------------------------------------------//
