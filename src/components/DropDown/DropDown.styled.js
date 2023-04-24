@@ -40,4 +40,9 @@ export const DropDownItem = styled.li`
   &:after {
     color: ${colors.accent};
   }
+
+  & button {
+    width: 100%;
+    text-align: left;
+  }
 `;

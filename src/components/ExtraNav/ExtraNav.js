@@ -1,7 +1,7 @@
 import { css } from '@emotion/css';
 import { UilBars, UilShoppingBag, UilUser } from '@iconscout/react-unicons';
 import { CartDropDown, Contacts, DropDown } from 'components';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import MediaQuery from 'react-responsive';
 import { breakpoints, colors } from 'styles/utils/variables';
 import { BurgerBtn, Item, List, Wrapper } from './ExtraNav.styled';
@@ -15,6 +15,9 @@ export function ExtraNav({ handleClick }) {
   const [isCartData, setIsCartData] = useState(
     cartData.length !== 0 ? true : false
   );
+
+  const cartDropDownRef = useRef(null);
+  const dropDownRef = useRef(null);
 
   useEffect(() => {
     const onStorageChange = () => {
@@ -31,6 +34,32 @@ export function ExtraNav({ handleClick }) {
       window.removeEventListener('storage', onStorageChange);
     };
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = e => {
+      if (
+        cartDropDownRef.current &&
+        !cartDropDownRef.current.contains(e.target) &&
+        cartDropDown
+      ) {
+        setCartDropDown(false);
+      }
+
+      if (
+        dropDownRef.current &&
+        !dropDownRef.current.contains(e.target) &&
+        dropdown
+      ) {
+        setDropdown(false);
+      }
+    };
+
+    window.addEventListener('click', handleClickOutside);
+
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
+    };
+  }, [dropdown, cartDropDown]);
 
   const myStyle =
     isCartData &&
@@ -55,16 +84,13 @@ export function ExtraNav({ handleClick }) {
         <Contacts />
       </MediaQuery>
       <List>
-        <Item
-          onMouseEnter={() => setDropdown(true)}
-          onMouseLeave={() => setDropdown(false)}
-        >
+        <Item onClick={() => setDropdown(true)} ref={dropDownRef}>
           <UilUser />
           {dropdown && <DropDown />}
         </Item>
         <Item
-          onMouseEnter={() => setCartDropDown(true)}
-          onMouseLeave={() => setCartDropDown(false)}
+          onClick={() => setCartDropDown(true)}
+          ref={cartDropDownRef}
           className={myStyle}
         >
           <UilShoppingBag />

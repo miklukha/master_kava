@@ -13,6 +13,8 @@ export const Button = styled.button`
   background-color: ${colors.accent};
   color: ${colors.whiteText};
 
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+
   transition: background-color ${utils.transitDur} ${utils.transitFunc};
 
   &:hover,
