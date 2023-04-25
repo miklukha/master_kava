@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { colors, mq } from 'styles/utils/variables';
 
 export const FooterStyled = styled.footer`
-  width: 100vw;
+  width: 100%;
   position: relative;
   border-top: 1px solid ${colors.auxiliary};
   background-color: ${colors.mainBg};
@@ -46,7 +46,7 @@ export const FooterCopyright = styled.div`
     bottom: 0;
     left: 0;
     z-index: 0;
-    width: 100vw;
+    width: 100%;
     height: 46px;
     background-color: ${colors.headerBg};
   }

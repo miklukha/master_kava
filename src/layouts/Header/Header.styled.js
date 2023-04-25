@@ -3,7 +3,7 @@ import { colors, mq } from 'styles/utils/variables';
 
 export const HeaderStyled = styled.header`
   height: 80px; //60px
-  width: 100vw;
+  width: 100%;
   border-bottom: 1px solid ${colors.auxiliary};
   background-color: ${colors.mainBg};
 
@@ -13,7 +13,7 @@ export const HeaderStyled = styled.header`
     top: 0;
     left: 0;
     z-index: 0;
-    width: 100vw;
+    width: 100%;
     height: 80px; //60px
     background-color: ${colors.headerBg};
 
