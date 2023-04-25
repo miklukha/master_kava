@@ -20,6 +20,8 @@ export const CartDropWrapper = styled.div`
   background-color: ${colors.mainBg};
   color: ${colors.mainText};
 
+  cursor: default;
+
   ${mq.tablet} {
     width: 360px;
   }

@@ -15,6 +15,7 @@ export function ExtraNav({ handleClick }) {
   const [isCartData, setIsCartData] = useState(
     cartData.length !== 0 ? true : false
   );
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const cartDropDownRef = useRef(null);
   const dropDownRef = useRef(null);
@@ -38,9 +39,10 @@ export function ExtraNav({ handleClick }) {
   useEffect(() => {
     const handleClickOutside = e => {
       if (
-        cartDropDownRef.current &&
-        !cartDropDownRef.current.contains(e.target) &&
-        cartDropDown
+        (cartDropDownRef.current &&
+          !cartDropDownRef.current.contains(e.target) &&
+          cartDropDown) ||
+        e.target.nodeName === 'A'
       ) {
         setCartDropDown(false);
       }
@@ -48,7 +50,8 @@ export function ExtraNav({ handleClick }) {
       if (
         dropDownRef.current &&
         !dropDownRef.current.contains(e.target) &&
-        dropdown
+        dropdown &&
+        !isModalOpen
       ) {
         setDropdown(false);
       }
@@ -59,7 +62,7 @@ export function ExtraNav({ handleClick }) {
     return () => {
       window.removeEventListener('click', handleClickOutside);
     };
-  }, [dropdown, cartDropDown]);
+  }, [dropdown, cartDropDown, isModalOpen]);
 
   const myStyle =
     isCartData &&
@@ -86,7 +89,7 @@ export function ExtraNav({ handleClick }) {
       <List>
         <Item onClick={() => setDropdown(true)} ref={dropDownRef}>
           <UilUser />
-          {dropdown && <DropDown />}
+          {dropdown && <DropDown setIsModalOpen={setIsModalOpen} />}
         </Item>
         <Item
           onClick={() => setCartDropDown(true)}

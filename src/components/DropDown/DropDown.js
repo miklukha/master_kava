@@ -1,8 +1,8 @@
 import { DropDownMenu, DropDownItem } from './DropDown.styled';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ModalRegistration, ModalLogin } from 'components';
 
-export function DropDown() {
+export function DropDown({ setIsModalOpen }) {
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
@@ -10,6 +10,10 @@ export function DropDown() {
     setIsRegistrationOpen(false);
     setIsLoginOpen(false);
   };
+
+  useEffect(() => {
+    setIsModalOpen(isLoginOpen || isRegistrationOpen);
+  });
 
   return (
     <>

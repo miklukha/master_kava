@@ -9,13 +9,17 @@ export function ModalWrapper({ closeModal, children }) {
     window.addEventListener('keydown', onKeyDown);
     const root = document.getElementById('root');
     const bodyStyle = document.body.style;
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
     root.style.pointerEvents = 'none';
     bodyStyle.overflow = 'hidden';
+    bodyStyle.paddingRight = `${scrollbarWidth}px`;
 
     return () => {
       window.removeEventListener('keydown', onKeyDown);
       root.style.pointerEvents = 'auto';
       bodyStyle.overflow = 'visible';
+      bodyStyle.paddingRight = 0;
     };
   });
 
