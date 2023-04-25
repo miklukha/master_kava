@@ -41,3 +41,6 @@ export * from './OrderAside';
 export * from './ModalRegistration';
 export * from './ModalWrapper';
 export * from './ModalLogin';
+export * from './ModalFeedback';
+export * from './InputForm.styled';
+export * from './Label.styled';

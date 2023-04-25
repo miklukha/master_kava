@@ -10,14 +10,10 @@ import {
   Wrapper,
 } from './Footer.styled';
 import { useState } from 'react';
+import { ModalFeedback } from 'components';
 
 export function Footer() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const onBtnClick = () => {
-    console.log('open feedback form ');
-    setIsModalOpen(!isModalOpen);
-  };
 
   return (
     <FooterStyled>
@@ -30,7 +26,7 @@ export function Footer() {
           <Nav layout="footer" />
           <div>
             <SocialMedias />
-            <Feedback type="button" onClick={onBtnClick}>
+            <Feedback type="button" onClick={() => setIsModalOpen(true)}>
               Зворотній зв'язок
             </Feedback>
           </div>
@@ -38,6 +34,9 @@ export function Footer() {
         <FooterCopyright>
           <Copyright>© 2023 Master Kava - Всі права захищені</Copyright>
         </FooterCopyright>
+        {isModalOpen && (
+          <ModalFeedback closeModal={() => setIsModalOpen(false)} />
+        )}
       </Container>
     </FooterStyled>
   );

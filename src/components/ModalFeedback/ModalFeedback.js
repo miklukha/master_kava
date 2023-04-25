@@ -3,7 +3,7 @@ import { Button, CloseDeleteBtn, ModalTitle, ModalWrapper } from 'components';
 import { InputForm, Label } from 'components';
 import { useForm } from 'react-hook-form';
 import { colors } from 'styles/utils/variables';
-import { Form } from './ModalRegistration.styled';
+import { Form } from 'components/ModalRegistration/ModalRegistration.styled';
 
 const theme = createTheme({
   palette: {
@@ -13,12 +13,11 @@ const theme = createTheme({
   },
 });
 
-export function ModalRegistration({ closeModal }) {
+export function ModalFeedback({ closeModal }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
   } = useForm();
 
   const onSubmit = data => {
@@ -29,10 +28,10 @@ export function ModalRegistration({ closeModal }) {
   return (
     <ModalWrapper closeModal={closeModal}>
       <ThemeProvider theme={theme}>
-        <ModalTitle>Реєстрація</ModalTitle>
+        <ModalTitle>Форма зворотнього зв'язку</ModalTitle>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <CloseDeleteBtn handleClick={closeModal} />
-          <Label htmlFor="name">Ім'я*</Label>
+          <Label htmlFor="name">Ім'я</Label>
           <InputForm
             {...register('name', {
               required: "Це поле обов'язкове",
@@ -42,7 +41,7 @@ export function ModalRegistration({ closeModal }) {
             helperText={errors.name?.message}
             color="auxillary"
           />
-          <Label htmlFor="email">Пошта*</Label>
+          <Label htmlFor="email">Пошта (для зв'язку)</Label>
           <InputForm
             {...register('email', {
               required: "Це поле обов'язкове",
@@ -59,41 +58,20 @@ export function ModalRegistration({ closeModal }) {
             }
             color="auxillary"
           />
-          <Label htmlFor="password">Пароль*</Label>
+          <Label htmlFor="message">Повідомлення</Label>
           <InputForm
-            {...register('password', {
+            {...register('message', {
               required: "Це поле обов'язкове",
-              minLength: 8,
             })}
-            id="password"
-            error={!!errors.password}
-            helperText={
-              errors.password
-                ? errors.email.password === 'required'
-                  ? "Це поле обов'язкове"
-                  : 'Пароль має бути мінімум 8 символів'
-                : ''
-            }
+            multiline
+            rows={4}
+            id="message"
+            error={!!errors.message}
+            helperText={errors.message?.message}
             color="auxillary"
           />
-          <Label htmlFor="repeatPassword">Підтвердження паролю*</Label>
-          <InputForm
-            {...register('repeatPassword', {
-              required: "Це поле обов'язкове",
-              validate: value => value === watch('password'),
-            })}
-            id="repeatPassword"
-            error={!!errors.repeatPassword}
-            helperText={
-              errors.repeatPassword
-                ? errors.repeatPassword.type === 'required'
-                  ? "Це поле обов'язкове"
-                  : 'Паролі не співпадають'
-                : ''
-            }
-            color="auxillary"
-          />
-          <Button type="submit">Зареєструватися</Button>
+
+          <Button type="submit">Відправити</Button>
         </Form>
       </ThemeProvider>
     </ModalWrapper>

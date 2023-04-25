@@ -10,22 +10,30 @@ export function SocialMedias() {
   return (
     <List>
       <Item>
-        <Link href="/">
+        <Link href="tel:+380671429022">
           <UilPhoneAlt />
         </Link>
       </Item>
       <Item>
-        <Link href="/">
+        <Link href="mailto:master_kava@gmail.com">
           <UilEnvelopeAlt />
         </Link>
       </Item>
       <Item>
-        <Link href="/">
+        <Link
+          href="https://t.me/mikl_ukha"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
           <UilTelegramAlt />
         </Link>
       </Item>
       <Item>
-        <Link href="/">
+        <Link
+          href="https://instagram.com/master_kava?igshid=YmMyMTA2M2Y="
+          target="_blank"
+          rel="noreferrer noopener"
+        >
           <UilInstagram />
         </Link>
       </Item>

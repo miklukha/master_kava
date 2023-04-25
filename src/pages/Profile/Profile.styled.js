@@ -139,8 +139,8 @@ export const Input = styled(TextField)`
 
   & input {
     font-size: ${fontSizes.s};
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 12px;
+    padding-bottom: 12px;
   }
 
   &:last-of-type {

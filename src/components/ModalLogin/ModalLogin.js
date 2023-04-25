@@ -1,6 +1,6 @@
 import { ThemeProvider, createTheme } from '@mui/material';
 import { Button, CloseDeleteBtn, ModalTitle, ModalWrapper } from 'components';
-import { Input, Label } from 'pages/Profile/Profile.styled';
+import { InputForm, Label } from 'components';
 import { useForm } from 'react-hook-form';
 import { colors } from 'styles/utils/variables';
 import { Form } from 'components/ModalRegistration/ModalRegistration.styled';
@@ -32,7 +32,7 @@ export function ModalLogin({ closeModal }) {
         <Form onSubmit={handleSubmit(onSubmit)}>
           <CloseDeleteBtn handleClick={closeModal} />
           <Label htmlFor="email">Пошта*</Label>
-          <Input
+          <InputForm
             {...register('email', {
               required: "Це поле обов'язкове",
               pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -49,7 +49,7 @@ export function ModalLogin({ closeModal }) {
             color="auxillary"
           />
           <Label htmlFor="password">Пароль*</Label>
-          <Input
+          <InputForm
             {...register('password', {
               required: "Це поле обов'язкове",
               minLength: 8,
