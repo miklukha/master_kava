@@ -70,13 +70,7 @@ export const DetailsItem = styled.li`
 //   color: ${colors.auxiliaryText};
 // `;
 
-export const DetailsLabel = styled(InputLabel)`
-  font-size: ${fontSizes.xs};
-  margin-bottom: 5px;
-  color: ${colors.auxiliaryText};
-`;
-
-export const DetailsInput = styled(TextField)`
+export const ContactsInput = styled(TextField)`
   width: 100%;
   background-color: ${colors.mainBg};
 
@@ -92,6 +86,22 @@ export const DetailsInput = styled(TextField)`
 
   ${mq.desktop} {
     width: 470px;
+  }
+`;
+
+export const DetailsLabel = styled(InputLabel)`
+  font-size: ${fontSizes.xs};
+  margin-bottom: 5px;
+  color: ${colors.auxiliaryText};
+`;
+
+export const DetailsInput = styled(ContactsInput)`
+  ${mq.tablet} {
+    width: 380px;
+  }
+
+  ${mq.desktop} {
+    width: 450px;
   }
 `;
 

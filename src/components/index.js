@@ -44,3 +44,4 @@ export * from './ModalLogin';
 export * from './ModalFeedback';
 export * from './InputForm.styled';
 export * from './Label.styled';
+export * from './ModalConditions';

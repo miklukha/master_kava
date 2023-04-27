@@ -193,7 +193,7 @@ export function AdminProductEdit({ product = {}, onCancel, action }) {
           defaultValue={roastLevel}
           {...register('roastLevel', { required: true })}
         />
-        {errors.roastLevel && <Tip>Це поле обов'язкове </Tip>}
+        {errors.roastLevel && <Tip> поле обов'язкове </Tip>}
       </ItemWrapper>
       {/* <ItemWrapper>
         <label htmlFor="image">Зоображення</label>

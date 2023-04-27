@@ -1,44 +1,34 @@
-import { useForm } from 'react-hook-form';
-import { OrderAside, Title } from 'components';
 import {
+  Autocomplete,
+  Box,
+  Checkbox,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  ThemeProvider,
+  Typography,
+  createTheme,
+} from '@mui/material';
+import liqpay from 'assets/images/liqpay.png';
+import { ModalConditions, OrderAside, Title } from 'components';
+import { useState } from 'react';
+import { DebounceInput } from 'react-debounce-input';
+import { useForm } from 'react-hook-form';
+import * as API from 'services/deliveryApi';
+import { colors } from 'styles/utils/variables';
+import {
+  ContactsInput,
+  DeliveryItem,
   DetailsInput,
   DetailsItem,
   DetailsLabel,
   DetailsList,
   DetailsTitle,
+  Notification,
   OrderDetailsBtn,
   OrderDetailsCondition,
-  DeliveryItem,
   Wrapper,
-  // Notification,
-  // Tip,
-  // SelectOption,
-  // Option,
-  // AddressInput,
 } from './PlacingOrder.styled';
-// import { CheckboxLabel } from 'components/ShopFilter/ShopFilter.styled';
-// import { visuallyHidden } from 'styles/utils/visuallyHidden';
-import {
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  createTheme,
-  ThemeProvider,
-  Box,
-  Select,
-  // MenuItem,
-  Typography,
-  // InputLabel,
-  Checkbox,
-  // FormGroup,
-  // TextField,
-} from '@mui/material';
-import { colors } from 'styles/utils/variables';
-// import liqpay from 'assets/images/liqpay.png';
-import { useState, useEffect } from 'react';
-// import * as API from 'services/deliveryApi';
-// import { FilterDropdown } from 'components';
-// import { typesOptions } from 'helpers';
 
 const theme = createTheme({
   palette: {
@@ -52,28 +42,29 @@ const theme = createTheme({
 });
 
 export function PlacingOrder() {
-  // const [cartData, setCartData] = useState(
-  //   JSON.parse(localStorage.getItem('cartData')) || []
-  // );
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const cartData = JSON.parse(localStorage.getItem('cartData')) || [];
   const [deliveryType, setDeliveryType] = useState('novaPoshta');
   const [selectedCity, setSelectedCity] = useState('');
-  const [selectedDepartment, setSelectedDepartment] = useState('');
-  // const [cities, setCities] = useState([]);
-  // const [addresses, setAddresses] = useState([]);
-  // const [options, setOptions] = useState([
-  //   { label: 'Kyiv', value: 'Kyiv' },
-  //   { label: 'Odesa', value: 'Odesa' },
-  //   { label: 'Option 3', value: 'option3' },
-  // ]);
-
-  // const isCartData = cartData.length !== 0 ? true : false;
+  const [_, setSelectedDepartment] = useState('');
+  const [cities, setCities] = useState([]);
+  const [departments, setDepartments] = useState([]);
+  const [address, setAddress] = useState('');
+  const [payment, setPayment] = useState('receiving');
+  console.log(address);
+  const isCartData = cartData.length !== 0 ? true : false;
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    // control,
-  } = useForm();
+    setValue,
+  } = useForm({
+    defaultValues: {
+      payment: 'receiving',
+      deliveryType: 'novaPoshta',
+    },
+  });
 
   const onSubmit = data => {
     console.log(data);
@@ -86,613 +77,66 @@ export function PlacingOrder() {
     },
   };
 
-  useEffect(() => {
-    (async function getProducts() {
-      try {
-        // const cities = await API.getCities();
-        // setCities(cities.data);
-        // console.log(cities.data);
-        // const address = await API.getAddress(selectedCity);
-        // console.log(selectedCity);
-        // console.log(address);
-        // setAddresses(address);
-      } catch (error) {
-        //  toast.error('Щось пішло не так :(( Спробуйте, будь ласка, пізніше!');
-        //  navigate('/', { replace: true });
-        console.log(error);
-      }
-    })();
-    // const products = getProducts();
-    // setProducts(products);
-  }, []);
+  const searchCity = async query => {
+    try {
+      const cities = await API.getCities(query);
+      const validCities = cities.data.map(city => ({
+        label: city.Description,
+      }));
+      setCities(validCities);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // const city = watch('city');
+  const searchDepartments = async (city, query = '') => {
+    // if (city) {
+    try {
+      const departments = await API.getDepartments(city, query);
+      const validDepartments = departments.data.map(department => ({
+        label: department.Description,
+      }));
+      setDepartments(validDepartments);
+    } catch (error) {
+      console.log(error);
+    }
+    // }
+  };
 
   return (
     <ThemeProvider theme={theme}>
       <Title>ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</Title>
-      {/* {isCartData ? ( */}
-      <Wrapper>
-        {/* <OrderAside cartData={cartData} />
-         */}
-        <OrderAside />
-
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <DetailsTitle>Контактні дані</DetailsTitle>
-          <DetailsList>
-            <DetailsItem>
-              <DetailsLabel htmlFor="lastName">Прізвище*</DetailsLabel>
-              <DetailsInput
-                id="lastName"
-                {...register('lastName', { required: "Це поле обов'язкове" })}
-                error={!!errors.lastName}
-                helperText={errors.lastName?.message}
-                color="accent"
-              />
-            </DetailsItem>
-            <DetailsItem>
-              <DetailsLabel htmlFor="firstName">Ім’я*</DetailsLabel>
-              <DetailsInput
-                id="firstName"
-                {...register('firstName', {
-                  required: "Це поле обов'язкове",
-                })}
-                error={!!errors.firstName}
-                helperText={errors.firstName?.message}
-              />
-            </DetailsItem>
-            <DetailsItem>
-              <DetailsLabel htmlFor="phone">Мобільний телефон*</DetailsLabel>
-              <DetailsInput
-                {...register('phone', {
-                  required: "Це поле обов'язкове",
-                  pattern: phoneValidation.pattern,
-                })}
-                id="phone"
-                error={!!errors.phone}
-                helperText={errors.phone?.message}
-                color="accent"
-                defaultValue="+380"
-              />
-            </DetailsItem>
-          </DetailsList>
-          <DetailsTitle>Доставка</DetailsTitle>
-          {/* <Controller
-              name="delivery"
-              control={control}
-              defaultValue=""
-              rules={{ required: true }}
-              render={({ field }) => (
-                <Box marginBottom={2.5}>
-                  <RadioGroup
-                    value={field.value}
-                    onChange={e => field.onChange(e.target.value)}
-                    sx={{ rowGap: 1 }}
-                  >
-                    <ul>
-                      <DeliveryItem>
-                        <FormControlLabel
-                          value="NovaPoshta"
-                          control={
-                            <Radio
-                              color="accent"
-                              size="small"
-                              sx={{
-                                '& .MuiSvgIcon-root': {
-                                  fontSize: 16,
-                                },
-                              }}
-                            />
-                          }
-                          label={
-                            <Typography style={{ fontSize: '14px' }}>
-                              Новою поштою
-                            </Typography>
-                          }
-                        />
-                        {field.value === 'NovaPoshta' && (
-                          <>
-                            <Box marginBottom={1}>
-                              <Controller
-                                name="city"
-                                control={control}
-                                defaultValue=""
-                                rules={{ required: true }}
-                                render={({ field }) => (
-                                  <>
-                                    <InputLabel
-                                      id="city-label"
-                                      sx={{
-                                        fontSize: 12,
-                                        color: colors.auxiliaryText,
-                                      }}
-                                    >
-                                      Місто
-                                    </InputLabel>
-                                    <Select
-                                      sx={{
-                                        height: 40,
-                                        fontSize: 14,
-                                        color: 'inherit',
-                                      }}
-                                      labelId="city-label"
-                                      {...field}
-                                      // label="Місто"
-                                      fullWidth
-                                      // margin="normal"
-                                      // variant="outlined"
-                                    >
-                                      <MenuItem value="option1">
-                                        Option 1
-                                      </MenuItem>
-                                      <MenuItem value="option2">
-                                        Option 2
-                                      </MenuItem>
-                                      <MenuItem value="option3">
-                                        Option 3
-                                      </MenuItem>
-                                    </Select>
-                                  </>
-                                )}
-                              />
-                            </Box>
-                            <Controller
-                              name="department"
-                              control={control}
-                              defaultValue=""
-                              rules={{ required: true }}
-                              render={({ field }) => (
-                                <div>
-                                  <InputLabel
-                                    id="department-label"
-                                    sx={{
-                                      fontSize: 12,
-                                      color: colors.auxiliaryText,
-                                    }}
-                                  >
-                                    Відділення
-                                  </InputLabel>
-                                  <Select
-                                    sx={{
-                                      height: 40,
-                                      fontSize: 14,
-                                      color: 'inherit',
-                                      // '&:hover fieldset': {
-                                      //   borderColor: 'green',
-                                      // },
-                                    }}
-                                    labelId="department-label"
-                                    {...field}
-                                    // label="Відділення"
-
-                                    fullWidth
-                                    // variant="outlined"
-                                  >
-                                    <MenuItem value="option1">
-                                      Option 1
-                                    </MenuItem>
-                                    <MenuItem value="option2">
-                                      Option 2
-                                    </MenuItem>
-                                    <MenuItem value="option3">
-                                      Option 3
-                                    </MenuItem>
-                                  </Select>
-                                </div>
-                              )}
-                            />
-                          </>
-                        )}
-                      </DeliveryItem>
-                      <DeliveryItem>
-                        <FormControlLabel
-                          value="courier"
-                          control={
-                            <Radio
-                              color="accent"
-                              size="small"
-                              sx={{
-                                '& .MuiSvgIcon-root': {
-                                  fontSize: 16,
-                                },
-                              }}
-                            />
-                          }
-                          label={
-                            <Typography style={{ fontSize: '14px' }}>
-                              Кур'єром (лише по Києву)
-                            </Typography>
-                          }
-                          // label="Кур'єром (лише по Києву)"
-                        />
-                        {field.value === 'courier' && (
-                          <Controller
-                            name="address"
-                            control={control}
-                            defaultValue=""
-                            rules={{ required: true }}
-                            render={({ field }) => (
-                              <div>
-                                <InputLabel
-                                  sx={{
-                                    fontSize: 12,
-                                    color: colors.auxiliaryText,
-                                  }}
-                                  id="address-label"
-                                >
-                                  Адреса
-                                </InputLabel>
-
-                                <Select
-                                  sx={{
-                                    height: 40,
-                                    fontSize: 14,
-                                    color: 'inherit',
-                                    // '&:hover fieldset': {
-                                    //   borderColor: 'green',
-                                    // },
-                                  }}
-                                  {...field}
-                                  labelId="address-label"
-                                  fullWidth
-                                  // variant="outlined"
-                                >
-                                  <MenuItem value="option1">Option 1</MenuItem>
-                                  <MenuItem value="option2">Option 2</MenuItem>
-                                  <MenuItem value="option3">Option 3</MenuItem>
-                                </Select>
-                              </div>
-                            )}
-                          />
-                        )}
-                      </DeliveryItem>
-                      <DeliveryItem>
-                        <FormControlLabel
-                          value="selfPickup"
-                          control={
-                            <Radio
-                              color="accent"
-                              size="small"
-                              sx={{
-                                '& .MuiSvgIcon-root': {
-                                  fontSize: 16,
-                                },
-                              }}
-                            />
-                          }
-                          label={
-                            <Typography style={{ fontSize: '14px' }}>
-                              Самовивіз (м. Київ, вул. Сім’ї Сосняних 11)
-                            </Typography>
-                          }
-
-                          // label="Самовивіз (м. Київ, вул. Сім’ї Сосняних 11)"
-                        />
-                      </DeliveryItem>
-                    </ul>
-                  </RadioGroup>
-                </Box>
-              )}
-            /> */}
-          <Box marginBottom={2.5}>
-            <RadioGroup
-              id="delivery"
-              value={deliveryType}
-              onChange={e => setDeliveryType(e.target.value)}
-              sx={{ rowGap: 1 }}
-            >
-              <ul>
-                <DeliveryItem>
-                  <FormControlLabel
-                    value="novaPoshta"
-                    control={
-                      <Radio
-                        color="accent"
-                        size="small"
-                        sx={{
-                          '& .MuiSvgIcon-root': {
-                            fontSize: 16,
-                          },
-                        }}
-                      />
-                    }
-                    label={
-                      <Typography style={{ fontSize: '14px' }}>
-                        Новою поштою
-                      </Typography>
-                    }
-                  />
-                  {deliveryType === 'novaPoshta' && (
-                    <>
-                      <Box marginBottom={1}>
-                        <DetailsLabel id="city">Місто*</DetailsLabel>
-                        <Select
-                          {...register('city', { required: true })}
-                          value={selectedCity}
-                          onChange={e => setSelectedCity(e.target.value)}
-                          fullWidth
-                          color="auxillary"
-                          sx={{ fontSize: 14 }}
-                          // getOptionLabel={option => option.label}
-                          // renderInput={params => (
-                          //   <TextField
-                          //     {...params}
-                          //     fullWidth
-                          //     color="auxillary"
-                          //   />
-                          // )}
-                        >
-                          {/* {cities.map(city => (
-                            <Option key={city.CityID} value={city.Description}>
-                              {city.Description}
-                            </Option>
-                          ))} */}
-                        </Select>
-                      </Box>
-                      <div>
-                        <DetailsLabel id="department">Відділення*</DetailsLabel>
-                        <Select
-                          labelId="department"
-                          {...register('department', { required: true })}
-                          value={selectedDepartment}
-                          onChange={e => setSelectedDepartment(e.target.value)}
-                          fullWidth
-                          color="auxillary"
-                        >
-                          {/* {addresses.map(address => (
-                              <Option
-                                key={city.CityID}
-                                value={city.Description}
-                              >
-                                {city.Description}
-                              </Option>
-                            ))} */}
-                          {/* <Option value="option1">Option 1</Option>
-                            <Option value="option2">Option 2</Option>
-                            <Option value="option3">Option 3</Option> */}
-                        </Select>
-                      </div>
-                    </>
-                  )}
-                </DeliveryItem>
-                <DeliveryItem>
-                  <FormControlLabel
-                    value="courier"
-                    control={
-                      <Radio
-                        color="accent"
-                        size="small"
-                        sx={{
-                          '& .MuiSvgIcon-root': {
-                            fontSize: 16,
-                          },
-                        }}
-                      />
-                    }
-                    label={
-                      <Typography style={{ fontSize: '14px' }}>
-                        Кур'єром (лише по Києву)
-                      </Typography>
-                    }
-                  />
-                  {deliveryType === 'courier' && (
-                    <div>
-                      <DetailsLabel
-                        sx={{
-                          fontSize: 12,
-                          color: 'text.secondary',
-                        }}
-                        htmlFor="address"
-                      >
-                        Адреса*
-                      </DetailsLabel>
-                      {/* <AddressInput
-                          id="address"
-                          {...register('address', { required: true })}
-                          onChange={e => setAddress(e.target.value)}
-                          fullWidth
-                          color="auxillary"
-                        ></AddressInput> */}
-                    </div>
-                  )}
-                </DeliveryItem>
-                <DeliveryItem>
-                  <FormControlLabel
-                    value="selfPickup"
-                    control={
-                      <Radio
-                        color="accent"
-                        size="small"
-                        sx={{
-                          '& .MuiSvgIcon-root': {
-                            fontSize: 16,
-                          },
-                        }}
-                      />
-                    }
-                    label={
-                      <Typography style={{ fontSize: '14px' }}>
-                        Самовивіз (м. Київ, вул. Сім’ї Сосняних 11)
-                      </Typography>
-                    }
-                  />
-                </DeliveryItem>
-              </ul>
-            </RadioGroup>
-          </Box>
-          {/* <DetailsTitle>Оплата</DetailsTitle>
-            <Controller
-              name="payment"
-              control={control}
-              defaultValue=""
-              rules={{ required: true }}
-              render={({ field }) => (
-                <Box marginBottom={1.25}>
-                  <RadioGroup
-                    value={field.value}
-                    onChange={e => field.onChange(e.target.value)}
-                    sx={{ rowGap: 1 }}
-                  >
-                    <ul>
-                      <DeliveryItem>
-                        <FormControlLabel
-                          value="receiving"
-                          control={
-                            <Radio
-                              color="accent"
-                              size="small"
-                              sx={{
-                                '& .MuiSvgIcon-root': {
-                                  fontSize: 16,
-                                },
-                              }}
-                            />
-                          }
-                          label={
-                            <Typography style={{ fontSize: '14px' }}>
-                              Оплата під час отримання товару
-                            </Typography>
-                          }
-                        />
-                      </DeliveryItem>
-                      <DeliveryItem>
-                        <FormControlLabel
-                          value="now"
-                          control={
-                            <Radio
-                              color="accent"
-                              size="small"
-                              sx={{
-                                '& .MuiSvgIcon-root': {
-                                  fontSize: 16,
-                                },
-                              }}
-                            />
-                          }
-                          label={
-                            <>
-                              <Typography
-                                style={{
-                                  fontSize: '14px',
-                                  marginBottom: 3,
-                                }}
-                              >
-                                Оплата зараз (Visa/Mastercard)
-                              </Typography>
-                              <img src={liqpay} alt="liqpay icon" />
-                            </>
-                          }
-                        />
-                      </DeliveryItem>
-                    </ul>
-                  </RadioGroup>
-                </Box>
-              )}
-            /> */}
-          <FormControlLabel
-            sx={{ marginBottom: '10px' }}
-            control={
-              <Checkbox
-                color="accent"
-                size="small"
-                sx={{
-                  '& .MuiSvgIcon-root': {
-                    fontSize: 16,
-                  },
-                }}
-              />
-            }
-            label={
-              <>
-                <Typography variant="span" style={{ fontSize: 14 }}>
-                  Я приймаю умови
-                </Typography>
-                <OrderDetailsCondition
-                  type="button"
-                  aria-label="відкрити публічний договір"
-                  onClick={() => {
-                    console.log('open modal');
-                  }}
-                >
-                  публічного договору
-                </OrderDetailsCondition>
-              </>
-            }
-          />
-
-          {/* <input
-                className={visuallyHidden}
-                type="checkbox"
-                id="conditions"
-              />
-              <CheckboxLabel htmlFor="conditions">
-                Я приймаю умови
-                <OrderDetailsCondition
-                  type="button"
-                  aria-label="відкрити публічний договір"
-                  onClick={() => {
-                    console.log('open modal');
-                  }}
-                >
-                  публічного договору
-                </OrderDetailsCondition>
-              </CheckboxLabel> */}
-          <OrderDetailsBtn type="submit">
-            Підтвердити замовлення
-          </OrderDetailsBtn>
-        </form>
-      </Wrapper>
-      {/* ) : (
-      <Notification>
-        Для оформлення замовлення додаєте товари в кошик...
-      </Notification>
-      )} */}
-    </ThemeProvider>
-  );
-}
-
-//! реалізувати модалку публічного договору
-/**
- * <input
-                        {...register("sun")}
-                        type="radio"
-                        name="weather"
-                        value="sun"
-                        id="field-sun"
-                    />
-
- * <OrderDetailsTip>
-              *вартість доставки окремо оплачується при отриманні посилки у
-              відділенні
-            </OrderDetailsTip>
- */
-
-/**
-             * <DetailsList>
+      {isCartData ? (
+        <Wrapper>
+          <OrderAside cartData={cartData} />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <DetailsTitle>Контактні дані</DetailsTitle>
+            <DetailsList>
               <DetailsItem>
                 <DetailsLabel htmlFor="lastName">Прізвище*</DetailsLabel>
-                <DetailsInput
+                <ContactsInput
                   id="lastName"
                   {...register('lastName', { required: "Це поле обов'язкове" })}
                   error={!!errors.lastName}
                   helperText={errors.lastName?.message}
-                  color="accent"
+                  color="auxillary"
                 />
               </DetailsItem>
               <DetailsItem>
                 <DetailsLabel htmlFor="firstName">Ім’я*</DetailsLabel>
-                <DetailsInput
+                <ContactsInput
                   id="firstName"
                   {...register('firstName', {
                     required: "Це поле обов'язкове",
                   })}
                   error={!!errors.firstName}
                   helperText={errors.firstName?.message}
+                  color="auxillary"
                 />
               </DetailsItem>
               <DetailsItem>
                 <DetailsLabel htmlFor="phone">Мобільний телефон*</DetailsLabel>
-                <DetailsInput
+                <ContactsInput
                   {...register('phone', {
                     required: "Це поле обов'язкове",
                     pattern: phoneValidation.pattern,
@@ -700,9 +144,297 @@ export function PlacingOrder() {
                   id="phone"
                   error={!!errors.phone}
                   helperText={errors.phone?.message}
-                  color="accent"
+                  color="auxillary"
                   defaultValue="+380"
                 />
               </DetailsItem>
             </DetailsList>
-             */
+            <DetailsTitle>Доставка</DetailsTitle>
+            <Box marginBottom={2.5}>
+              <RadioGroup
+                id="delivery"
+                value={deliveryType}
+                onChange={e => {
+                  setValue('deliveryType', e.target.value);
+                  setDeliveryType(e.target.value);
+                }}
+                sx={{ rowGap: 1 }}
+                defaultValue="novaPoshta"
+                name="deliveryType"
+              >
+                <ul>
+                  <DeliveryItem>
+                    <FormControlLabel
+                      value="novaPoshta"
+                      control={
+                        <Radio
+                          color="accent"
+                          size="small"
+                          sx={{
+                            '& .MuiSvgIcon-root': {
+                              fontSize: 16,
+                            },
+                          }}
+                        />
+                      }
+                      label={
+                        <Typography style={{ fontSize: '14px' }}>
+                          Новою поштою
+                        </Typography>
+                      }
+                    />
+                    {deliveryType === 'novaPoshta' && (
+                      <>
+                        <Box marginBottom={1}>
+                          <DetailsLabel id="city">Місто*</DetailsLabel>
+                          <Autocomplete
+                            onChange={(_, newValue) => {
+                              if (newValue) {
+                                setSelectedCity(newValue.label);
+                                searchDepartments(newValue.label);
+                                setValue('city', newValue.label);
+                              }
+                            }}
+                            fullWidth
+                            color="auxillary"
+                            sx={{ fontSize: 14 }}
+                            id="city"
+                            options={cities}
+                            renderInput={params => (
+                              <DebounceInput
+                                {...register('city')}
+                                element={DetailsInput}
+                                debounceTimeout={300}
+                                onChange={e => searchCity(e.target.value)}
+                                {...params}
+                                placeholder="Введіть місто"
+                                color="auxillary"
+                              />
+                            )}
+                          />
+                        </Box>
+                        <div>
+                          <DetailsLabel id="department">
+                            Відділення*
+                          </DetailsLabel>
+                          <Autocomplete
+                            onChange={(_, newValue) => {
+                              if (selectedCity) {
+                                setSelectedDepartment(
+                                  newValue ? newValue?.label : ''
+                                );
+                                setValue(
+                                  'department',
+                                  newValue ? newValue.label : ''
+                                );
+                              }
+                            }}
+                            fullWidth
+                            color="auxillary"
+                            sx={{ fontSize: 14 }}
+                            id="department"
+                            options={departments}
+                            renderInput={params => (
+                              <DebounceInput
+                                {...register('department')}
+                                element={DetailsInput}
+                                debounceTimeout={200}
+                                onChange={e =>
+                                  searchDepartments(
+                                    selectedCity,
+                                    e.target.value
+                                  )
+                                }
+                                {...params}
+                                placeholder="Введіть відділення"
+                                color="auxillary"
+                              />
+                            )}
+                          />
+                        </div>
+                      </>
+                    )}
+                  </DeliveryItem>
+                  <DeliveryItem>
+                    <FormControlLabel
+                      value="courier"
+                      control={
+                        <Radio
+                          color="accent"
+                          size="small"
+                          sx={{
+                            '& .MuiSvgIcon-root': {
+                              fontSize: 16,
+                            },
+                          }}
+                        />
+                      }
+                      label={
+                        <Typography style={{ fontSize: '14px' }}>
+                          Кур'єром (лише по Києву)
+                        </Typography>
+                      }
+                    />
+                    {deliveryType === 'courier' && (
+                      <div>
+                        <DetailsLabel
+                          sx={{
+                            fontSize: 12,
+                            color: 'text.secondary',
+                          }}
+                          htmlFor="address"
+                        >
+                          Адреса*
+                        </DetailsLabel>
+                        <DetailsInput
+                          id="address"
+                          {...register('address', { required: true })}
+                          onChange={e => {
+                            setValue('address', e.target.value);
+                            setAddress(e.target.value);
+                          }}
+                          placeholder="Введіть адресу"
+                          fullWidth
+                          color="auxillary"
+                        ></DetailsInput>
+                      </div>
+                    )}
+                  </DeliveryItem>
+                  <DeliveryItem>
+                    <FormControlLabel
+                      value="selfPickup"
+                      control={
+                        <Radio
+                          color="accent"
+                          size="small"
+                          sx={{
+                            '& .MuiSvgIcon-root': {
+                              fontSize: 16,
+                            },
+                          }}
+                        />
+                      }
+                      label={
+                        <Typography style={{ fontSize: '14px' }}>
+                          Самовивіз (м. Київ, вул. Сім’ї Сосняних 11)
+                        </Typography>
+                      }
+                    />
+                  </DeliveryItem>
+                </ul>
+              </RadioGroup>
+            </Box>
+            <DetailsTitle>Оплата</DetailsTitle>
+            <Box marginBottom={1.25}>
+              <RadioGroup
+                id="payment"
+                value={payment}
+                onChange={e => {
+                  setValue('payment', e.target.value);
+                  setPayment(e.target.value);
+                }}
+                sx={{ rowGap: 1 }}
+                defaultValue="receiving"
+                name="payment"
+              >
+                <ul>
+                  <DeliveryItem>
+                    <FormControlLabel
+                      value="receiving"
+                      control={
+                        <Radio
+                          color="accent"
+                          size="small"
+                          sx={{
+                            '& .MuiSvgIcon-root': {
+                              fontSize: 16,
+                            },
+                          }}
+                        />
+                      }
+                      label={
+                        <Typography style={{ fontSize: '14px' }}>
+                          Оплата під час отримання товару
+                        </Typography>
+                      }
+                    />
+                  </DeliveryItem>
+                  <DeliveryItem>
+                    <FormControlLabel
+                      value="now"
+                      control={
+                        <Radio
+                          color="accent"
+                          size="small"
+                          sx={{
+                            '& .MuiSvgIcon-root': {
+                              fontSize: 16,
+                            },
+                          }}
+                        />
+                      }
+                      label={
+                        <>
+                          <Typography
+                            style={{
+                              fontSize: '14px',
+                              marginBottom: 3,
+                            }}
+                          >
+                            Оплата зараз (Visa/Mastercard)
+                          </Typography>
+                          <img src={liqpay} alt="liqpay icon" />
+                        </>
+                      }
+                    />
+                  </DeliveryItem>
+                </ul>
+              </RadioGroup>
+            </Box>
+            <FormControlLabel
+              sx={{ marginBottom: '10px' }}
+              control={
+                <Checkbox
+                  required
+                  color="accent"
+                  size="small"
+                  sx={{
+                    '& .MuiSvgIcon-root': {
+                      fontSize: 16,
+                    },
+                  }}
+                />
+              }
+              label={
+                <>
+                  <Typography variant="span" style={{ fontSize: 14 }}>
+                    Я приймаю умови
+                  </Typography>
+                  <OrderDetailsCondition
+                    type="button"
+                    aria-label="відкрити публічний договір"
+                    onClick={() => {
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    публічного договору
+                  </OrderDetailsCondition>
+                </>
+              }
+            />
+            <OrderDetailsBtn type="submit">
+              Підтвердити замовлення
+            </OrderDetailsBtn>
+          </form>
+        </Wrapper>
+      ) : (
+        <Notification>
+          Для оформлення замовлення додаєте товари в кошик...
+        </Notification>
+      )}
+      {isModalOpen && (
+        <ModalConditions closeModal={() => setIsModalOpen(false)} />
+      )}
+    </ThemeProvider>
+  );
+}

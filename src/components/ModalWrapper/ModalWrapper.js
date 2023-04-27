@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Backdrop, ModalContainer } from './ModalWrapper.styled';
 
-export function ModalWrapper({ closeModal, children }) {
+export function ModalWrapper({ closeModal, children, conditions = false }) {
   const modalRoot = document.querySelector('#modal-root');
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export function ModalWrapper({ closeModal, children }) {
 
   return createPortal(
     <Backdrop onClick={onBackdropClick}>
-      <ModalContainer>{children}</ModalContainer>
+      <ModalContainer conditions={conditions}>{children}</ModalContainer>
     </Backdrop>,
     modalRoot
   );

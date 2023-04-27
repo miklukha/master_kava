@@ -8,14 +8,18 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
-export async function getCities() {
+export async function getCities(name) {
   const response = await axios.post(
     '/',
     {
       apiKey,
       modelName,
       calledMethod: 'getCities',
-      methodProperties: {},
+      methodProperties: {
+        FindByString: name,
+        Limit: '20',
+        Page: '1',
+      },
     },
     {
       headers,
@@ -24,7 +28,7 @@ export async function getCities() {
   return response.data;
 }
 
-export async function getAddress({ city }) {
+export async function getDepartments(city, query = '') {
   const response = await axios.post(
     '/',
     {
@@ -32,7 +36,10 @@ export async function getAddress({ city }) {
       modelName,
       calledMethod: 'getWarehouses',
       methodProperties: {
+        FindByString: query,
         CityName: city,
+        Limit: '30',
+        Page: '1',
       },
     },
     {
