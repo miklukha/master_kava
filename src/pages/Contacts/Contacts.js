@@ -1,4 +1,4 @@
-import { Title, Feedback } from 'components';
+import { Title, Feedback, ModalFeedback } from 'components';
 import {
   ContactsList,
   ContactsItem,
@@ -12,8 +12,11 @@ import {
   UilEnvelopeAlt,
   UilClock,
 } from '@iconscout/react-unicons';
+import { useState } from 'react';
 
-export function Contacts() {
+export function Contacts({ closeModal }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <>
       <Title>КОНТАКТИ</Title>
@@ -44,12 +47,19 @@ export function Contacts() {
             </ContactsItem>
           </ContactsList>
 
-          <Feedback style={{ marginBottom: 20 }}>
+          <Feedback
+            type="button"
+            onClick={() => setIsModalOpen(true)}
+            style={{ marginBottom: 20 }}
+          >
             Форма зворотнього зв'язку
           </Feedback>
         </div>
         <Map />
       </Wrapper>
+      {isModalOpen && (
+        <ModalFeedback closeModal={() => setIsModalOpen(false)} />
+      )}
     </>
   );
 }
