@@ -4,7 +4,9 @@ import {
   BtnsWrapper,
   CancelBtn,
   Form,
+  // ImgPreview,
   ItemWrapper,
+  LoadBtn,
   Tip,
 } from './AdminProductEdit.styled';
 import { useEffect, useState } from 'react';
@@ -25,26 +27,71 @@ export function AdminProductEdit({ product = {}, onCancel, action }) {
   } = product;
 
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(category?.label);
+  const [selectedCategory, setSelectedCategory] = useState(category?._id);
   const [selectedAvailability, setSelectedAvailability] =
     useState(availability);
+  const [file, setFile] = useState(null);
+
+  // const imagePath = `http://127.0.0.1:1880/images/${product._id}`;
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    // setValue,
+    setValue,
+    reset,
   } = useForm();
 
-  const onSubmit = data => {
-    // if (action === 'edit') {
-    // }
-    // if (action === 'create') {
-    // }
-    // setValue('category', selectedCategory);
+  const onFileChange = e => {
+    if (e.target.files) {
+      setFile(e.target.files[0]);
+    }
+  };
 
-    console.log(data);
-    //! availability, characteristics save like STRING
+  const onSubmit = async data => {
+    if (action === 'edit') {
+      try {
+        await API.updateProduct(product._id, data);
+        toast.success('Товар успішно оновлено');
+
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+        toast.error('Щось пішло не так, спробуйте пізніше');
+      }
+    }
+
+    if (action === 'create') {
+      if (data.image === '' || typeof data.image === 'object') {
+        toast.error('Завантажте фото');
+      } else {
+        try {
+          await API.createProduct(data);
+          toast.success('Товар успішно додано');
+          reset();
+        } catch (error) {
+          console.error(error);
+          toast.error('Щось пішло не так, спробуйте пізніше');
+        }
+      }
+    }
+  };
+
+  const uploadImage = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('image', file, file.name);
+      formData.append('name', file.name);
+      setValue('image', file.name);
+      formData.append('size', file.size);
+
+      await API.uploadImage(formData, file);
+      toast.success('Фотографія успішно завантажилася');
+      setFile(null);
+    } catch (error) {
+      console.error(error);
+      toast.error('Оберіть фотографію');
+    }
   };
 
   useEffect(() => {
@@ -54,14 +101,17 @@ export function AdminProductEdit({ product = {}, onCancel, action }) {
         setCategories(categories);
       } catch (error) {
         toast.error('Категорії не знайдені, спробуйте пізніше');
-        // navigate('/', { replace: true });
         console.log(error);
       }
     })();
   }, []);
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} action={action}>
+    <Form
+      onSubmit={handleSubmit(onSubmit)}
+      action={action}
+      encType="multipart/form-data"
+    >
       <ItemWrapper>
         <label htmlFor="name">Назва</label>
         <input
@@ -102,9 +152,9 @@ export function AdminProductEdit({ product = {}, onCancel, action }) {
           value={selectedCategory}
           onChange={e => setSelectedCategory(e.target.value)}
         >
-          {categories.map(({ label, name, _id }) => {
+          {categories.map(({ name, _id }) => {
             return (
-              <option key={_id} value={label}>
+              <option key={_id} value={_id}>
                 {name}
               </option>
             );
@@ -174,7 +224,7 @@ export function AdminProductEdit({ product = {}, onCancel, action }) {
         {errors.description && <Tip>Це поле обов'язкове</Tip>}
       </ItemWrapper>
       <ItemWrapper>
-        <label htmlFor="price">Ціна</label>
+        <label htmlFor="price">Ціна (за 100г)</label>
         <input
           type="number"
           id="price"
@@ -193,18 +243,27 @@ export function AdminProductEdit({ product = {}, onCancel, action }) {
           defaultValue={roastLevel}
           {...register('roastLevel', { required: true })}
         />
-        {errors.roastLevel && <Tip> поле обов'язкове </Tip>}
+        {errors.roastLevel && <Tip>Це поле поле обов'язкове </Tip>}
       </ItemWrapper>
-      {/* <ItemWrapper>
-        <label htmlFor="image">Зоображення</label>
-        <input
-          type="file"
-          name="image"
-          accept="image/*"
-          {...register('image', { required: true })}
-        />
-        {errors.image && <Tip>Це поле обов'язкове </Tip>}
-      </ItemWrapper> */}
+      {action === 'create' && (
+        <ItemWrapper>
+          <label htmlFor="image">Зображення</label>
+
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            {...register('image')}
+            onChange={onFileChange}
+          />
+
+          {errors.image && <Tip>Це поле обов'язкове </Tip>}
+          <LoadBtn type="button" onClick={uploadImage}>
+            Завантажити
+          </LoadBtn>
+        </ItemWrapper>
+      )}
+
       <BtnsWrapper>
         <Btn type="submit">Підтвердити</Btn>
         {action === 'edit' && (

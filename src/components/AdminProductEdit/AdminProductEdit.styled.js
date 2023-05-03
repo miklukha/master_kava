@@ -35,6 +35,7 @@ export const ItemWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 5px;
 
   width: 360px;
   padding-top: 7px;
@@ -66,4 +67,21 @@ export const Tip = styled.p`
   align-self: flex-end;
   margin-top: 10px;
   color: ${colors.error};
+`;
+
+export const LoadBtn = styled.button`
+  padding: 5px;
+  border: 1px solid ${colors.auxiliaryText};
+  border-radius: 4px;
+  background-color: ${colors.auxiliary};
+
+  &:hover,
+  &:focus {
+    background-color: ${colors.auxiliaryBg};
+  }
+`;
+
+export const ImgPreview = styled.img`
+  width: 50px;
+  height: 50px;
 `;

@@ -6,7 +6,7 @@ import {
   CategoryList,
   Wrapper,
 } from './Admin.styled';
-import { AdminProducts, AdminProductCreate, LoadFotos } from 'components';
+import { AdminProducts, AdminProductCreate } from 'components';
 
 export function Admin() {
   const [selectedOption, setSelectedOption] = useState(
@@ -35,8 +35,8 @@ export function Admin() {
         </CategoryList>
         {selectedOption === adminCategories[0].value && <AdminProducts />}
         {selectedOption === adminCategories[1].value && <AdminProductCreate />}
-        {selectedOption === adminCategories[2].value && <LoadFotos />}
-        {selectedOption === adminCategories[3].value && <div>user</div>}
+        {selectedOption === adminCategories[2].value && <div>user</div>}
+        {selectedOption === adminCategories[3].value && <div>замовлення</div>}
       </Wrapper>
     </>
   );

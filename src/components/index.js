@@ -36,7 +36,6 @@ export * from './CookingMethods';
 export * from './AdminProducts';
 export * from './AdminProductEdit';
 export * from './AdminProductCreate';
-export * from './LoadFotos';
 export * from './OrderAside';
 export * from './ModalRegistration';
 export * from './ModalWrapper';
