@@ -41,6 +41,7 @@ export function Product() {
 
   const { slug } = useParams();
   const productId = slug.match(/[a-z0-9]+$/)[0];
+  const imgPath = 'http://127.0.0.1:1880/images/';
   // const { productId } = useParams();
   const navigate = useNavigate();
 
@@ -127,7 +128,7 @@ export function Product() {
         <form onSubmit={e => onSubmit(e)}>
           <Wrapper>
             <ImgWrapper>
-              <Img src={product.image} alt={product.name} />
+              <Img src={`${imgPath}${product._id}`} alt={product.name} />
             </ImgWrapper>
             <DescWrapper>
               <Name>{product.name}</Name>

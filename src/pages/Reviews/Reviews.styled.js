@@ -4,6 +4,7 @@ import { colors, mq } from 'styles/utils/variables';
 export const ReviewsList = styled.ul`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
 
   ${mq.tablet} {

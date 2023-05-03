@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
-import { mq, utils, colors } from 'styles/utils/variables';
+import { mq, utils, colors, fontSizes } from 'styles/utils/variables';
 
 export const Item = styled.li`
   width: 175px;
@@ -22,7 +22,7 @@ export const Link = styled(NavLink)`
   align-items: center;
   gap: 10px;
 
-  min-height: 352px;
+  min-height: 330px;
   padding: 15px 15px 30px 15px;
 
   box-shadow: none;
@@ -42,22 +42,30 @@ export const Link = styled(NavLink)`
 `;
 
 export const Img = styled.img`
-  width: 120px;
+  width: 143px;
+  height: 143px;
+
+  border-radius: ${utils.borderRadius};
 
   ${mq.tablet} {
-    width: 200px;
+    width: 207px;
+    height: 207px;
+  }
+
+  ${mq.desktop} {
+    width: 240px;
     height: 240px;
   }
 `;
 
 export const Name = styled.h3`
   flex: 1;
-  font-size: 16px;
+  font-size: ${fontSizes.m};
   font-weight: 700;
   text-align: center;
 
   ${mq.tablet} {
-    font-size: 18px;
+    font-size: ${fontSizes.l};
   }
 `;
 
@@ -68,4 +76,10 @@ export const Ingredients = styled.span`
 
 export const Price = styled.span`
   font-weight: 700;
+  font-size: ${fontSizes.m};
+  margin-top: 5px;
+
+  ${mq.tablet} {
+    font-size: ${fontSizes.l};
+  }
 `;

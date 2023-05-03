@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Label,
   Form,
@@ -11,14 +11,16 @@ import { Button, Input, CloseDeleteBtn } from 'components';
 import { visuallyHidden } from 'styles/utils/visuallyHidden';
 import MediaQuery from 'react-responsive';
 import { breakpoints } from 'styles/utils/variables';
+import * as API from 'services/api';
+import toast from 'react-hot-toast';
 
-export function ShopFilter({ handleClick }) {
+export function ShopFilter({ handleClick, onSetProducts }) {
   const [minPrice, setMinPrice] = useState('0');
-  const [maxPrice, setMaxPrice] = useState('1000');
+  const [maxPrice, setMaxPrice] = useState('500');
+  const [categories, setCategories] = useState([]);
+  const [labels, setLabels] = useState([]);
 
-  //! the same for maxPrice
-  //! the checking if entered value is number
-  const onInputChange = e => {
+  const onInputChangeMin = e => {
     const value = e.target.value;
 
     if (value === '') {
@@ -34,10 +36,73 @@ export function ShopFilter({ handleClick }) {
     setMinPrice(value);
   };
 
-  const onSubmitClick = e => {
-    e.preventDefault();
-    console.log(e);
+  const onInputChangeMax = e => {
+    const value = e.target.value;
+
+    if (value === '') {
+      setMaxPrice('0');
+      return;
+    }
+
+    if (maxPrice === '0') {
+      setMaxPrice(value.slice(1, value.length));
+      return;
+    }
+
+    setMaxPrice(value);
   };
+
+  const onClick = async e => {
+    e.preventDefault();
+
+    try {
+      const products = await API.getProductsByPrice(
+        parseInt(minPrice),
+        parseInt(maxPrice)
+      );
+
+      onSetProducts(products);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onCheckboxChange = async e => {
+    const isChecked = e.target.checked;
+    const categoryLabel = e.target.id;
+
+    if (isChecked) {
+      setLabels(labels => [...labels, categoryLabel]);
+    } else {
+      setLabels(labels.filter(label => label !== categoryLabel));
+    }
+  };
+
+  useEffect(() => {
+    if (labels.length !== 0) {
+      (async function getProductsByCategory() {
+        try {
+          const products = await API.getProductsByCategory(labels.join(','));
+          onSetProducts(products);
+        } catch (error) {
+          toast.error('Щось пішло не так, спробуйте, будь ласка, пізніше');
+          console.log(error);
+        }
+      })();
+    }
+  }, [labels, onSetProducts]);
+
+  useEffect(() => {
+    (async function getCategories() {
+      try {
+        const categories = await API.getCategories();
+        setCategories(categories);
+      } catch (error) {
+        toast.error('Категорії не знайдені, спробуйте пізніше');
+        console.log(error);
+      }
+    })();
+  }, []);
 
   return (
     <Form>
@@ -49,35 +114,37 @@ export function ShopFilter({ handleClick }) {
         <Input
           type="number"
           id="price"
+          name="minPrice"
           value={minPrice}
-          onChange={e => onInputChange(e)}
+          onChange={e => onInputChangeMin(e)}
         />
         -
         <Input
           type="number"
+          name="maxPrice"
           // id="maxPrice"
           value={maxPrice}
-          onChange={e => setMaxPrice(e.target.value)}
+          onChange={e => onInputChangeMax(e)}
         />
+        <Button type="click" aria-label="застосувати фільтр" onClick={onClick}>
+          Ок
+        </Button>
       </InputsWrapper>
       <Label htmlFor="ingredients">Склад</Label>
       <OptionList>
-        <OptionItem>
-          <input className={visuallyHidden} type="checkbox" id="arabica" />
-          <CheckboxLabel htmlFor="arabica">100% Арабіка</CheckboxLabel>
-        </OptionItem>
-        <OptionItem>
-          <input
-            className={visuallyHidden}
-            type="checkbox"
-            id="arabica-robusta"
-          />
-          <CheckboxLabel htmlFor="arabica-robusta">
-            Арабіка 80% / Робуста 20%
-          </CheckboxLabel>
-        </OptionItem>
+        {categories.map(({ _id, label, name }) => (
+          <OptionItem key={_id}>
+            <input
+              className={visuallyHidden}
+              type="checkbox"
+              id={label}
+              onChange={e => onCheckboxChange(e)}
+            />
+            <CheckboxLabel htmlFor={label}>{name}</CheckboxLabel>
+          </OptionItem>
+        ))}
       </OptionList>
-      <Label htmlFor="country">Країна походження</Label>
+      {/* <Label htmlFor="country">Країна походження</Label>
       <OptionList>
         <OptionItem>
           <input className={visuallyHidden} type="checkbox" id="brasilia" />
@@ -91,16 +158,7 @@ export function ShopFilter({ handleClick }) {
           <input className={visuallyHidden} type="checkbox" id="mexico" />
           <CheckboxLabel htmlFor="mexico">Мексика</CheckboxLabel>
         </OptionItem>
-      </OptionList>
-      <Button
-        type="submit"
-        aria-label="застосувати фільтр"
-        onClick={e => {
-          onSubmitClick(e);
-        }}
-      >
-        Застосувати
-      </Button>
+      </OptionList> */}
     </Form>
   );
 }

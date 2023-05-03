@@ -22,7 +22,7 @@ import * as API from 'services/api';
 import { useNavigate } from 'react-router-dom';
 
 export function Shop() {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(filterOptions[0]);
   const [products, setProducts] = useState([]);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
@@ -32,8 +32,23 @@ export function Shop() {
   useEffect(() => {
     (async function getProducts() {
       try {
-        const products = await API.getProducts();
-        setProducts(products);
+        switch (selectedOption.value) {
+          case 'popular':
+            const popular = await API.getProductsPopular();
+            setProducts(popular);
+            break;
+          case 'low':
+            const asc = await API.getProductsAsc();
+            setProducts(asc);
+            break;
+          case 'high':
+            const desc = await API.getProductsDesc();
+            setProducts(desc);
+            break;
+          default:
+            const products = await API.getProducts();
+            setProducts(products);
+        }
       } catch (error) {
         toast.error('Щось пішло не так :(( Спробуйте, будь ласка, пізніше!');
         navigate('/', { replace: true });
@@ -42,7 +57,7 @@ export function Shop() {
     })();
     // const products = getProducts();
     // setProducts(products);
-  }, [navigate]);
+  }, [navigate, selectedOption]);
 
   return (
     <>
@@ -58,7 +73,10 @@ export function Shop() {
           </FilterBtn>
           {isFilterOpen && (
             <Backdrop open={isFilterOpen}>
-              <ShopFilter handleClick={onFilterClick} />
+              <ShopFilter
+                handleClick={onFilterClick}
+                onSetProducts={products => setProducts(products)}
+              />
             </Backdrop>
           )}
         </MediaQuery>
@@ -70,8 +88,9 @@ export function Shop() {
       </FiltersWrapper>
       <ContentWrapper>
         <MediaQuery minWidth={parseInt(breakpoints.tablet)}>
-          <ShopFilter />
+          <ShopFilter onSetProducts={products => setProducts(products)} />
         </MediaQuery>
+
         <ProductList>
           {products.map(product => (
             <ProductCard key={product._id} product={product} />

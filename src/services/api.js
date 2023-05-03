@@ -10,6 +10,39 @@ export async function getProducts() {
   return response.data;
 }
 
+export async function getProductsPopular() {
+  const response = await axios.get('/products?sort=popular');
+  return response.data;
+}
+
+export async function getProductsDesc() {
+  const response = await axios.get('/products?sort=price_desc');
+  return response.data;
+}
+
+export async function getProductsAsc() {
+  const response = await axios.get('/products?sort=price_asc');
+  return response.data;
+}
+
+// /products?sort=country&name=brasil,nicaragua
+export async function getProductsByCountry(countries) {
+  const response = await axios.get(`/products?sort=country&name=${countries}`);
+  return response.data;
+}
+
+export async function getProductsByPrice(min, max) {
+  const response = await axios.get(
+    `/products?sort=price&&min=${min}&max=${max}`
+  );
+  return response.data;
+}
+
+export async function getProductsByCategory(category) {
+  const response = await axios.get(`/products?sort=category&label=${category}`);
+  return response.data;
+}
+
 export async function getProductById(id) {
   const response = await axios.get(`/products/${id}`);
   return response.data;
@@ -25,25 +58,12 @@ export async function deleteProduct(id) {
   return response.data;
 }
 
-// export async function uploadImage(data) {
-//   const response = await axios.post('/upload-image', { data });
-//   return response.data;
-// }
-
 export async function updateProduct(id, data) {
-  const response = await axios.put(
-    `/update/${id}`,
-    { data },
-    {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    }
-  );
+  const response = await axios.put(`/products/${id}`, data);
   return response.data;
 }
 
-export async function upload(formData, file) {
+export async function uploadImage(formData, file) {
   const response = await axios.post('/upload', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -55,11 +75,12 @@ export async function upload(formData, file) {
 }
 
 export async function createProduct(data) {
-  const response = await axios.post(`/create`, data, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
+  const response = await axios.post('/products', data);
+  return response.data;
+}
+
+export async function getImage(id) {
+  const response = await axios.get(`/images/${id}`);
   return response.data;
 }
 

@@ -31,6 +31,7 @@ export const ImgWrapper = styled.div`
 export const Img = styled.img`
   width: 100%;
   height: 346px;
+  border-radius: ${utils.borderRadius};
 
   ${mq.tablet} {
     width: 304px;

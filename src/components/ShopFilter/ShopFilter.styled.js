@@ -12,15 +12,15 @@ export const Form = styled.form`
   border: 1px solid ${colors.auxiliary};
   border-radius: ${utils.borderRadius};
 
-  ${mq.tablet} {
-    padding: 20px;
-    /* position: fixed; */
-    height: 400px;
-  }
-
   ${mq.onlyTablet} {
     width: 200px;
+    height: 332px;
     padding: 15px;
+  }
+
+  ${mq.desktop} {
+    padding: 20px;
+    height: 250px;
   }
 `;
 
@@ -32,10 +32,31 @@ export const Label = styled.label`
 
 export const InputsWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
   gap: 15px;
 
   margin-bottom: 20px;
+
+  & button {
+    font-weight: 400;
+    width: 53px;
+    padding: 9px;
+    border: 1px solid ${colors.auxiliary};
+
+    background-color: transparent;
+    color: ${colors.mainText};
+
+    &:hover,
+    &:focus {
+      background-color: ${colors.auxiliary};
+    }
+  }
+
+  ${mq.onlyTablet} {
+    flex-wrap: wrap;
+  }
 `;
 
 export const OptionList = styled.ul`

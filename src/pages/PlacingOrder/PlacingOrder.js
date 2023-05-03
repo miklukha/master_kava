@@ -46,12 +46,14 @@ export function PlacingOrder() {
   const cartData = JSON.parse(localStorage.getItem('cartData')) || [];
   const [deliveryType, setDeliveryType] = useState('novaPoshta');
   const [selectedCity, setSelectedCity] = useState('');
-  const [_, setSelectedDepartment] = useState('');
+  const [department, setSelectedDepartment] = useState('');
   const [cities, setCities] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [address, setAddress] = useState('');
   const [payment, setPayment] = useState('receiving');
+
   console.log(address);
+  console.log(department);
   const isCartData = cartData.length !== 0 ? true : false;
 
   const {
@@ -203,6 +205,7 @@ export function PlacingOrder() {
                             renderInput={params => (
                               <DebounceInput
                                 {...register('city')}
+                                required
                                 element={DetailsInput}
                                 debounceTimeout={300}
                                 onChange={e => searchCity(e.target.value)}
@@ -237,6 +240,7 @@ export function PlacingOrder() {
                             renderInput={params => (
                               <DebounceInput
                                 {...register('department')}
+                                required
                                 element={DetailsInput}
                                 debounceTimeout={200}
                                 onChange={e =>
