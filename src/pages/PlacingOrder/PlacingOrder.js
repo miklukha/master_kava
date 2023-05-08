@@ -10,7 +10,7 @@ import {
   createTheme,
 } from '@mui/material';
 import liqpay from 'assets/images/liqpay.png';
-import { ModalConditions, OrderAside, Title } from 'components';
+import { ModalConditions, OrderAside, Title, LiqPayForm } from 'components';
 import { useState } from 'react';
 import { DebounceInput } from 'react-debounce-input';
 import { useForm } from 'react-hook-form';
@@ -107,6 +107,7 @@ export function PlacingOrder() {
 
   return (
     <ThemeProvider theme={theme}>
+      <LiqPayForm />
       <Title>ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</Title>
       {isCartData ? (
         <Wrapper>
