@@ -44,3 +44,4 @@ export * from './ModalFeedback';
 export * from './InputForm.styled';
 export * from './Label.styled';
 export * from './ModalConditions';
+export * from './LiqPayForm';
