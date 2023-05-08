@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmaster_kava=self.webpackChunkmaster_kava||[]).push([[535],{6535:function(a,r,e){e.r(r),e.d(r,{PlacingOrder:function(){return n.PlacingOrder}});var n=e(268)}}]);
