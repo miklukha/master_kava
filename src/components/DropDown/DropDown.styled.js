@@ -17,7 +17,7 @@ export const DropDownMenu = styled.ul`
 `;
 
 export const DropDownItem = styled.li`
-  /* position: relative; */
+  position: relative;
   padding: 10px;
   font-size: 14px;
   color: ${colors.mainText};

@@ -89,7 +89,12 @@ export function ExtraNav({ handleClick }) {
       <List>
         <Item onClick={() => setDropdown(true)} ref={dropDownRef}>
           <UilUser />
-          {dropdown && <DropDown setIsModalOpen={setIsModalOpen} />}
+          {dropdown && (
+            <DropDown
+              setIsModalOpen={setIsModalOpen}
+              onSetDropDown={option => setDropdown(option)}
+            />
+          )}
         </Item>
         <Item
           onClick={() => setCartDropDown(true)}

@@ -4,21 +4,13 @@ axios.defaults.baseURL = 'http://127.0.0.1:1880';
 let data = '';
 let signature = '';
 
-// const onSubmit = async () => {
-// const response = await axios.post('/liqpay');
-// console.log(response.data);
-// data = response.data.data;
-// signature = response.data.signature;
-// return response.data;
-// };
-
-(async function getData() {
-  const response = await axios.post('/liqpay');
-  console.log(response.data);
-  data = response.data.data;
-  signature = response.data.signature;
-  return response.data;
-})();
+// (async function getData() {
+//   const response = await axios.post('/liqpay');
+//   console.log(response.data);
+//   data = response.data.data;
+//   signature = response.data.signature;
+//   return response.data;
+// })();
 
 export function LiqPayForm() {
   return (

@@ -2,8 +2,57 @@ import axios from 'axios';
 
 // axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8';
 // axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
+//  headers: {
+//         'Access-Control-Allow-Origin': '*',
+//         'Content-Type': 'application/json',
+//       },
+//       withCredentials: true,
+//       credentials: 'same-origin
 // axios.defaults.baseURL = 'https://masterkava.herokuapp.com/';
 axios.defaults.baseURL = 'http://127.0.0.1:1880';
+// axios.defaults.withCredentials = true;
+// axios.defaults.credentials = 'same-origin';
+
+const setAuthHeader = token => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+// {
+//     headers: {
+//       Authorization: token,
+//     },
+//   }
+
+const removeAuthHeader = () => {
+  axios.defaults.headers.common.Authorization = '';
+};
+
+const token = localStorage.getItem('token' || '');
+
+if (token) {
+  setAuthHeader(token);
+} else {
+  removeAuthHeader();
+}
+
+export async function register(data) {
+  const response = await axios.post('/register', data);
+  return response.data;
+}
+
+export async function login(data) {
+  const response = await axios.post('/login', data);
+  return response.data;
+}
+
+export async function logout() {
+  const response = await axios.post('/logout');
+  return response.data;
+}
+
+export async function getCurrentUser() {
+  const response = await axios.get('/current');
+  return response.data;
+}
 
 export async function getProducts() {
   const response = await axios.get('/products');
@@ -81,6 +130,11 @@ export async function createProduct(data) {
 
 export async function getImage(id) {
   const response = await axios.get(`/images/${id}`);
+  return response.data;
+}
+
+export async function getUser() {
+  const response = await axios.get(`/user`);
   return response.data;
 }
 

@@ -4,9 +4,15 @@ import { CloseDeleteBtn, Nav, Contacts, Backdrop } from 'components';
 
 export function MobileMenu({ handleClick, isOpen }) {
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
+    const bodyStyle = document.body.style;
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    bodyStyle.overflow = 'hidden';
+    bodyStyle.paddingRight = `${scrollbarWidth}px`;
+
     return () => {
-      document.body.style.overflow = '';
+      bodyStyle.overflow = 'visible';
+      bodyStyle.paddingRight = 0;
     };
   }, []);
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { ProductOrder, Title, Button } from 'components';
@@ -25,6 +25,9 @@ import {
 } from './Profile.styled';
 import { UilUser } from '@iconscout/react-unicons';
 import { colors } from 'styles/utils/variables';
+import * as API from 'services/api';
+import toast from 'react-hot-toast';
+// import Cookies from 'js-cookie';
 
 const theme = createTheme({
   palette: {
@@ -36,6 +39,7 @@ const theme = createTheme({
 
 export function Profile() {
   const [selectedItem, setSelectedItem] = useState('contacts');
+  // const [user, setUser] = useState({});
 
   const {
     register,
@@ -57,6 +61,20 @@ export function Profile() {
   const handleClick = e => {
     setSelectedItem(e.target.value);
   };
+
+  useEffect(() => {
+    (async function getUserById() {
+      try {
+        // const token = Cookies.get('token');
+        const product = await API.getUser();
+        console.log(product);
+        //  setUser(product[0]);
+      } catch (error) {
+        toast.error('Щось пішло не так, спробуйте, будь ласка, пізніше');
+        console.log(error);
+      }
+    })();
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>

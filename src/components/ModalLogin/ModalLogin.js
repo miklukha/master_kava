@@ -4,6 +4,8 @@ import { InputForm, Label } from 'components';
 import { useForm } from 'react-hook-form';
 import { colors } from 'styles/utils/variables';
 import { Form } from 'components/ModalRegistration/ModalRegistration.styled';
+import * as API from 'services/api';
+import toast from 'react-hot-toast';
 
 const theme = createTheme({
   palette: {
@@ -13,16 +15,33 @@ const theme = createTheme({
   },
 });
 
-export function ModalLogin({ closeModal }) {
+export function ModalLogin({ closeModal, onSetDropDown }) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors = {} },
   } = useForm();
 
-  const onSubmit = data => {
-    console.log(data);
-    closeModal();
+  const onSubmit = async data => {
+    try {
+      const { token } = await API.login(data);
+      localStorage.setItem('token', token);
+      // Cookies.delete('token');
+      toast.success('Вхід пройшов успішно');
+      closeModal();
+      onSetDropDown(false);
+    } catch (error) {
+      const errorStatus = error.response.status;
+
+      if (errorStatus === 401) {
+        toast.error('Неправильні дані пошти або пароля');
+      } else {
+        toast.error('Щось пішло не так, спробуйте, будь ласка, пізніше');
+        console.log(error);
+      }
+    }
+    // console.log(data);
+    // closeModal();
   };
 
   return (
@@ -38,10 +57,10 @@ export function ModalLogin({ closeModal }) {
               pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
             })}
             id="email"
-            error={!!errors.email}
+            error={!!errors?.email}
             helperText={
-              errors.email
-                ? errors.email.type === 'required'
+              errors?.email
+                ? errors?.email?.type === 'required'
                   ? "Це поле обов'язкове"
                   : 'Некоректний формат електронної пошти'
                 : ''
@@ -54,11 +73,12 @@ export function ModalLogin({ closeModal }) {
               required: "Це поле обов'язкове",
               minLength: 8,
             })}
+            type="password"
             id="password"
-            error={!!errors.password}
+            error={!!errors?.password}
             helperText={
-              errors.password
-                ? errors.email.password === 'required'
+              errors?.password
+                ? errors?.email?.password === 'required'
                   ? "Це поле обов'язкове"
                   : 'Пароль має бути мінімум 8 символів'
                 : ''
@@ -66,7 +86,7 @@ export function ModalLogin({ closeModal }) {
             color="auxillary"
           />
 
-          <Button type="submit">Зареєструватися</Button>
+          <Button type="submit">Вхід</Button>
         </Form>
       </ThemeProvider>
     </ModalWrapper>

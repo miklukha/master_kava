@@ -1,6 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 import { SharedLayout } from 'layouts';
 import { createAsyncComponent } from 'helpers';
+import { useEffect } from 'react';
+import * as API from 'services/api';
 
 const Home = createAsyncComponent('Home');
 const Shop = createAsyncComponent('Shop');
@@ -14,6 +16,17 @@ const Product = createAsyncComponent('Product');
 const Admin = createAsyncComponent('Admin');
 
 export function App() {
+  useEffect(() => {
+    (async () => {
+      try {
+        const user = await API.getCurrentUser();
+        console.log(user);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+
   return (
     <>
       <Routes>
