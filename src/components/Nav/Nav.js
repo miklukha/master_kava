@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import * as API from 'services/api';
 import {
   Link,
   NavItem,
@@ -5,8 +7,34 @@ import {
   NavList,
   NavListFooter,
 } from './Nav.styled';
+import { Loader } from 'components/Loader';
 
 export function Nav({ layout }) {
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { role } = await API.getCurrentUser();
+        setIsAdmin(role === 'admin');
+      } catch (error) {
+        if (error.response && error.response.status === 401) {
+          setIsAdmin(false);
+          console.log('User is not authorized');
+        } else {
+          console.log(error);
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    })();
+  }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <>
       {layout === 'header' ? (
@@ -29,6 +57,11 @@ export function Nav({ layout }) {
           <NavItem>
             <Link to="/payment-delivery">ОПЛАТА ТА ДОСТАВКА</Link>
           </NavItem>
+          {isAdmin && (
+            <NavItem>
+              <Link to="/admin">АДМІН</Link>
+            </NavItem>
+          )}
         </NavList>
       ) : (
         <NavListFooter>
@@ -50,6 +83,11 @@ export function Nav({ layout }) {
           <NavItemFooter>
             <Link to="/payment-delivery">ОПЛАТА ТА ДОСТАВКА</Link>
           </NavItemFooter>
+          {isAdmin && (
+            <NavItemFooter>
+              <Link to="/admin">АДМІН</Link>
+            </NavItemFooter>
+          )}
         </NavListFooter>
       )}
     </>

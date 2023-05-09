@@ -5,11 +5,13 @@ import { ModalRegistration, ModalLogin } from 'components';
 import * as API from 'services/api';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export function DropDown({ setIsModalOpen, onSetDropDown }) {
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const closeRegistrationModal = () => {
     setIsRegistrationOpen(false);
@@ -26,8 +28,12 @@ export function DropDown({ setIsModalOpen, onSetDropDown }) {
       setIsLoggedIn(false);
       onSetDropDown();
       toast.success('Вихід пройшов успішно');
+      setIsLoggedIn(true);
     } catch (error) {
-      toast.error('Щось пішло не так, спробуйте, будь ласка, пізніше');
+      localStorage.setItem('token', '');
+      navigate('/', { replace: true });
+      setIsLoggedIn(false);
+      toast.error('Час сесії вийшов');
       console.log(error);
     }
   };

@@ -24,9 +24,9 @@ export function ModalLogin({ closeModal, onSetDropDown }) {
 
   const onSubmit = async data => {
     try {
-      const { token } = await API.login(data);
+      const response = await API.login(data);
+      const token = response.$set.token;
       localStorage.setItem('token', token);
-      // Cookies.delete('token');
       toast.success('Вхід пройшов успішно');
       closeModal();
       onSetDropDown(false);
@@ -40,8 +40,6 @@ export function ModalLogin({ closeModal, onSetDropDown }) {
         console.log(error);
       }
     }
-    // console.log(data);
-    // closeModal();
   };
 
   return (

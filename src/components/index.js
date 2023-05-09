@@ -45,3 +45,5 @@ export * from './InputForm.styled';
 export * from './Label.styled';
 export * from './ModalConditions';
 export * from './LiqPayForm';
+export * from './PrivateRoute';
+export * from './PrivateAdminRoute';
