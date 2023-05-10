@@ -96,6 +96,11 @@ export async function getImage(id) {
   return response.data;
 }
 
+export async function getUsers() {
+  const response = await axios.get('/users');
+  return response.data;
+}
+
 export async function updateContactsUser(data) {
   const token = localStorage.getItem('token' || '');
 
@@ -116,6 +121,11 @@ export async function updatePasswordUser(data) {
       Authorization: `Bearer ${token}`,
     },
   });
+  return response.data;
+}
+
+export async function createAdmin(data) {
+  const response = await axios.post('/admin', data);
   return response.data;
 }
 
