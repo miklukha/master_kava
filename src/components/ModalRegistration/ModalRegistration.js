@@ -4,9 +4,8 @@ import { InputForm, Label } from 'components';
 import { useForm } from 'react-hook-form';
 import { colors } from 'styles/utils/variables';
 import { Form } from './ModalRegistration.styled';
-import * as API from 'services/api';
+import * as API from 'services/authApi';
 import { toast } from 'react-hot-toast';
-// import Cookies from 'js-cookie';
 
 const theme = createTheme({
   palette: {
@@ -27,14 +26,9 @@ export function ModalRegistration({ closeModal, onLoginOpen }) {
   const onSubmit = async data => {
     try {
       await API.register(data);
-      // console.log(token);
-      // localStorage.setItem('token', JSON.stringify(token));
-      // Cookies.set('token', token);
       toast.success('Реєстрація пройшла успішно');
       closeModal();
       onLoginOpen();
-      // console.log(onLoginOpen());
-      // onSetDropDown(false);
     } catch (error) {
       const errorStatus = error.response.status;
 

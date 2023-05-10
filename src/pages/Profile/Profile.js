@@ -46,20 +46,35 @@ export function Profile() {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
+    reset,
   } = useForm();
 
   const onContactSubmit = async data => {
     try {
-      await API.updateContactsUser(user._id, data);
-      toast.success('інформація успішно оновлена');
+      await API.updateContactsUser(data);
+      toast.success('Інформація успішно оновлена');
     } catch (error) {
       console.log(error);
       toast.error('Щось пішло не так, спробуйте пізніше');
     }
   };
 
-  const onPasswordSubmit = data => {
-    console.log(data);
+  const onPasswordSubmit = async data => {
+    try {
+      await API.updatePasswordUser(data);
+      toast.success('Пароль успішно оновлений');
+      reset();
+    } catch (error) {
+      const statusError = error.response;
+
+      if (statusError.status === 400) {
+        toast.error('Неправильний старий пароль');
+      } else {
+        console.log(error);
+        toast.error('Щось пішло не так, спробуйте пізніше');
+      }
+    }
   };
 
   const phoneValidation = {
@@ -215,26 +230,47 @@ export function Profile() {
                 <Input
                   {...register('oldPassword')}
                   id="oldPassword"
+                  type="password"
                   error={!!errors?.oldPassword}
                   helperText={errors?.oldPassword?.message}
                   color="myColor"
                 />
                 <Label htmlFor="newPassword">Новий пароль</Label>
                 <Input
-                  {...register('newPassword')}
+                  {...register('newPassword', {
+                    required: "Це поле обов'язкове",
+                    minLength: 8,
+                  })}
+                  type="password"
                   id="newPassword"
                   error={!!errors?.newPassword}
-                  helperText={errors?.newPassword?.message}
+                  helperText={
+                    errors?.newPassword
+                      ? errors?.email?.newPassword === 'required'
+                        ? "Це поле обов'язкове"
+                        : 'Пароль має бути мінімум 8 символів'
+                      : ''
+                  }
                   color="myColor"
                 />
-                <Label htmlFor="passwordConfirmation">
+                <Label htmlFor="repeatNewPassword">
                   Підтвердження нового паролю
                 </Label>
                 <Input
-                  {...register('passwordConfirmation')}
-                  id="passwordConfirmation"
-                  error={!!errors?.passwordConfirmation}
-                  helperText={errors?.passwordConfirmation?.message}
+                  {...register('repeatNewPassword', {
+                    required: "Це поле обов'язкове",
+                    validate: value => value === watch('newPassword'),
+                  })}
+                  id="repeatNewPassword"
+                  type="password"
+                  error={!!errors?.repeatNewPassword}
+                  helperText={
+                    errors?.repeatNewPassword
+                      ? errors?.repeatNewPassword?.type === 'required'
+                        ? "Це поле обов'язкове"
+                        : 'Паролі не співпадають'
+                      : ''
+                  }
                   color="myColor"
                 />
                 <Button type="submit">Відправити</Button>

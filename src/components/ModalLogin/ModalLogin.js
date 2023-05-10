@@ -4,7 +4,7 @@ import { InputForm, Label } from 'components';
 import { useForm } from 'react-hook-form';
 import { colors } from 'styles/utils/variables';
 import { Form } from 'components/ModalRegistration/ModalRegistration.styled';
-import * as API from 'services/api';
+import * as API from 'services/authApi';
 import toast from 'react-hot-toast';
 
 const theme = createTheme({

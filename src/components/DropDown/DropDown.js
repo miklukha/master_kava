@@ -1,11 +1,9 @@
-import { DropDownMenu, DropDownItem } from './DropDown.styled';
+import { ModalLogin, ModalRegistration } from 'components';
 import { useEffect, useState } from 'react';
-import { ModalRegistration, ModalLogin } from 'components';
-// import Cookies from 'js-cookie';
-import * as API from 'services/api';
 import { toast } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import * as API from 'services/authApi';
+import { DropDownItem, DropDownMenu } from './DropDown.styled';
 
 export function DropDown({ setIsModalOpen, onSetDropDown }) {
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);

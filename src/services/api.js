@@ -1,57 +1,6 @@
 import axios from 'axios';
 
-// axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8';
-// axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
 axios.defaults.baseURL = 'http://127.0.0.1:1880';
-
-// const setAuthHeader = token => {
-//   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-// };
-// {
-//     headers: {
-//       Authorization: token,
-//     },
-//   }
-
-// const removeAuthHeader = () => {
-//   axios.defaults.headers.common.Authorization = '';
-// };
-
-// const token = localStorage.getItem('token' || '');
-// console.log(token);
-
-// if (token) {
-//   setAuthHeader(token);
-// } else {
-//   removeAuthHeader();
-// }
-
-export async function register(data) {
-  const response = await axios.post('/register', data);
-  return response.data;
-}
-
-export async function login(data) {
-  const response = await axios.post('/login', data);
-  // setAuthHeader(response.data.token);
-
-  return response.data;
-}
-
-export async function logout() {
-  const token = localStorage.getItem('token' || '');
-  const response = await axios.post(
-    '/logout',
-    {},
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  // removeAuthHeader();
-  return response.data;
-}
 
 export async function getCurrentUser() {
   const token = localStorage.getItem('token' || '');
@@ -147,8 +96,26 @@ export async function getImage(id) {
   return response.data;
 }
 
-export async function updateContactsUser(id, data) {
-  const response = await axios.put(`/users/${id}`, data);
+export async function updateContactsUser(data) {
+  const token = localStorage.getItem('token' || '');
+
+  const response = await axios.put('/users', data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response.data;
+}
+
+export async function updatePasswordUser(data) {
+  const token = localStorage.getItem('token' || '');
+
+  const response = await axios.put('/users-password', data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response.data;
 }
 
