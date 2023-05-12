@@ -3,6 +3,7 @@ import {
   Btn,
   BtnsWrapper,
   Form,
+  Tip,
   ItemWrapper,
 } from 'components/AdminProductEdit/AdminProductEdit.styled';
 import { Wrapper } from 'components/AdminProducts/AdminProducts.styled';
@@ -46,10 +47,9 @@ export function AdminCreateUser() {
               required: "Це поле обов'язкове",
             })}
             id="name"
-            error={!!errors?.name}
-            helperText={errors?.name?.message}
             color="auxillary"
           />
+          {errors.name && <Tip>Це поле обов'язкове</Tip>}
         </ItemWrapper>
         <ItemWrapper>
           <label htmlFor="email">Пошта*</label>
@@ -59,16 +59,13 @@ export function AdminCreateUser() {
               pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
             })}
             id="email"
-            error={!!errors?.email}
-            helperText={
-              errors?.email
-                ? errors?.email?.type === 'required'
-                  ? "Це поле обов'язкове"
-                  : 'Некоректний формат електронної пошти'
-                : ''
-            }
             color="auxillary"
           />
+          {errors.email && (
+            <Tip>
+              Некоректний формат електронної пошти або це поле обов'язкове{' '}
+            </Tip>
+          )}
         </ItemWrapper>
         <ItemWrapper>
           <label htmlFor="password">Пароль*</label>
@@ -79,16 +76,13 @@ export function AdminCreateUser() {
             })}
             type="password"
             id="password"
-            error={!!errors?.password}
-            helperText={
-              errors?.password
-                ? errors?.email?.password === 'required'
-                  ? "Це поле обов'язкове"
-                  : 'Пароль має бути мінімум 8 символів'
-                : ''
-            }
             color="auxillary"
           />
+          {errors.password && (
+            <Tip>
+              Пароль має бути мінімум 8 символів або це поле обов'язкове
+            </Tip>
+          )}
         </ItemWrapper>
         <ItemWrapper>
           <label htmlFor="repeatPassword">Повторення паролю*</label>
@@ -99,16 +93,17 @@ export function AdminCreateUser() {
             })}
             id="repeatPassword"
             type="password"
-            error={!!errors?.repeatPassword}
-            helperText={
-              errors?.repeatPassword
-                ? errors?.repeatPassword?.type === 'required'
-                  ? "Це поле обов'язкове"
-                  : 'Паролі не співпадають'
-                : ''
-            }
             color="auxillary"
           />
+          {errors?.repeatPassword ? (
+            errors?.repeatPassword?.type === 'required' ? (
+              <Tip>Це поле обов'язкове</Tip>
+            ) : (
+              <Tip>Паролі не співпадають</Tip>
+            )
+          ) : (
+            ''
+          )}
         </ItemWrapper>
         <BtnsWrapper>
           <Btn type="submit">Підтвердити</Btn>

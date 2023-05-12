@@ -11,6 +11,7 @@ import {
   AdminProductCreate,
   AdminUsers,
   AdminCreateUser,
+  AdminOrders,
 } from 'components';
 
 export function Admin() {
@@ -42,7 +43,7 @@ export function Admin() {
         {selectedOption === adminCategories[1].value && <AdminProductCreate />}
         {selectedOption === adminCategories[2].value && <AdminUsers />}
         {selectedOption === adminCategories[3].value && <AdminCreateUser />}
-        {selectedOption === adminCategories[4].value && <div>Orders</div>}
+        {selectedOption === adminCategories[4].value && <AdminOrders />}
       </Wrapper>
     </>
   );

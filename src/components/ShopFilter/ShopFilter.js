@@ -132,17 +132,18 @@ export function ShopFilter({ handleClick, onSetProducts }) {
       </InputsWrapper>
       <Label htmlFor="ingredients">Склад</Label>
       <OptionList>
-        {categories.map(({ _id, label, name }) => (
-          <OptionItem key={_id}>
-            <input
-              className={visuallyHidden}
-              type="checkbox"
-              id={label}
-              onChange={e => onCheckboxChange(e)}
-            />
-            <CheckboxLabel htmlFor={label}>{name}</CheckboxLabel>
-          </OptionItem>
-        ))}
+        {categories &&
+          categories.map(({ _id, label, name }) => (
+            <OptionItem key={_id}>
+              <input
+                className={visuallyHidden}
+                type="checkbox"
+                id={label}
+                onChange={e => onCheckboxChange(e)}
+              />
+              <CheckboxLabel htmlFor={label}>{name}</CheckboxLabel>
+            </OptionItem>
+          ))}
       </OptionList>
       {/* <Label htmlFor="country">Країна походження</Label>
       <OptionList>

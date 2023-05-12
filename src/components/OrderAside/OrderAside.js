@@ -9,7 +9,7 @@ import {
   Wrapper,
 } from './OrderAside.styled';
 
-export function OrderAside({ cartData = [] }) {
+export function OrderAside({ cartData = [], onTotalPriceCount }) {
   const [number, setNumber] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -20,7 +20,8 @@ export function OrderAside({ cartData = [] }) {
       return acc + product.price;
     }, 0);
     setTotalPrice(totalPrice);
-  }, [cartData]);
+    onTotalPriceCount(totalPrice);
+  }, [cartData, onTotalPriceCount]);
 
   return (
     <Wrapper>

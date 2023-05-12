@@ -11,6 +11,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import toast from 'react-hot-toast';
 
 export function Popular() {
   const [products, setProducts] = useState([]);
@@ -21,9 +22,8 @@ export function Popular() {
         const products = await API.getProducts();
         setProducts(products);
       } catch (error) {
-        // toast.error('Film is not found');
-        // navigate('/', { replace: true });
-        // console.log(error);
+        toast.error('Щось пішло не так, спробуйте, будь ласка, пізніше');
+        console.log(error);
       }
     })();
     // const products = getProducts();
@@ -54,11 +54,12 @@ export function Popular() {
             position: 'relative',
           }}
         >
-          {products.map(product => (
-            <SwiperSlide tag="li" key={product._id}>
-              <ProductCard as="div" home={true} product={product} />
-            </SwiperSlide>
-          ))}
+          {products &&
+            products.map(product => (
+              <SwiperSlide tag="li" key={product._id}>
+                <ProductCard as="div" home={true} product={product} />
+              </SwiperSlide>
+            ))}
         </Swiper>
       </NavigationStyles>
       <WatchMore to="/shop">Подивитися всі товари</WatchMore>

@@ -11,12 +11,13 @@ import {
 import { CloseDeleteBtn } from 'components';
 
 export function ProductOrder({ placing, product = {}, onDelete }) {
-  const { image, name, quantity, price, weight, grind = {} } = product;
+  const { id, name, quantity, price, weight, grind = {} } = product;
+  const imgPath = 'http://127.0.0.1:1880/images/';
 
   return (
     <Wrapper placing={placing && true}>
       {!placing && <CloseDeleteBtn remove handleClick={onDelete} />}
-      <Img src={image} alt={name} />
+      <Img src={`${imgPath}${id}`} alt={name} />
       <DescWrapper placing={placing && true}>
         <Title>{name}</Title>
         <DetailsWrapper>

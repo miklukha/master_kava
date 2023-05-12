@@ -1,4 +1,4 @@
-import { Wrapper, List, Item } from './AdminUserInformation.styled';
+import { Wrapper, TD, Table } from './AdminUserInformation.styled';
 
 export function AdminUserInformation({ user }) {
   const { name, email, shipping } = user;
@@ -6,14 +6,30 @@ export function AdminUserInformation({ user }) {
 
   return (
     <Wrapper>
-      <List>
-        <Item>Нікнейм: {name}</Item>
-        <Item>Email: {email}</Item>
-        <Item>Ім'я: {shipping?.firstName}</Item>
-        <Item>Прізвище: {shipping?.lastName}</Item>
-        <Item>Телефон: {shipping?.phone}</Item>
-        {/* <Item>Orders: {orders}</Item> */}
-      </List>
+      <Table>
+        <tbody>
+          <tr>
+            <TD>Нікнейм: </TD>
+            <TD>{name}</TD>
+          </tr>
+          <tr>
+            <TD>Email: </TD>
+            <TD>{email}</TD>
+          </tr>
+          <tr>
+            <TD>Ім'я: </TD>
+            <TD>{shipping?.firstName}</TD>
+          </tr>
+          <tr>
+            <TD>Прізвище: </TD>
+            <TD>{shipping?.lastName}</TD>
+          </tr>
+          <tr>
+            <TD>Телефон: </TD>
+            <TD>{shipping?.phone}</TD>
+          </tr>
+        </tbody>
+      </Table>
     </Wrapper>
   );
 }

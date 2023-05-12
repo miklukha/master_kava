@@ -25,15 +25,16 @@ export function ModalLogin({ closeModal, onSetDropDown }) {
   const onSubmit = async data => {
     try {
       const response = await API.login(data);
+      console.log(response);
       const token = response.$set.token;
       localStorage.setItem('token', token);
       toast.success('Вхід пройшов успішно');
       closeModal();
       onSetDropDown(false);
     } catch (error) {
-      const errorStatus = error.response.status;
+      const errorStatus = error?.response?.status;
 
-      if (errorStatus === 401) {
+      if (errorStatus && errorStatus === 401) {
         toast.error('Неправильні дані пошти або пароля');
       } else {
         toast.error('Щось пішло не так, спробуйте, будь ласка, пізніше');

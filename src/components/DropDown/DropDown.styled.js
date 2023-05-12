@@ -5,6 +5,7 @@ export const DropDownMenu = styled.ul`
   position: absolute;
   top: auto;
   left: 0;
+  z-index: 10;
 
   text-align: left;
 

@@ -25,6 +25,7 @@ export function DropDown({ setIsModalOpen, onSetDropDown }) {
       localStorage.setItem('token', '');
       setIsLoggedIn(false);
       onSetDropDown();
+      navigate('/', { replace: true });
       toast.success('Вихід пройшов успішно');
       setIsLoggedIn(true);
     } catch (error) {

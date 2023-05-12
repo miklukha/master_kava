@@ -104,24 +104,6 @@ export function Product() {
     })();
   }, [navigate, productId]);
 
-  // const product = getProductById(productId);
-  // setProduct(product);
-
-  // if (product) {
-
-  // }
-  // const {
-  //   name,
-  //   image,
-  //   availability,
-  //   price,
-  //   description,
-  //   category,
-  //   characteristics,
-  //   roastLevel,
-  //   countries,
-  // } = product;
-
   return (
     <>
       {product && (

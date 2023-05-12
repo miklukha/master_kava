@@ -4,7 +4,7 @@ import { colors, fontSizes } from 'styles/utils/variables';
 export const Wrapper = styled.li`
   position: relative;
   display: flex;
-  gap: 20px;
+  gap: 15px;
 
   padding-top: ${({ placing }) => !placing && '20px'};
   padding-bottom: 20px;

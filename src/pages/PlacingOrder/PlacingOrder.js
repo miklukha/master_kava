@@ -11,10 +11,11 @@ import {
 } from '@mui/material';
 import liqpay from 'assets/images/liqpay.png';
 import { ModalConditions, OrderAside, Title, LiqPayForm } from 'components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DebounceInput } from 'react-debounce-input';
 import { useForm } from 'react-hook-form';
-import * as API from 'services/deliveryApi';
+import * as API from 'services/api';
+import { Loader } from 'components';
 import { colors } from 'styles/utils/variables';
 import {
   ContactsInput,
@@ -29,6 +30,8 @@ import {
   OrderDetailsCondition,
   Wrapper,
 } from './PlacingOrder.styled';
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme({
   palette: {
@@ -51,6 +54,8 @@ export function PlacingOrder() {
   const [departments, setDepartments] = useState([]);
   const [address, setAddress] = useState('');
   const [payment, setPayment] = useState('receiving');
+  const [user, setUser] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   console.log(address);
   console.log(department);
@@ -65,11 +70,35 @@ export function PlacingOrder() {
     defaultValues: {
       payment: 'receiving',
       deliveryType: 'novaPoshta',
+      phone: '+380',
+      totalPrice: 0,
     },
   });
 
-  const onSubmit = data => {
-    console.log(data);
+  const navigate = useNavigate();
+
+  const onSubmit = async data => {
+    try {
+      const combinedData = {
+        contacts: {
+          ...data,
+          userId: user._id || null,
+        },
+        products: cartData,
+        totalPrice: data.totalPrice,
+      };
+
+      await API.createOrder(combinedData);
+
+      //! clear local store
+      if (data.payment === 'receiving') {
+        toast.success('Дякуємо! Замовлення створено');
+        navigate('/', { replace: true });
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error('Щось пішло не так, спробуйте, будь ласка, пізніше');
+    }
   };
 
   const phoneValidation = {
@@ -81,20 +110,30 @@ export function PlacingOrder() {
 
   const searchCity = async query => {
     try {
-      const cities = await API.getCities(query);
+      const data = {
+        name: query,
+      };
+
+      const cities = await API.getCities(data);
+      console.log(cities);
       const validCities = cities.data.map(city => ({
         label: city.Description,
       }));
       setCities(validCities);
     } catch (error) {
       console.log(error);
+      toast.error('Щось пішло не так, спробуйте, будь ласка, пізніше');
     }
   };
 
   const searchDepartments = async (city, query = '') => {
     // if (city) {
     try {
-      const departments = await API.getDepartments(city, query);
+      const data = {
+        query,
+        city,
+      };
+      const departments = await API.getDepartments(data);
       const validDepartments = departments.data.map(department => ({
         label: department.Description,
       }));
@@ -105,13 +144,45 @@ export function PlacingOrder() {
     // }
   };
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const user = await API.getCurrentUser();
+        setUser(user);
+        setValue('firstName', user?.shipping?.firstName || '');
+        setValue('lastName', user?.shipping?.lastName || '');
+        setValue('phone', user?.shipping?.phone || '+380');
+        console.log(user);
+      } catch (error) {
+        if (error.response && error.response.status === 401) {
+          console.log('User is not authorized');
+        } else {
+          console.log(error);
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    })();
+  }, [setValue]);
+
+  const handleTotalPrice = totalPrice => {
+    setValue('totalPrice', totalPrice);
+  };
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <LiqPayForm />
       <Title>ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</Title>
       {isCartData ? (
         <Wrapper>
-          <OrderAside cartData={cartData} />
+          <OrderAside
+            cartData={cartData}
+            onTotalPriceCount={handleTotalPrice}
+          />
           <form onSubmit={handleSubmit(onSubmit)}>
             <DetailsTitle>Контактні дані</DetailsTitle>
             <DetailsList>
@@ -143,12 +214,12 @@ export function PlacingOrder() {
                   {...register('phone', {
                     required: "Це поле обов'язкове",
                     pattern: phoneValidation.pattern,
+                    defaultValue: user?.shipping?.phone || '+380',
                   })}
                   id="phone"
                   error={!!errors.phone}
                   helperText={errors.phone?.message}
                   color="auxillary"
-                  defaultValue="+380"
                 />
               </DetailsItem>
             </DetailsList>

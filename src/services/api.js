@@ -129,6 +129,26 @@ export async function createAdmin(data) {
   return response.data;
 }
 
+export async function getCities(data) {
+  const response = await axios.post('/cities', data);
+  return response.data;
+}
+
+export async function getDepartments(data) {
+  const response = await axios.post('/departments', data);
+  return response.data;
+}
+
+export async function createOrder(data) {
+  const response = await axios.post('/orders', data);
+  return response.data;
+}
+
+export async function getOrders() {
+  const response = await axios.get('/orders');
+  return response.data;
+}
+
 /*
  * try {
     const response = await axios.post('/prod', { data });

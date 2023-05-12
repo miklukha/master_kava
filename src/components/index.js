@@ -50,3 +50,4 @@ export * from './PrivateAdminRoute';
 export * from './AdminUsers';
 export * from './AdminUserInformation';
 export * from './AdminCreateUser';
+export * from './AdminOrders';
