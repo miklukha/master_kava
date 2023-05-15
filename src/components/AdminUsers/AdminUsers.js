@@ -25,7 +25,6 @@ export function AdminUsers() {
     (async function getUsers() {
       try {
         const users = await API.getUsers();
-        console.log(users);
         setUsers(users);
       } catch (error) {
         toast.error('Щось пішло не так, спробуйте пізніше');

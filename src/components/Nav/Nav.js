@@ -29,7 +29,7 @@ export function Nav({ layout }) {
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [isAdmin]);
 
   if (isLoading) {
     return <Loader />;

@@ -8,16 +8,30 @@ import {
   WrapperDesc,
   Table,
   TD,
+  SearchWrapper,
   THead,
+  TH,
 } from './AdminOrders.styled';
 import { useEffect, useState, Fragment } from 'react';
 import * as API from 'services/api';
 import toast from 'react-hot-toast';
 import { UilEye } from '@iconscout/react-unicons';
+import { DebounceInput } from 'react-debounce-input';
+import { Input } from 'components';
 
 export function AdminOrders() {
   const [orders, setOrders] = useState([]);
   const [clickedOrder, setClickedOrder] = useState(false);
+  const [search, setSearch] = useState('');
+
+  const onSearchChange = e => {
+    setSearch(e.target.value);
+  };
+
+  const filteredOrders = orders.filter(order => {
+    const orderCode = order.code.toString();
+    return orderCode.includes(search);
+  });
 
   const transformDate = dateString => {
     const date = new Date(dateString);
@@ -35,7 +49,6 @@ export function AdminOrders() {
     (async () => {
       try {
         const orders = await API.getOrders('/orders');
-        console.log(orders);
         setOrders(orders);
       } catch (error) {
         console.log(error);
@@ -46,9 +59,17 @@ export function AdminOrders() {
 
   return (
     <Wrapper>
+      <SearchWrapper>
+        <DebounceInput
+          element={Input}
+          debounceTimeout={300}
+          onChange={onSearchChange}
+          placeholder="Введіть назву"
+        />
+      </SearchWrapper>
       <List>
         {orders &&
-          orders.map(
+          filteredOrders.map(
             ({
               _id,
               code,
@@ -80,7 +101,11 @@ export function AdminOrders() {
                   {clickedOrder === _id && (
                     <WrapperDesc>
                       <Table>
-                        <THead>Контакти</THead>
+                        <THead>
+                          <tr>
+                            <TH>Контакти</TH>
+                          </tr>
+                        </THead>
                         <tbody>
                           <tr>
                             <TD>Ім'я: </TD>
@@ -97,7 +122,12 @@ export function AdminOrders() {
                         </tbody>
                       </Table>
                       <Table>
-                        <THead>Опис</THead>
+                        <THead>
+                          <tr>
+                            <TH>Опис</TH>
+                          </tr>
+                        </THead>
+                        {/* <THead>Опис</THead> */}
                         <tbody>
                           <tr>
                             <TD>Оплата: </TD>
@@ -138,39 +168,44 @@ export function AdminOrders() {
                           </tr>
                         </tbody>
                       </Table>
-                      <Table>
-                        {products &&
-                          products.map(
-                            ({ name, grind, quantity, weight, price }, i) => (
-                              <Fragment>
-                                <THead>Товар {i + 1}</THead>
-                                <tbody>
-                                  <tr>
-                                    <TD>Назва: </TD>
-                                    <TD>{name}</TD>
-                                  </tr>
-                                  <tr>
-                                    <TD>Кількість: </TD>
-                                    <TD>{quantity}</TD>
-                                  </tr>
-                                  <tr>
-                                    <TD>Помел: </TD>
-                                    <TD>{grind}</TD>
-                                  </tr>
-                                  <tr>
-                                    <TD>Вага: </TD>
-                                    <TD>{weight}</TD>
-                                  </tr>
-                                  <tr>
-                                    <TD>Ціна: </TD>
-                                    <TD>{price}</TD>
-                                  </tr>
-                                </tbody>
-                                <br />
-                              </Fragment>
-                            )
-                          )}
-                      </Table>
+                      {products &&
+                        products.map(
+                          (
+                            { name, grind, quantity, weight, price, _id },
+                            i
+                          ) => (
+                            <Table key={_id}>
+                              <THead>
+                                <tr>
+                                  <TH>Товар {i + 1}</TH>
+                                </tr>
+                              </THead>
+
+                              <tbody>
+                                <tr>
+                                  <TD>Назва: </TD>
+                                  <TD>{name}</TD>
+                                </tr>
+                                <tr>
+                                  <TD>Кількість: </TD>
+                                  <TD>{quantity}</TD>
+                                </tr>
+                                <tr>
+                                  <TD>Помел: </TD>
+                                  <TD>{grind}</TD>
+                                </tr>
+                                <tr>
+                                  <TD>Вага: </TD>
+                                  <TD>{weight}</TD>
+                                </tr>
+                                <tr>
+                                  <TD>Ціна: </TD>
+                                  <TD>{price}</TD>
+                                </tr>
+                              </tbody>
+                            </Table>
+                          )
+                        )}
                     </WrapperDesc>
                   )}
                 </Fragment>

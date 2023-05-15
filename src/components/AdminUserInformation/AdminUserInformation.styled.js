@@ -12,4 +12,18 @@ export const TD = styled.td`
 
 export const Table = styled.table`
   width: 100%;
+
+  margin-bottom: 20px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+`;
+
+export const THead = styled.thead`
+  font-weight: 500;
+`;
+
+export const TH = styled.th`
+  text-align: left;
 `;

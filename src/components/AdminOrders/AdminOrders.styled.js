@@ -70,3 +70,27 @@ export const Table = styled.table`
 export const THead = styled.thead`
   font-weight: 500;
 `;
+
+export const TH = styled.th`
+  text-align: left;
+`;
+
+export const SearchWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+
+  margin-bottom: 20px;
+
+  & input {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 360px;
+
+    ${mq.tablet} {
+      width: 500px;
+    }
+    /* margin-right: 10px; */
+  }
+`;
