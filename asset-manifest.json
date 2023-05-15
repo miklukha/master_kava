@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/master_kava/static/css/main.66ae7602.css",
-    "main.js": "/master_kava/static/js/main.2913ca17.js",
+    "main.js": "/master_kava/static/js/main.64750f4a.js",
     "static/js/812.e98481a0.chunk.js": "/master_kava/static/js/812.e98481a0.chunk.js",
     "static/js/483.0a659791.chunk.js": "/master_kava/static/js/483.0a659791.chunk.js",
     "static/js/731.a74e95f2.chunk.js": "/master_kava/static/js/731.a74e95f2.chunk.js",
@@ -45,7 +45,7 @@
     "static/media/geyser.webp": "/master_kava/static/media/geyser.4a9ed1329d7691bcc78c.webp",
     "index.html": "/master_kava/index.html",
     "main.66ae7602.css.map": "/master_kava/static/css/main.66ae7602.css.map",
-    "main.2913ca17.js.map": "/master_kava/static/js/main.2913ca17.js.map",
+    "main.64750f4a.js.map": "/master_kava/static/js/main.64750f4a.js.map",
     "812.e98481a0.chunk.js.map": "/master_kava/static/js/812.e98481a0.chunk.js.map",
     "483.0a659791.chunk.js.map": "/master_kava/static/js/483.0a659791.chunk.js.map",
     "731.a74e95f2.chunk.js.map": "/master_kava/static/js/731.a74e95f2.chunk.js.map",
@@ -75,6 +75,6 @@
   },
   "entrypoints": [
     "static/css/main.66ae7602.css",
-    "static/js/main.2913ca17.js"
+    "static/js/main.64750f4a.js"
   ]
 }
