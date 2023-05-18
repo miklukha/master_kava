@@ -10,7 +10,7 @@ import {
   createTheme,
 } from '@mui/material';
 import liqpay from 'assets/images/liqpay.png';
-import { ModalConditions, OrderAside, Title, LiqPayForm } from 'components';
+import { ModalConditions, OrderAside, Title } from 'components';
 import { useState, useEffect } from 'react';
 import { DebounceInput } from 'react-debounce-input';
 import { useForm } from 'react-hook-form';
@@ -56,6 +56,7 @@ export function PlacingOrder() {
   const [payment, setPayment] = useState('receiving');
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  // const [liqpayData, setLiqpayData] = useState({});
 
   console.log(address);
   console.log(department);
@@ -88,12 +89,25 @@ export function PlacingOrder() {
         totalPrice: data.totalPrice,
       };
 
-      await API.createOrder(combinedData);
+      // const res = await API.createOrder(combinedData);
+      const res = await API.createOrder(combinedData);
 
       //! clear local store
       if (data.payment === 'receiving') {
         toast.success('Дякуємо! Замовлення створено');
         navigate('/', { replace: true });
+      }
+
+      if (data.payment === 'now') {
+        toast.success('Дякуємо! Замовлення створено');
+        console.log(res.data);
+        navigate(
+          '/liqpay',
+          {
+            state: { data: res.data, signature: res.signature },
+          },
+          { replace: true }
+        );
       }
     } catch (error) {
       console.log(error);
@@ -152,7 +166,6 @@ export function PlacingOrder() {
         setValue('firstName', user?.shipping?.firstName || '');
         setValue('lastName', user?.shipping?.lastName || '');
         setValue('phone', user?.shipping?.phone || '+380');
-        console.log(user);
       } catch (error) {
         if (error.response && error.response.status === 401) {
           console.log('User is not authorized');
@@ -175,7 +188,24 @@ export function PlacingOrder() {
 
   return (
     <ThemeProvider theme={theme}>
-      <LiqPayForm />
+      {/* <LiqPayForm /> */}
+      {/* {liqpayData?.data && (
+        <form
+          method="POST"
+          action="https://www.liqpay.ua/api/3/checkout"
+          acceptCharset="utf-8"
+        >
+          <input type="hidden" name="data" value={liqpayData.data} />
+          <input type="hidden" name="signature" value={liqpayData.signature} />
+          <input
+            type="image"
+            src="//static.liqpay.ua/buttons/p1en.radius.png"
+            name="btn_text"
+            alt=""
+          />
+        </form>
+      )} */}
+
       <Title>ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</Title>
       {isCartData ? (
         <Wrapper>

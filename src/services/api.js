@@ -149,6 +149,11 @@ export async function getOrders() {
   return response.data;
 }
 
+export async function sendFeedback(data) {
+  const response = await axios.post('/feedback', data);
+  return response.data;
+}
+
 /*
  * try {
     const response = await axios.post('/prod', { data });

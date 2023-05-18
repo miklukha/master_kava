@@ -4,6 +4,8 @@ import { InputForm, Label } from 'components';
 import { useForm } from 'react-hook-form';
 import { colors } from 'styles/utils/variables';
 import { Form } from 'components/ModalRegistration/ModalRegistration.styled';
+import * as API from 'services/api';
+import toast from 'react-hot-toast';
 
 const theme = createTheme({
   palette: {
@@ -20,9 +22,16 @@ export function ModalFeedback({ closeModal }) {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = data => {
-    console.log(data);
-    closeModal();
+  const onSubmit = async data => {
+    try {
+      await API.sendFeedback(data);
+
+      toast.success('Дякуємо! Відгук успішно надіслано');
+      closeModal();
+    } catch (error) {
+      console.log(error);
+      toast.error('Щось пішло не так, спробуйте, будь ласка, пізніше');
+    }
   };
 
   return (

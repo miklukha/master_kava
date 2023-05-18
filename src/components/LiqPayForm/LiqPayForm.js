@@ -1,37 +1,20 @@
-import axios from 'axios';
-axios.defaults.baseURL = 'http://127.0.0.1:1880';
-
-let data = '';
-let signature = '';
-
-// (async function getData() {
-//   const response = await axios.post('/liqpay');
-//   console.log(response.data);
-//   data = response.data.data;
-//   signature = response.data.signature;
-//   return response.data;
-// })();
+import { useLocation } from 'react-router-dom';
+import { Btn } from './LiqPayForm.styled';
 
 export function LiqPayForm() {
+  const location = useLocation();
+  const { data, signature } = location.state;
+
   return (
     <form
       method="POST"
       action="https://www.liqpay.ua/api/3/checkout"
       acceptCharset="utf-8"
-      // onSubmit={onSubmit}
     >
       <input type="hidden" name="data" value={data} />
       <input type="hidden" name="signature" value={signature} />
-      <input
-        type="image"
-        // onClick={onSubmit}
-        src="//static.liqpay.ua/buttons/p1en.radius.png"
-        name="btn_text"
-        alt=""
-      />
-      {/* <button onClick={onSubmit} type="submit" >
-        ОФОРМЛЕННЯ ЗАМОВЛЕННЯ
-      </button> */}
+      <Btn type="submit">Перейти на сторінку оплати</Btn>
+      <p>*Без оплати, замовлення не буде враховане</p>
     </form>
   );
 }

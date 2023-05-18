@@ -1,4 +1,4 @@
-import { PrivateAdminRoute, PrivateRoute } from 'components';
+import { LiqPayForm, PrivateAdminRoute, PrivateRoute } from 'components';
 import { createAsyncComponent } from 'helpers';
 import { SharedLayout } from 'layouts';
 import { Route, Routes } from 'react-router-dom';
@@ -26,6 +26,8 @@ export function App() {
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/payment-delivery" element={<PaymentDelivery />} />
           <Route path="/placing-order" element={<PlacingOrder />} />
+          <Route path="/liqpay" element={<LiqPayForm />} />
+
           <Route
             path="/profile"
             element={

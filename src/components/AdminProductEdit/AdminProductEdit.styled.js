@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { colors, mq } from 'styles/utils/variables';
+import { colors, mq, utils } from 'styles/utils/variables';
 import { Button } from 'components/Button.styled';
 
 export const Form = styled.form`
@@ -23,6 +23,8 @@ export const CancelBtn = styled(Btn)`
 
   background-color: transparent;
   color: ${colors.accent};
+
+  transition: color ${utils.transitDur} ${utils.transitFunc};
 
   &:hover,
   &:focus {
