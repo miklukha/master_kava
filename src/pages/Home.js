@@ -1,14 +1,11 @@
-import { Hero, Features, Popular, ReviewsHome } from 'layouts';
-// import Cookies from 'js-cookie';
+import { Hero, Features, Popular } from 'layouts';
 export function Home() {
-  // console.log(Cookies.get());
-
   return (
     <>
       <Hero />
       <Features />
       <Popular />
-      <ReviewsHome />
+      {/* <ReviewsHome /> */}
     </>
   );
 }

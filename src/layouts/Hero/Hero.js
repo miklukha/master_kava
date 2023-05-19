@@ -5,8 +5,8 @@ import {
   technologiesMobile,
   types,
   typesMobile,
-  variety,
-  varietyMobile,
+  // variety,
+  // varietyMobile,
 } from 'assets/images/hero';
 import { NavigationStyles, Section } from 'components';
 import MediaQuery from 'react-responsive';
@@ -52,14 +52,14 @@ export function Hero() {
               <Img src={roasting} alt="обсмаження кави" />
             </MediaQuery>
           </SwiperSlide>
-          <SwiperSlide tag="li">
+          {/* <SwiperSlide tag="li">
             <MediaQuery maxWidth={parseInt(breakpoints.preTablet)}>
               <Img src={varietyMobile} alt="різноманітність кави" />
             </MediaQuery>
             <MediaQuery minWidth={parseInt(breakpoints.tablet)}>
               <Img src={variety} alt="різноманітність кави" />
             </MediaQuery>
-          </SwiperSlide>
+          </SwiperSlide> */}
         </Swiper>
       </NavigationStyles>
     </Section>

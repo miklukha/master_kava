@@ -21,7 +21,7 @@ export function SocialMedias() {
       </Item>
       <Item>
         <Link
-          href="https://t.me/mikl_ukha"
+          href="https://t.me/masterkava"
           target="_blank"
           rel="noreferrer noopener"
         >

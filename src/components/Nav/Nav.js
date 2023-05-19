@@ -51,9 +51,9 @@ export function Nav({ layout }) {
           <NavItem>
             <Link to="/contacts">КОНТАКТИ</Link>
           </NavItem>
-          <NavItem>
+          {/* <NavItem>
             <Link to="/reviews">ВІДГУКИ</Link>
-          </NavItem>
+          </NavItem> */}
           <NavItem>
             <Link to="/payment-delivery">ОПЛАТА ТА ДОСТАВКА</Link>
           </NavItem>
@@ -77,9 +77,9 @@ export function Nav({ layout }) {
           <NavItemFooter>
             <Link to="/contacts">КОНТАКТИ</Link>
           </NavItemFooter>
-          <NavItemFooter>
+          {/* <NavItemFooter>
             <Link to="/reviews">ВІДГУКИ</Link>
-          </NavItemFooter>
+          </NavItemFooter> */}
           <NavItemFooter>
             <Link to="/payment-delivery">ОПЛАТА ТА ДОСТАВКА</Link>
           </NavItemFooter>

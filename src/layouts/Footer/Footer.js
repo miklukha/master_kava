@@ -21,6 +21,7 @@ export function Footer() {
         <FooterMain>
           <Wrapper>
             <Img src={logoText} alt="logo" />
+
             <Address href="/">м. Київ, вул. Сім'ї Сосняних 11</Address>
           </Wrapper>
           <Nav layout="footer" />

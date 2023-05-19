@@ -7,7 +7,7 @@ const Home = createAsyncComponent('Home');
 const Shop = createAsyncComponent('Shop');
 const AboutUs = createAsyncComponent('AboutUs');
 const Contacts = createAsyncComponent('Contacts');
-const Reviews = createAsyncComponent('Reviews');
+// const Reviews = createAsyncComponent('Reviews');
 const PaymentDelivery = createAsyncComponent('PaymentDelivery');
 const PlacingOrder = createAsyncComponent('PlacingOrder');
 const Profile = createAsyncComponent('Profile');
@@ -23,7 +23,7 @@ export function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contacts" element={<Contacts />} />
-          <Route path="/reviews" element={<Reviews />} />
+          {/* <Route path="/reviews" element={<Reviews />} /> */}
           <Route path="/payment-delivery" element={<PaymentDelivery />} />
           <Route path="/placing-order" element={<PlacingOrder />} />
           <Route path="/liqpay" element={<LiqPayForm />} />
