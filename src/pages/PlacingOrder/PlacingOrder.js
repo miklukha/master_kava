@@ -10,12 +10,13 @@ import {
   createTheme,
 } from '@mui/material';
 import liqpay from 'assets/images/liqpay.png';
-import { ModalConditions, OrderAside, Title } from 'components';
-import { useState, useEffect } from 'react';
+import { Loader, ModalConditions, OrderAside, Title } from 'components';
+import { useEffect, useState } from 'react';
 import { DebounceInput } from 'react-debounce-input';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import * as API from 'services/api';
-import { Loader } from 'components';
 import { colors } from 'styles/utils/variables';
 import {
   ContactsInput,
@@ -30,8 +31,6 @@ import {
   OrderDetailsCondition,
   Wrapper,
 } from './PlacingOrder.styled';
-import { toast } from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme({
   palette: {
@@ -56,7 +55,6 @@ export function PlacingOrder() {
   const [payment, setPayment] = useState('receiving');
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  // const [liqpayData, setLiqpayData] = useState({});
 
   console.log(address);
   console.log(department);
@@ -80,6 +78,7 @@ export function PlacingOrder() {
 
   const onSubmit = async data => {
     try {
+      console.log(data);
       const combinedData = {
         contacts: {
           ...data,
@@ -89,12 +88,11 @@ export function PlacingOrder() {
         totalPrice: data.totalPrice,
       };
 
-      // const res = await API.createOrder(combinedData);
       const res = await API.createOrder(combinedData);
 
       //! clear local store
       if (data.payment === 'receiving') {
-        toast.success('Дякуємо! Замовлення створено');
+        toast.success('Дякуємо! Замовлення успішно створено');
         navigate('/', { replace: true });
       }
 
@@ -166,6 +164,7 @@ export function PlacingOrder() {
         setValue('firstName', user?.shipping?.firstName || '');
         setValue('lastName', user?.shipping?.lastName || '');
         setValue('phone', user?.shipping?.phone || '+380');
+        setValue('email', user?.email || '');
       } catch (error) {
         if (error.response && error.response.status === 401) {
           console.log('User is not authorized');
@@ -188,24 +187,6 @@ export function PlacingOrder() {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <LiqPayForm /> */}
-      {/* {liqpayData?.data && (
-        <form
-          method="POST"
-          action="https://www.liqpay.ua/api/3/checkout"
-          acceptCharset="utf-8"
-        >
-          <input type="hidden" name="data" value={liqpayData.data} />
-          <input type="hidden" name="signature" value={liqpayData.signature} />
-          <input
-            type="image"
-            src="//static.liqpay.ua/buttons/p1en.radius.png"
-            name="btn_text"
-            alt=""
-          />
-        </form>
-      )} */}
-
       <Title>ОФОРМЛЕННЯ ЗАМОВЛЕННЯ</Title>
       {isCartData ? (
         <Wrapper>
@@ -249,6 +230,25 @@ export function PlacingOrder() {
                   id="phone"
                   error={!!errors.phone}
                   helperText={errors.phone?.message}
+                  color="auxillary"
+                />
+              </DetailsItem>
+              <DetailsItem>
+                <DetailsLabel htmlFor="email">Електронна пошта</DetailsLabel>
+                <ContactsInput
+                  {...register('email', {
+                    required: "Це поле обов'язкове",
+                    pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  })}
+                  id="email"
+                  error={!!errors?.email}
+                  helperText={
+                    errors?.email
+                      ? errors?.email?.type === 'required'
+                        ? "Це поле обов'язкове"
+                        : 'Некоректний формат електронної пошти'
+                      : ''
+                  }
                   color="auxillary"
                 />
               </DetailsItem>

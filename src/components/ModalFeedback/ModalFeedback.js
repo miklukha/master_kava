@@ -57,10 +57,10 @@ export function ModalFeedback({ closeModal }) {
               pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
             })}
             id="email"
-            error={!!errors.email}
+            error={!!errors?.email}
             helperText={
-              errors.email
-                ? errors.email.type === 'required'
+              errors?.email
+                ? errors?.email?.type === 'required'
                   ? "Це поле обов'язкове"
                   : 'Некоректний формат електронної пошти'
                 : ''
