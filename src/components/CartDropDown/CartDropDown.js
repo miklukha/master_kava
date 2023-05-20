@@ -11,9 +11,13 @@ import {
 import { useState, useEffect } from 'react';
 
 export function CartDropDown() {
-  const [cartData, setCartData] = useState(
-    JSON.parse(localStorage.getItem('cartData')) || []
-  );
+  // const [cartData, setCartData] = useState(
+  //   JSON.parse(localStorage.getItem('cartData')) || []
+  // );
+  const storedCartData = localStorage.getItem('cartData');
+  const initialCartData = storedCartData ? JSON.parse(storedCartData) : [];
+
+  const [cartData, setCartData] = useState(initialCartData);
   const [number, setNumber] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
 

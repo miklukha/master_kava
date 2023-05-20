@@ -93,14 +93,14 @@ export function PlacingOrder() {
       //! clear local store
       if (data.payment === 'receiving') {
         toast.success('Дякуємо! Замовлення успішно створено');
-        localStorage.setItem('cartData', []);
+        localStorage.setItem('cartData', JSON.stringify([]));
         navigate('/', { replace: true });
       }
 
       if (data.payment === 'now') {
         toast.success('Дякуємо! Замовлення успішно створено');
         console.log(res.data);
-        localStorage.setItem('cartData', []);
+        localStorage.setItem('cartData', JSON.stringify([]));
 
         navigate(
           '/liqpay',

@@ -7,10 +7,14 @@ export const InputForm = styled(TextField)`
   width: 100%;
   background-color: ${colors.mainBg};
 
-  & input {
+  & inpu {
     font-size: ${fontSizes.s};
     padding-top: 12px;
     padding-bottom: 12px;
+  }
+
+  & textarea {
+    font-size: ${fontSizes.s};
   }
 
   &:last-of-type {

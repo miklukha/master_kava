@@ -62,7 +62,11 @@ export function Product() {
   const onSubmit = e => {
     e.preventDefault();
 
-    const cartData = JSON.parse(localStorage.getItem('cartData')) || [];
+    // const cartData = JSON.parse(localStorage.getItem('cartData')) || [];
+    const storedCartData = localStorage.getItem('cartData');
+    const initialCartData = storedCartData ? JSON.parse(storedCartData) : [];
+
+    const cartData = initialCartData;
 
     const isExistProduct = cartData.find(p => p.id === product._id);
 

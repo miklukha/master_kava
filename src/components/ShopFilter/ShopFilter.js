@@ -67,9 +67,12 @@ export function ShopFilter({ handleClick, onSetProducts }) {
     }
   };
 
-  const onCheckboxChange = async e => {
+  const onCheckboxChange = e => {
     const isChecked = e.target.checked;
     const categoryLabel = e.target.id;
+
+    // console.log(isChecked);
+    // console.log(labels);
 
     if (isChecked) {
       setLabels(labels => [...labels, categoryLabel]);
@@ -79,6 +82,7 @@ export function ShopFilter({ handleClick, onSetProducts }) {
   };
 
   useEffect(() => {
+    //!! fix
     if (labels.length !== 0) {
       (async function getProductsByCategory() {
         try {
@@ -89,7 +93,28 @@ export function ShopFilter({ handleClick, onSetProducts }) {
           console.log(error);
         }
       })();
-    }
+    } // else {
+    //   (async function getAllProducts() {
+    //     try {
+    //       const products = await API.getProducts();
+    //       onSetProducts(products);
+    //     } catch (error) {
+    //       toast.error('Щось пішло не так, спробуйте, будь ласка, пізніше');
+    //       console.log(error);
+    //     }
+    //   })();
+    // }
+    // if (labels.length !== 0) {
+    //   (async function getProductsByCategory() {
+    //     try {
+    //       const products = await API.getProductsByCategory(labels.join(','));
+    //       onSetProducts(products);
+    //     } catch (error) {
+    //       toast.error('Щось пішло не так, спробуйте, будь ласка, пізніше');
+    //       console.log(error);
+    //     }
+    //   })();
+    // }
   }, [labels, onSetProducts]);
 
   useEffect(() => {

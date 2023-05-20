@@ -9,9 +9,14 @@ import { BurgerBtn, Item, List, Wrapper } from './ExtraNav.styled';
 export function ExtraNav({ handleClick }) {
   const [dropdown, setDropdown] = useState(false);
   const [cartDropDown, setCartDropDown] = useState(false);
-  const [cartData, setCartData] = useState(
-    JSON.parse(localStorage.getItem('cartData')) || []
-  );
+  // const [cartData, setCartData] = useState(
+  //   JSON.parse(localStorage.getItem('cartData')) || []
+  // );
+
+  const storedCartData = localStorage.getItem('cartData');
+  const initialCartData = storedCartData ? JSON.parse(storedCartData) : [];
+
+  const [cartData, setCartData] = useState(initialCartData);
   const [isCartData, setIsCartData] = useState(
     cartData.length !== 0 ? true : false
   );
