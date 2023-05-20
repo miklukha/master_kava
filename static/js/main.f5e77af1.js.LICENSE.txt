@@ -254,3 +254,5 @@ object-assign
 //! it is necessary to do check if it number or not
 
 //! stored as a STRING
+
+//!! fix
