@@ -29,6 +29,10 @@ export function Nav({ layout }) {
         setIsLoading(false);
       }
     })();
+  }, []);
+
+  useEffect(() => {
+    // Component re-rendered when isAdmin changes
   }, [isAdmin]);
 
   if (isLoading) {

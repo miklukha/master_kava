@@ -9,7 +9,7 @@ import {
   Typography,
   createTheme,
 } from '@mui/material';
-import liqpay from 'assets/images/liqpay.png';
+// import liqpay from 'assets/images/liqpay.png';
 import { Loader, ModalConditions, OrderAside, Title } from 'components';
 import { useEffect, useState } from 'react';
 import { DebounceInput } from 'react-debounce-input';
@@ -78,38 +78,39 @@ export function PlacingOrder() {
 
   const onSubmit = async data => {
     try {
-      console.log(data);
-      const combinedData = {
-        contacts: {
-          ...data,
-          userId: user._id || null,
-        },
-        products: cartData,
-        totalPrice: data.totalPrice,
-      };
+      // console.log(data);
+      // const combinedData = {
+      //   contacts: {
+      //     ...data,
+      //     userId: user._id || null,
+      //   },
+      //   products: cartData,
+      //   totalPrice: data.totalPrice,
+      // };
 
-      const res = await API.createOrder(combinedData);
+      // const res = await API.createOrder(combinedData);
 
       //! clear local store
       if (data.payment === 'receiving') {
         toast.success('Дякуємо! Замовлення успішно створено');
         localStorage.setItem('cartData', JSON.stringify([]));
+        window.dispatchEvent(new Event('storage'));
         navigate('/', { replace: true });
       }
 
-      if (data.payment === 'now') {
-        toast.success('Дякуємо! Замовлення успішно створено');
-        console.log(res.data);
-        localStorage.setItem('cartData', JSON.stringify([]));
+      // if (data.payment === 'now') {
+      //   toast.success('Дякуємо! Замовлення успішно створено');
+      //   console.log(res.data);
+      //   localStorage.setItem('cartData', JSON.stringify([]));
 
-        navigate(
-          '/liqpay',
-          {
-            state: { data: res.data, signature: res.signature },
-          },
-          { replace: true }
-        );
-      }
+      //   navigate(
+      //     '/liqpay',
+      //     {
+      //       state: { data: res.data, signature: res.signature },
+      //     },
+      //     { replace: true }
+      //   );
+      // }
     } catch (error) {
       console.log(error);
       toast.error('Щось пішло не так, спробуйте, будь ласка, пізніше');
@@ -468,7 +469,7 @@ export function PlacingOrder() {
                       }
                     />
                   </DeliveryItem>
-                  <DeliveryItem>
+                  {/* <DeliveryItem>
                     <FormControlLabel
                       value="now"
                       control={
@@ -496,7 +497,7 @@ export function PlacingOrder() {
                         </>
                       }
                     />
-                  </DeliveryItem>
+                  </DeliveryItem> */}
                 </ul>
               </RadioGroup>
             </Box>

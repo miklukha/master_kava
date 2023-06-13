@@ -104,17 +104,6 @@ export function ShopFilter({ handleClick, onSetProducts }) {
     //     }
     //   })();
     // }
-    // if (labels.length !== 0) {
-    //   (async function getProductsByCategory() {
-    //     try {
-    //       const products = await API.getProductsByCategory(labels.join(','));
-    //       onSetProducts(products);
-    //     } catch (error) {
-    //       toast.error('Щось пішло не так, спробуйте, будь ласка, пізніше');
-    //       console.log(error);
-    //     }
-    //   })();
-    // }
   }, [labels, onSetProducts]);
 
   useEffect(() => {

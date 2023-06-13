@@ -31,6 +31,7 @@ export function ModalLogin({ closeModal, onSetDropDown }) {
       toast.success('Вхід пройшов успішно');
       closeModal();
       onSetDropDown(false);
+      window.dispatchEvent(new Event('storage'));
     } catch (error) {
       const errorStatus = error?.response?.status;
 
